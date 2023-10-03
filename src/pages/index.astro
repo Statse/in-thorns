@@ -5,13 +5,15 @@ import Layout from '../layouts/Layout.astro'
 <Layout title='Sail into the unknown.'>
   <main>
     <div class='noise'></div>
-    <div class='screen'>
+    <div class='screen flex flex-col'>
       <div class='play-container flex space-between'>
         <p class='white'>STOP</p>
         <p class='white'>--:--</p>
         <p class='white'>CH 003</p>
       </div>
-      <div class='flex flex-row w-full gap-4 bg-transparent mt-auto'>
+      <div
+        class='flex flex-row w-full gap-4 bg-transparent mt-auto items-center justify-center pb-8'
+      >
         <a href='https://www.instagram.com/inxthorns/'
           ><img src='ig.png' class='w-12' /></a
         >
