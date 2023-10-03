@@ -1,93 +1,159 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Card from '../components/card.astro'
 ---
 
-<Layout title='Welcome to Astro.'>
+<Layout title='Sail into the unknown.'>
   <main>
-    <ul role='list' class='link-card-grid'>
-      <Card
-        href='https://docs.astro.build/'
-        title='Documentation'
-        body='Learn how Astro works and explore the official API docs.'
-      />
-      <Card
-        href='https://astro.build/integrations/'
-        title='Integrations'
-        body='Supercharge your project with new frameworks and libraries.'
-      />
-      <Card
-        href='https://astro.build/themes/'
-        title='Themes'
-        body='Explore a galaxy of community-built starter themes.'
-      />
-      <Card
-        href='https://astro.build/chat/'
-        title='Community'
-        body='Come say hi to our amazing Discord community. ❤️'
-      />
-    </ul>
+    <div class='noise'></div>
+    <div class='screen'>
+      <div class='play-container flex space-between'>
+        <p class='white'>STOP</p>
+        <p class='white'>--:--</p>
+        <p class='white'>CH 003</p>
+      </div>
+      <div class='flex flex-row w-full gap-4 bg-transparent mt-auto'>
+        <a href='https://www.instagram.com/inxthorns/'
+          ><img src='ig.png' class='w-12' /></a
+        >
+        <a
+          href='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ'
+          ><img src='spotify.png' class='w-12' /></a
+        >
+        <a href='https://www.youtube.com/@inthornsband'
+          ><img src='yt.png' class='w-12' /></a
+        >
+        <a href='https://www.facebook.com/inthorns'
+          ><img src='fb.png' class='w-12' /></a
+        >
+      </div>
+    </div>
   </main>
 </Layout>
 
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
+<style is:global>
+  @font-face {
+    font-family: 'VCR';
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/225473/VCR_OSD_MONO_1.001.ttf');
+    font-weight: normal;
+    font-style: normal;
   }
-  .astro-a {
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .flex {
+    display: flex;
+  }
+  .space-between {
+    justify-content: space-between;
+  }
+
+  .white {
+    color: #ffffff;
+    filter: blur(0.4px);
+    animation: 0.1s infinite linear glitch;
+    text-shadow: 0px 0px 3px #333333;
+  }
+
+  .red {
+    color: #a30901;
+    top: 5px;
+    left: 15px;
+  }
+  .pink {
+    color: #d50bcf;
+  }
+  .dark-blue {
+    color: #31e3e7;
+  }
+  .cyan {
+    color: #31e3e7;
+  }
+  .green {
+    color: #51bb13;
+  }
+  .gold {
+  }
+
+  .absolute {
     position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
   }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
+
+  html {
+    /* Display & Box Model */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+
+    /* Other */
+    background-color: #0c0c0c;
   }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
+
+  .screen {
+    /* Display & Box Model */
+    width: 80vw;
+    height: 100vh;
+    padding: 8px 10vw;
+
+    /* Positioning */
+    position: relative;
+    z-index: 2;
+
+    /* Other */
+    font-family: 'VCR', monospace;
+    font-size: 42px;
+    background-image: url('../../public/xii_\(the_death\).jpg');
   }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
+
+  .play-container {
+    animation: 3s infinite linear glitch-vertical;
   }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
+
+  @keyframes glitch {
+    0% {
+      transform: translateX(0px);
+    }
+    25% {
+      transform: translateX(-0.5px);
+    }
+    50% {
+      transform: translateX(0px);
+    }
+    75% {
+      transform: translateX(0.5px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
   }
-  .instructions strong {
-    color: rgb(var(--accent-light));
+
+  @keyframes glitch-vertical {
+    0% {
+      transform: translateY(0px);
+    }
+    49% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-13px);
+    }
+    51% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
   }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
+
+  .noise {
+    position: absolute;
+    width: 80vh;
+    height: 80vh;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/225473/img-noise-361x370.png');
   }
 </style>
