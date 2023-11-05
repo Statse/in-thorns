@@ -8,9 +8,10 @@ import MainSection from '../components/mainSection.astro'
 <Layout title='Sail into the unknown.'>
   <main>
     <section
-      class='w-screen h-screen bg-no-repeat bg-center bg-cover relative'
+      class='w-screen h-screen bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
       style='background-image:  url(itbg.gif);'
     >
+      <div class='absolute w-screen h-screen bg-black opacity-5'></div>
       <nav class='w-full h-16 flex flex-row justify-center items-center px-8'>
         <ul class='flex flex-row gap-2'>
           <Social link='https://www.instagram.com/inxthorns/' src='ig.png' />
