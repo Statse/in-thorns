@@ -1,133 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro'
+
+import Social from '../components/social.astro'
+import MainSection from '../components/mainSection.astro'
 ---
 
 <Layout title='Sail into the unknown.'>
   <main>
-    <div class='noise'></div>
-    <div class='screen flex flex-col md:w-[80vw] w-[100vw] h-[100vh]'>
-      <div
-        class='play-container flex space-between lg:px-48 px-12 lg:pt-12 pt-6'
-      >
-        <p class='text-white lg:text-5xl text-xl'>STOP</p>
-        <p class='text-white lg:text-5xl text-xl'>--:--</p>
-        <p class='text-white lg:text-5xl text-xl'>CH 003</p>
-      </div>
-      <div
-        class='flex flex-row w-full gap-4 bg-transparent mt-auto items-center justify-center pb-24 md:pb-8'
-      >
-        <a href='https://www.instagram.com/inxthorns/'
-          ><img src='ig.png' class='w-12' /></a
-        >
-        <a
-          href='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ'
-          ><img src='spotify.png' class='w-12' /></a
-        >
-        <a href='https://www.youtube.com/@inthornsband'
-          ><img src='yt.png' class='w-12' /></a
-        >
-        <a href='https://www.facebook.com/inthorns'
-          ><img src='fb.png' class='w-12' /></a
-        >
-      </div>
-    </div>
+    <section
+      class='w-screen h-screen bg-no-repeat bg-center bg-cover relative'
+      style='background-image:  url(itbg.gif);'
+    >
+      <nav class='w-full h-16 flex flex-row justify-center items-center px-8'>
+        <ul class='flex flex-row gap-2'>
+          <Social link='https://www.instagram.com/inxthorns/' src='ig.png' />
+          <Social
+            link='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ'
+            src='spotify.png'
+          />
+          <Social link='https://www.youtube.com/@inthornsband' src='yt.png' />
+          <Social link='https://www.facebook.com/inthorns' src='fb.png' />
+        </ul>
+      </nav>
+      <img
+        src='favicon.svg'
+        class='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+      />
+    </section>
+    <!-- <section class='h-56'> -->
+    <!-- other stuff -->
+    <!-- Band members etc. -->
+    <!-- </section> -->
   </main>
 </Layout>
-
-<style is:global>
-  @font-face {
-    font-family: 'VCR';
-    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/225473/VCR_OSD_MONO_1.001.ttf');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  .flex {
-    display: flex;
-  }
-  .space-between {
-    justify-content: space-between;
-  }
-
-  html {
-    /* Display & Box Model */
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    overflow: hidden;
-
-    /* Other */
-    background-color: #0c0c0c;
-  }
-
-  .screen {
-    /* Display & Box Model */
-    /* width: 80vw;
-    height: 100vh; */
-
-    /* Positioning */
-    position: relative;
-    z-index: 2;
-
-    /* Other */
-    font-family: 'VCR', monospace;
-    font-size: 42px;
-    background-image: url('/xii_\(the_death\).jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .play-container {
-    animation: 3s infinite linear glitch-vertical;
-  }
-
-  @keyframes glitch {
-    0% {
-      transform: translateX(0px);
-    }
-    25% {
-      transform: translateX(-0.5px);
-    }
-    50% {
-      transform: translateX(0px);
-    }
-    75% {
-      transform: translateX(0.5px);
-    }
-    100% {
-      transform: translateX(0px);
-    }
-  }
-
-  @keyframes glitch-vertical {
-    0% {
-      transform: translateY(0px);
-    }
-    49% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-13px);
-    }
-    51% {
-      transform: translateY(0px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
-  }
-
-  .noise {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/225473/img-noise-361x370.png');
-  }
-</style>
