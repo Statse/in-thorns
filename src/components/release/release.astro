@@ -1,12 +1,12 @@
 ---
-
+import ReleaseImage from './releaseImage.astro'
 ---
 
-<div class='bg-gray-50'>
+<section>
   <div
-    class='p-8 lg:y-16 lg:px-32 flex flex-col md:flex-row justify-center items-center text-black bg-gray-50'
+    class='md:py-16 flex flex-col md:flex-row justify-center items-center text-black bg-gray-50'
   >
-    <img src='/releases/cb_cover.jpg' class='max-w-md' />
+    <ReleaseImage src='/releases/cb_cover.jpg' />
     <div class='p-8 flex flex-col gap-8'>
       <h3 class='text-4xl font-bold'>colorblind</h3>
       <iframe
@@ -20,9 +20,9 @@
     </div>
   </div>
   <div
-    class='p-8 lg:y-16 lg:px-32 flex flex-col md:flex-row justify-center items-center text-white bg-black'
+    class='md:py-16 lg:px-32 flex flex-col md:flex-row justify-center items-center text-white bg-black'
   >
-    <img src='/releases/xiii_cover.jpeg' class='max-w-md' />
+    <ReleaseImage src='/releases/xiii_cover.jpeg' />
     <div class='p-8 flex flex-col gap-8'>
       <h3 class='text-4xl font-bold'>XIII (the death)</h3>
       <iframe
@@ -35,4 +35,4 @@
         loading='lazy'></iframe>
     </div>
   </div>
-</div>
+</section>

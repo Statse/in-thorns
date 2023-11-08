@@ -1,0 +1,9 @@
+---
+interface props {
+  src: string
+}
+
+const { src } = Astro.props
+---
+
+<img src={src} class='w-full md:max-w-md' />
