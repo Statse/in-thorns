@@ -1,0 +1,25 @@
+---
+import Social from '../components/social.astro'
+---
+
+<section
+  class='w-screen h-screen bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
+  style='background-image:  url(itbg.gif);'
+>
+  <div class='absolute w-screen h-screen bg-black opacity-5'></div>
+  <nav class='w-full h-16 flex flex-row justify-center items-center px-8'>
+    <ul class='flex flex-row gap-2'>
+      <Social link='https://www.instagram.com/inxthorns/' src='ig.png' />
+      <Social
+        link='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ'
+        src='spotify.png'
+      />
+      <Social link='https://www.youtube.com/@inthornsband' src='yt.png' />
+      <Social link='https://www.facebook.com/inthorns' src='fb.png' />
+    </ul>
+  </nav>
+  <img
+    src='favicon.svg'
+    class='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+  />
+</section>
