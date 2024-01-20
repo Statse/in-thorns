@@ -9,8 +9,8 @@ import Social from '../components/social.astro'
     class='w-screen h-screen bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
     style='background-image:  url(candles.jpg);'
   >
-    <nav class='w-full flex flex-row h-14 items-center px-6'>
-      <ul class='flex flex-row gap-2'>
+    <nav class='w-full flex flex-row px-6 items-center justify-between'>
+      <ul class='flex flex-row gap-2 h-14 md:absolute'>
         <Social link='https://www.instagram.com/inxthorns/' src='ig.png' />
         <Social
           link='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ'
@@ -19,16 +19,15 @@ import Social from '../components/social.astro'
         <Social link='https://www.youtube.com/@inthornsband' src='yt.png' />
         <Social link='https://www.facebook.com/inthorns' src='fb.png' />
       </ul>
-      <img
-        src='it-logo-white.png'
-        class='w-80 absolute top-4 justify-self-center left-1/2 transform -translate-x-1/2 hidden md:block'
-      />
+      <div class='md:flex md:justify-center'></div>
+      <img src='it-logo-white.png' class='w-48 md:w-80 p-4 md:mx-auto' />
     </nav>
-    <section class='flex flex-col gap-4'>
-      <div
-        class='flex flex-col absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white w-96'
-      >
-        Debut album Last bead on a song of cords out now!
+    <section
+      class='flex flex-col gap-4 items-center justify-center h-screen top-0 absolute w-screen px-4'
+      '
+    >
+      <div class='flex flex-col bg-black text-white w-auto sm:w-96'>
+        Debut album Last bead on a song of cords available now!
         <img src='TLBOACOS.jpg' class='h-auto w-full' />
       </div>
     </section>
