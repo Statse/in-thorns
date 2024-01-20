@@ -6,10 +6,10 @@ import Social from '../components/social.astro'
 
 <Layout title='Sail into the unknown.'>
   <main
-    class='w-screen h-screen bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
+    class='flex flex-col w-screen h-screen bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
     style='background-image:  url(candles.jpg);'
   >
-    <nav class='w-full flex flex-row px-6 items-center justify-between'>
+    <nav class='w-full flex flex-row px-6 items-center justify-between z-50'>
       <ul class='flex flex-row gap-2 h-14 md:absolute'>
         <Social link='https://www.instagram.com/inxthorns/' src='ig.png' />
         <Social
@@ -23,8 +23,7 @@ import Social from '../components/social.astro'
       <img src='it-logo-white.png' class='w-48 md:w-80 p-4 md:mx-auto' />
     </nav>
     <section
-      class='flex flex-col gap-4 items-center justify-center h-screen top-0 absolute w-screen px-4'
-      '
+      class='flex flex-col gap-4 px-4 w-full h-full justify-center items-center'
     >
       <div class='flex flex-col bg-black text-white w-auto sm:w-96'>
         Debut album Last bead on a song of cords available now!
