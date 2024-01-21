@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths } from 'astro'
+import { medusa } from '../../scripts/medusa'
+
+export function getStaticPaths() {
+  return [
+    { params: { handle: 'ice-cream-into-the-void' } },
+    { params: { handle: 'rats-t-shirt' } }
+  ]
+}
+
+const { handle } = Astro.params
+
+if (!handle) {
+  throw new Error('Product is required')
+}
+
+const productResponse = await medusa.products.list({
+  handle: handle
+})
+
+const product = productResponse.products[0]
+
+if (!product) {
+  throw new Error('Product not found')
+}
+---
+
+<div>{product.title}</div>
