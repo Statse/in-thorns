@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",
+    "@fontsource/koulen": "^5.0.18",
+    "@fontsource/roboto": "^5.0.8",
+    "@medusajs/medusa-js": "^6.1.5",
     "astro": "^3.2.2"
   },
   "devDependencies": {
