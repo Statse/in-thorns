@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['Roboto', 'Inter var', 'Inter', 'system-ui', 'sans-serif'],
+				khmer: ['Koulen', 'Roboto', 'Inter var', 'Inter', 'system-ui', 'sans-serif'],
 			},
 		},
 	},

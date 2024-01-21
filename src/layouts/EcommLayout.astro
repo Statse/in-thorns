@@ -2,6 +2,7 @@
 interface Props {
   title: string
 }
+
 import '@fontsource/koulen'
 import '@fontsource/roboto'
 
@@ -18,7 +19,7 @@ const { title } = Astro.props
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class='bg-black min-h-screen flex flex-col'>
     <slot />
   </body>
 </html>
