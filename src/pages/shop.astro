@@ -16,11 +16,30 @@ if (!productsResponse) {
 const { products } = productsResponse
 ---
 
+<style>
+  .fade {
+    /* background-image: url('candles.jpg'); */
+    /* background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0)
+      ),
+      url('candles.jpg')
+    ); */
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>
 <EcommLayout title='In Thorns Web Store'>
   <main
-    class='m-4 border-white text-white border-2 flex flex-col h-full flex-1'
+    class='m-4 border-white text-white border-2 flex flex-col h-full flex-1 gap-8 fade items-center'
   >
-    <h1 class='font-khmer'>Products</h1>
-    {products.map((p) => <div>{p.title}</div>)}
+    <nav class='h-24 w-full flex items-center justify-center'>
+      <img src='it-logo-white.png' class='h-20' alt='In Thorns logo' />
+    </nav>
+    <section class='container flex flex-col'>
+      <h1 class='font-khmer'>Products</h1>
+      {products.map((p) => <div>{p.title}</div>)}
+    </section>
   </main>
 </EcommLayout>
