@@ -1,0 +1,14 @@
+---
+type Props = {
+  value: string
+  title: string
+  name: string
+}
+
+const { value, title, name } = Astro.props
+---
+
+<label>
+  <input type='radio' name={name} value={value} />
+  {title}
+</label>

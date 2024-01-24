@@ -1,0 +1,10 @@
+---
+type Props = {
+  customClass?: string
+}
+const { customClass } = Astro.props
+---
+
+<span class=`bg-white text-black px-2 font-khmer text-xl ${customClass}`>
+  <slot />
+</span>

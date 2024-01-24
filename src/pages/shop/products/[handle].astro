@@ -3,6 +3,8 @@ import { medusa } from '../../../scripts/medusa'
 import EcommLayout from '../../../layouts/EcommLayout.astro'
 import Main from '../../../components/main.astro'
 import Title from '../../../components/title.astro'
+import Badge from '../../../components/badge.astro'
+import RadioButton from '../../../components/RadioButton.astro'
 
 const { handle } = Astro.params
 
@@ -25,19 +27,94 @@ if (!product) {
 }
 
 const title = product.title || handle
+
+const { variants } = product
+
+// console.log('---------- variants ----------')
+// console.log(variants[0])
+
+// console.log('---------- options ----------')
+// options?.map((opt) => console.log(opt))
+
+// console.log(product)
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData()
+    console.log('---------- data ----------')
+    console.log(data)
+    // Do something with the data
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    }
+  }
+}
 ---
 
-<!-- Why the fuck this breaks the product page?  style='background-image: url("candles.jpg")' -->
 <EcommLayout title={title}>
   <Main>
     <section
-      class='border-white border-2 mb-32 mt-32 h-screen max-w-[1000px] w-full p-16 grid grid-cols-2 gap-4'
+      class='border-white border-2 my-16 h-auto max-w-[1000px] w-full p-16 grid grid-cols-2 gap-4 bg-opacity-90 bg-black'
     >
-      <div class='col-auto border-white border-2 flex'>image here</div>
-      <div class='col-auto border-white border-2 flex-col gap-8'>
-        <Title>{title}</Title>
-        <p>info here</p>
+      <div class='col-auto'>
+        <div class='border-white border-2'>
+          <img src={product.thumbnail} alt='' class='h-auto w-full' />
+        </div>
       </div>
+      <form method='POST' class='col-auto flex flex-col gap-8 items-start'>
+        <div class='flex flex-col gap-2 items-start'>
+          <Badge>In Stock</Badge>
+          <Title>{title}</Title>
+        </div>
+        <p>{product.description}</p>
+        <!-- {
+          options
+            ? options.map((opt) => (
+                <div class='flex flex-col gap-2 items-start'>
+                  <Badge>{opt.title}</Badge>
+                  {opt.values.map((val) => (
+                    <label>
+                      <input type='radio' name={opt.title} value={val.value} />
+                      {val.value}
+                    </label>
+                  ))}
+                </div>
+              ))
+            : null
+        } -->
+
+        <div class='flex flex-col gap-2 items-start'>
+          <Badge>Option</Badge>
+          {
+            variants
+              ? variants.map((variant) => {
+                  const { id, title } = variant
+                  if (!id || !title) {
+                    throw new Error('variant.id or variant.title is undefined')
+                  }
+
+                  return <RadioButton name='variant' value={id} title={title} />
+                })
+              : null
+          }
+        </div>
+        <div class='flex flex-col gap-2 items-start'>
+          <Badge>quantity</Badge>
+          <input
+            class='border-2 border-white w-16 flex items-center px-2 py-2 font-khmer text-2xl text-black'
+            type='number'
+            name='quantity'
+            id='quantity'
+            min='1'
+            max='10'
+            value='1'
+          />
+        </div>
+        <button class='px-4 py-2 font-khmer border-2 border-white text-2xl'
+          >Add to cart</button
+        >
+      </form>
     </section>
   </Main>
 </EcommLayout>
