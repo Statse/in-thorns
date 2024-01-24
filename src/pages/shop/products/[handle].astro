@@ -62,7 +62,7 @@ if (Astro.request.method === 'POST') {
         <p>{product.description}</p>
         <div class='flex flex-col gap-4 items-start relative'>
           <Badge>Option</Badge>
-          <div class='flex w-full flex-row flex-wrap h-auto gap-6'>
+          <div class='flex w-full flex-row flex-wrap h-auto gap-2 gap-y-6'>
             {
               variants
                 ? variants.map((variant) => {
