@@ -12,8 +12,19 @@ const imgUrl = imageUrl || '/candles.jpg'
   class='m-4 border-white text-white border-2 flex flex-col h-full flex-1 gap-8 items-center bg-no-repeat bg-contain md:bg-cover bg-top bg-fixed'
   style=`background-image: url("${imgUrl}")`
 >
-  <nav class='h-24 w-full flex items-center justify-center'>
-    <img src='/it-logo-white.png' class='h-20' alt='In Thorns logo' />
+  <nav
+    class='h-24 w-full grid grid-cols-5 gap-4 px-8 md:px-16 items-center justify-center'
+  >
+    <img
+      src='/it-logo-white.png'
+      class='h-20 mx-auto col-start-3'
+      alt='In Thorns logo'
+    />
+    <button
+      class='bg-black border-2 border-white px-4 py-2 self-center ml-auto col-start-5'
+    >
+      Cart
+    </button>
   </nav>
   <slot />
 </main>
