@@ -84,20 +84,26 @@ if (Astro.request.method === 'POST') {
             : null
         } -->
 
-        <div class='flex flex-col gap-2 items-start'>
+        <div class='flex flex-col gap-4 items-start relative'>
           <Badge>Option</Badge>
-          {
-            variants
-              ? variants.map((variant) => {
-                  const { id, title } = variant
-                  if (!id || !title) {
-                    throw new Error('variant.id or variant.title is undefined')
-                  }
+          <div class='flex flex-col gap-6 h-auto'>
+            {
+              variants
+                ? variants.map((variant) => {
+                    const { id, title } = variant
+                    if (!id || !title) {
+                      throw new Error(
+                        'variant.id or variant.title is undefined'
+                      )
+                    }
 
-                  return <RadioButton name='variant' value={id} title={title} />
-                })
-              : null
-          }
+                    return (
+                      <RadioButton name='variant' value={id} title={title} />
+                    )
+                  })
+                : null
+            }
+          </div>
         </div>
         <div class='flex flex-col gap-2 items-start'>
           <Badge>quantity</Badge>
