@@ -1,4 +1,6 @@
 ---
+import Title from './title.astro'
+
 type Props = {
   handle: string
   title: string
@@ -14,7 +16,7 @@ const { image, title, price, handle } = Astro.props
 >
   <img src={image} alt={title} class='flex-1 h-[250px] w-auto' />
   <div class='p-4 flex flex-col flex-1 h-1/2 items-center gap-4 font-khmer'>
-    <h2 class='text-xl'>{title}</h2>
+    <Title heading='h2' fontSize='text-xl'>{title}</Title>
     <span class='px-4 py-2 bg-white text-black w-auto'
       >{price.toFixed(2)} <b>€</b></span
     >

@@ -1,0 +1,12 @@
+---
+type Props = {
+  heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  fontSize?: string
+}
+
+const { heading, fontSize } = Astro.props
+
+const Element = heading || 'h1'
+---
+
+<Element class=`font-khmer ${fontSize ||'text-4xl'}`><slot /></Element>

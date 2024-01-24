@@ -3,6 +3,7 @@ import { medusa } from '../../scripts/medusa'
 import EcommLayout from '../../layouts/EcommLayout.astro'
 import ProductCard from '../../components/productCard.astro'
 import Main from '../../components/main.astro'
+import Title from '../../components/title.astro'
 
 const productsResponse = await medusa.products
   .list()
@@ -23,23 +24,24 @@ console.log(products[0])
 <style></style>
 <EcommLayout title='In Thorns Web Store'>
   <Main>
-    <nav class='h-24 w-full flex items-center justify-center'>
-      <img src='it-logo-white.png' class='h-20' alt='In Thorns logo' />
-    </nav>
-    <section class='container-md flex flex-col px-8'>
-      <h1 class='font-khmer text-2xl'>Products</h1>
+    <section class='container w-full flex flex-col px-8 gap-8'>
+      <Title>Products</Title>
       <div
         class='flex flex-row gap-16 flex-wrap w-full h-full justify-center py-4'
       >
         {
-          products.map(({ handle, thumbnail, title }) => (
-            <ProductCard
-              image={thumbnail || ''}
-              handle={handle || ''}
-              title={title || ''}
-              price={25}
-            />
-          ))
+          products ? (
+            products.map(({ handle, thumbnail, title }) => (
+              <ProductCard
+                image={thumbnail || ''}
+                handle={handle || ''}
+                title={title || ''}
+                price={25}
+              />
+            ))
+          ) : (
+            <Title heading='h2'>TBA</Title>
+          )
         }
       </div>
     </section>
