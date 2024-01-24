@@ -1,9 +1,9 @@
 ---
-import { medusa } from '../../scripts/medusa'
-import EcommLayout from '../../layouts/EcommLayout.astro'
-import ProductCard from '../../components/productCard.astro'
-import Main from '../../components/main.astro'
-import Title from '../../components/title.astro'
+import { medusa } from '@/scripts/medusa'
+import EcommLayout from '@/layouts/EcommLayout.astro'
+import ProductCard from '@/components/productCard.astro'
+import Main from '@/components/main.astro'
+import Title from '@/components/title.astro'
 
 const productsResponse = await medusa.products
   .list()
