@@ -44,6 +44,7 @@ const { variants } = product
         </div>
       </div>
       <AddToCartForm client:only='preact'>
+        <!-- TODO: Maybe move this whole thing under preact component? Would be easier to manage search params etc. -->
         <div class='col-auto flex flex-col gap-8 items-start'>
           <div class='flex flex-col gap-2 items-start'>
             <Badge>In Stock</Badge>
