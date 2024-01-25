@@ -1,10 +1,14 @@
 import { z } from 'zod'
 import { useState } from 'preact/hooks'
 
-import { addCartItem, persistentCart } from './cartStore'
+import {
+  addCartItem,
+  persistentCartId,
+  persistentCart,
+  isInStock
+} from './cartStore'
 import { medusa } from '@/scripts/medusa'
 import RadioButton from '@/components/preact/RadioButton/RadioButton'
-import { isInStock } from './cartStore'
 
 export type VariantType = {
   id: string
@@ -26,7 +30,10 @@ export default function AddToCartForm({ variants }: Props) {
     setSelectedVariant(variant)
   }
 
-  async function addToCart(e: SubmitEvent) {
+  const quantity = selectedVariant?.inventory_quantity
+  const isOutOfStock = !quantity
+
+  const addToCart = async (e: SubmitEvent) => {
     e.preventDefault()
 
     const formData = new FormData(e.target as HTMLFormElement)
@@ -40,58 +47,61 @@ export default function AddToCartForm({ variants }: Props) {
       .parse(formValues)
 
     const { quantity, variant_id } = validatedFormValues
-    const cartId = localStorage.getItem('cart_id')
     const medusaCart = persistentCart.get()
+    console.log(medusaCart)
 
-    if (cartId) {
-      console.log(medusaCart)
+    const cartId = persistentCartId.get()
+    console.log('cartId', cartId)
 
-      if (!medusaCart) {
-        console.log('create new item')
-        return await medusa.carts.lineItems
-          .create(cartId, {
-            variant_id,
-            quantity
-          })
-          .then(({ cart }) => {
-            cart.items.forEach(({ id, quantity, variant_id }) => {
-              if (!variant_id) {
-                throw new Error('No variant id')
-              }
-              addCartItem({
-                lineItemId: id,
-                variantId: variant_id,
-                quantity: quantity
-              })
-            })
-          })
-      }
+    // if (cartId) {
+    //   console.log(medusaCart)
 
-      return medusaCart.forEach(async (item) => {
-        if (item.variantId === variant_id) {
-          console.log('update item')
-          await medusa.carts.lineItems
-            .update(cartId, item.lineItemId, {
-              quantity: item.quantity + quantity
-            })
-            .then(({ cart }) => {
-              cart.items.forEach(({ id, quantity, variant_id }) => {
-                if (!variant_id) {
-                  throw new Error('No variant id')
-                }
-                addCartItem({
-                  lineItemId: id,
-                  variantId: variant_id,
-                  quantity: quantity
-                })
-              })
-            })
-        }
-      })
-    }
+    //   if (!medusaCart) {
+    //     console.log('create new item')
+    //     return await medusa.carts.lineItems
+    //       .create(cartId, {
+    //         variant_id,
+    //         quantity
+    //       })
+    //       .then(({ cart }) => {
+    //         cart.items.forEach(({ id, quantity, variant_id }) => {
+    //           if (!variant_id) {
+    //             throw new Error('No variant id')
+    //           }
+    //           addCartItem({
+    //             lineItemId: id,
+    //             variantId: variant_id,
+    //             quantity: quantity
+    //           })
+    //         })
+    //       })
+    //   }
+
+    //   return medusaCart.forEach(async (item) => {
+    //     if (item.variantId === variant_id) {
+    //       console.log('update item')
+    //       await medusa.carts.lineItems
+    //         .update(cartId, item.lineItemId, {
+    //           quantity: item.quantity + quantity
+    //         })
+    //         .then(({ cart }) => {
+    //           cart.items.forEach(({ id, quantity, variant_id }) => {
+    //             if (!variant_id) {
+    //               throw new Error('No variant id')
+    //             }
+    //             addCartItem({
+    //               lineItemId: id,
+    //               variantId: variant_id,
+    //               quantity: quantity
+    //             })
+    //           })
+    //         })
+    //     }
+    //   })
+    // }
 
     await medusa.carts.create().then(({ cart }) => {
-      localStorage.setItem('cart_id', cart.id)
+      persistentCartId.set(cart.id)
       medusa.carts.lineItems
         .create(cart.id, {
           variant_id,
@@ -111,9 +121,6 @@ export default function AddToCartForm({ variants }: Props) {
         })
     })
   }
-
-  const quantity = selectedVariant?.inventory_quantity
-  const isOutOfStock = !quantity
 
   return (
     <form onSubmit={addToCart} class='flex flex-col gap-8 items-start'>

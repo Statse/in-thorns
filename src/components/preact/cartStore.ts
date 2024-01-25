@@ -14,6 +14,11 @@ export type CartItem = {
 export type CartContent = CartItem[];
 export type CartItemDisplayInfo = Pick<CartItem, 'variantId' | 'quantity'>;
 
+export const persistentCartId = persistentAtom<string>('cart_id', "", {
+    encode: JSON.stringify,
+    decode: JSON.parse,
+});
+
 export const persistentCart = persistentAtom<CartContent>('medusa_cart', [], {
     encode: JSON.stringify,
     decode: JSON.parse,
