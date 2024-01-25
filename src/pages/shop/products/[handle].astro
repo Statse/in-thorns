@@ -7,7 +7,9 @@ import Badge from '@/components/badge.astro'
 import RadioButton from '@/components/RadioButton.astro'
 import Button from '@/components/Button.astro'
 
+import IsInStock from '@/components/preact/IsInStock'
 import AddToCartForm from '@/components/preact/AddToCartForm'
+import type { VariantType } from '@/components/preact/AddToCartForm'
 
 const { handle } = Astro.params
 
@@ -44,55 +46,17 @@ const { variants } = product
           <img src={product.thumbnail} alt='' class='h-auto w-full' />
         </div>
       </div>
-      <AddToCartForm client:only='preact'>
-        <!-- TODO: Maybe move this whole thing under preact component? Would be easier to manage search params etc. -->
-        <!-- Also the inventory management etc. -->
-        <div class='col-auto flex flex-col gap-8 items-start'>
-          <div class='flex flex-col gap-2 items-start'>
-            <Badge>In Stock</Badge>
-            <Title>{title}</Title>
-          </div>
-          <p>{product.description}</p>
-          <div class='flex flex-col gap-4 items-start'>
-            <Badge>Option</Badge>
-            <div class='flex w-full flex-row flex-wrap h-auto gap-2 gap-y-6'>
-              {
-                variants
-                  ? variants.map((variant) => {
-                      const { id, title } = variant
-                      if (!id || !title) {
-                        throw new Error(
-                          'variant.id or variant.title is undefined'
-                        )
-                      }
-
-                      return (
-                        <RadioButton
-                          name='variant_id'
-                          value={id}
-                          title={title}
-                        />
-                      )
-                    })
-                  : null
-              }
-            </div>
-          </div>
-          <div class='flex flex-col gap-2 items-start'>
-            <Badge>quantity</Badge>
-            <input
-              class='border-2 border-white w-16 flex items-center px-2 font-khmer text-2xl text-black'
-              type='number'
-              name='quantity'
-              id='quantity'
-              min='1'
-              max='10'
-              value='1'
-            />
-          </div>
-          <Button>Add to cart</Button>
+      <div class='col-auto flex flex-col gap-8 items-start'>
+        <div class='flex flex-col gap-2 items-start'>
+          <IsInStock client:only='preact' />
+          <Title>{title}</Title>
         </div>
-      </AddToCartForm>
+        <p>{product.description}</p>
+        <AddToCartForm
+          client:only='preact'
+          variants={product.variants as VariantType[]}
+        />
+      </div>
     </section>
   </Main>
 </EcommLayout>

@@ -1,0 +1,32 @@
+.radiobutton_container {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Hide the browser's default radio button */
+.radiobutton_container input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+background-color: black;
+color: white;
+border: 2px solid white;
+}
+
+/* On mouse-over, add a grey background color */
+.radiobutton_container:hover input ~ .checkmark {
+background-color: black;
+color: white;
+border: 2px solid white;
+opacity: 0.8;
+}
+
+/* When the radio button is checked, add a blue background */
+.radiobutton_container input:checked ~ .checkmark {
+background-color: white !important;
+color: black !important;
+}
