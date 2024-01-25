@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { useEffect, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 
 import { addCartItem, persistentCart } from './cartStore'
 import { medusa } from '@/scripts/medusa'
@@ -112,6 +112,9 @@ export default function AddToCartForm({ variants }: Props) {
     })
   }
 
+  const quantity = selectedVariant?.inventory_quantity
+  const isOutOfStock = !quantity
+
   return (
     <form onSubmit={addToCart} class='flex flex-col gap-8 items-start'>
       <div class='flex flex-col gap-4 items-start'>
@@ -150,12 +153,17 @@ export default function AddToCartForm({ variants }: Props) {
           type='number'
           name='quantity'
           id='quantity'
-          min='1'
-          max={selectedVariant?.inventory_quantity}
-          value='1'
+          min={!isOutOfStock ? '1' : '0'}
+          max={quantity}
+          value={!isOutOfStock ? '1' : '0'}
         />
       </div>
-      <button class='px-4 py-2 font-khmer border-2 border-white text-2xl'>
+      <button
+        class={`px-4 py-2 font-khmer border-2 border-white text-2xl ${
+          isOutOfStock ? 'opacity-20' : 'bg-black'
+        }`}
+        disabled={isOutOfStock}
+      >
         Add to cart
       </button>
     </form>

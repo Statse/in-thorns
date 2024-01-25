@@ -1,7 +1,7 @@
 import { persistentAtom } from '@nanostores/persistent'
 import { atom } from 'nanostores';
 
-export const isInStock = atom<boolean>(false);
+export const isInStock = atom<boolean>(true);
 
 //TODO: Think if we actually need this
 
