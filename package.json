@@ -10,12 +10,17 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/preact": "^3.1.0",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^7.0.0",
     "@fontsource/koulen": "^5.0.18",
     "@fontsource/roboto": "^5.0.8",
     "@medusajs/medusa-js": "^6.1.5",
-    "astro": "^4.2.1"
+    "@nanostores/preact": "^0.5.0",
+    "astro": "^4.2.1",
+    "nanostores": "^0.9.5",
+    "preact": "^10.19.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"

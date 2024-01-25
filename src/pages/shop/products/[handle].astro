@@ -6,6 +6,8 @@ import Title from '@/components/title.astro'
 import Badge from '@/components/badge.astro'
 import RadioButton from '@/components/RadioButton.astro'
 
+import AddToCartForm from '@/components/preact/AddToCartForm'
+
 const { handle } = Astro.params
 
 if (!handle) {
@@ -29,17 +31,6 @@ if (!product) {
 const title = product.title || handle
 
 const { variants } = product
-
-if (Astro.request.method === 'POST') {
-  try {
-    const data = await Astro.request.formData()
-    console.log(data)
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message)
-    }
-  }
-}
 ---
 
 <EcommLayout title={title}>
@@ -52,51 +43,55 @@ if (Astro.request.method === 'POST') {
           <img src={product.thumbnail} alt='' class='h-auto w-full' />
         </div>
       </div>
-      <form method='POST' class='col-auto flex flex-col gap-8 items-start'>
-        <div class='flex flex-col gap-2 items-start'>
-          <Badge>In Stock</Badge>
-          <Title>{title}</Title>
-        </div>
-        <p>{product.description}</p>
-        <div class='flex flex-col gap-4 items-start'>
-          <Badge>Option</Badge>
-          <div class='flex w-full flex-row flex-wrap h-auto gap-2 gap-y-6'>
-            {
-              variants
-                ? variants.map((variant) => {
-                    const { id, title } = variant
-                    if (!id || !title) {
-                      throw new Error(
-                        'variant.id or variant.title is undefined'
-                      )
-                    }
-
-                    return (
-                      <RadioButton name='variant' value={id} title={title} />
-                    )
-                  })
-                : null
-            }
+      <AddToCartForm client:only='preact'>
+        <div class='col-auto flex flex-col gap-8 items-start'>
+          <div class='flex flex-col gap-2 items-start'>
+            <Badge>In Stock</Badge>
+            <Title>{title}</Title>
           </div>
+          <p>{product.description}</p>
+          <div class='flex flex-col gap-4 items-start'>
+            <Badge>Option</Badge>
+            <div class='flex w-full flex-row flex-wrap h-auto gap-2 gap-y-6'>
+              {
+                variants
+                  ? variants.map((variant) => {
+                      const { id, title } = variant
+                      if (!id || !title) {
+                        throw new Error(
+                          'variant.id or variant.title is undefined'
+                        )
+                      }
+
+                      return (
+                        <RadioButton
+                          name='variant_id'
+                          value={id}
+                          title={title}
+                        />
+                      )
+                    })
+                  : null
+              }
+            </div>
+          </div>
+          <div class='flex flex-col gap-2 items-start'>
+            <Badge>quantity</Badge>
+            <input
+              class='border-2 border-white w-16 flex items-center px-2 font-khmer text-2xl text-black'
+              type='number'
+              name='quantity'
+              id='quantity'
+              min='1'
+              max='10'
+              value='1'
+            />
+          </div>
+          <button class='px-4 py-2 font-khmer border-2 border-white text-2xl'
+            >Add to cart</button
+          >
         </div>
-        <div class='flex flex-col gap-2 items-start'>
-          <Badge>quantity</Badge>
-          <!-- TODO: Limit max value based on inventory of selected variation -->
-          <!-- https://docs.astro.build/en/core-concepts/sharing-state/ Maybe this for cart handling? -->
-          <input
-            class='border-2 border-white w-16 flex items-center px-2 font-khmer text-2xl text-black'
-            type='number'
-            name='quantity'
-            id='quantity'
-            min='1'
-            max='10'
-            value='1'
-          />
-        </div>
-        <button class='px-4 py-2 font-khmer border-2 border-white text-2xl'
-          >Add to cart</button
-        >
-      </form>
+      </AddToCartForm>
     </section>
   </Main>
 </EcommLayout>
