@@ -105,7 +105,6 @@ export default function AddToCartForm({ variants }: Props) {
           class='border-2 border-white w-16 flex items-center px-2 font-khmer text-2xl text-black'
           type='number'
           name='quantity'
-          id='quantity'
           min={!isOutOfStock ? '1' : '0'}
           max={quantity}
           value={!isOutOfStock ? '1' : '0'}
@@ -113,7 +112,7 @@ export default function AddToCartForm({ variants }: Props) {
       </div>
       <button
         class={`px-4 py-2 font-khmer border-2 border-white text-2xl ${
-          isOutOfStock ? 'opacity-20' : 'bg-black'
+          isOutOfStock ? 'opacity-20' : ''
         }`}
         disabled={isOutOfStock}
       >

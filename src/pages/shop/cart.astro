@@ -1,6 +1,11 @@
 ---
 import EcommLayout from '@/layouts/EcommLayout.astro'
 import Main from '@/components/main.astro'
+import { medusa } from '@/scripts/medusa'
+import Title from '@/components/title.astro'
+import Button from '@/components/Button.astro'
+
+import { Cart } from '@/components/preact/Cart'
 
 const title = 'Cart'
 ---
@@ -8,9 +13,10 @@ const title = 'Cart'
 <EcommLayout title={title}>
   <Main>
     <section
-      class='border-white border-2 my-16 h-auto max-w-[1000px] w-full p-16 grid grid-cols-2 gap-4 bg-opacity-90 bg-black'
+      class='border-white border-2 my-16 h-auto max-w-[1000px] w-full p-16 bg-opacity-90 bg-black items-center justify-center flex flex-col gap-4'
     >
-      {title}
+      <Title>{title}</Title>
+      <Cart client:only='preact' />
     </section>
   </Main>
 </EcommLayout>

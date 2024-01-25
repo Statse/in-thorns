@@ -11,7 +11,7 @@ export const CartButton = () => {
     <a
       id='cart-link'
       class='bg-black border-2 border-white px-4 py-2 self-center ml-auto col-start-5'
-      href={`/shop/cart/${cartId}`}
+      href={`/shop/cart`} //${cartId}
     >
       Cart {`(${itemsInCart})`}
     </a>
