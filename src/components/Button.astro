@@ -1,9 +1,11 @@
 ---
 type Props = {
   customClass?: string
-} & HTMLButtonElement
-
+}
 const { customClass } = Astro.props
 ---
 
-<button class=`${customClass}`><slot /></button>
+<button
+  class=`px-4 py-2 font-khmer border-2 border-white text-2xl ${customClass}`
+  ><slot /></button
+>

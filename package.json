@@ -16,6 +16,7 @@
     "@fontsource/koulen": "^5.0.18",
     "@fontsource/roboto": "^5.0.8",
     "@medusajs/medusa-js": "^6.1.5",
+    "@nanostores/persistent": "^0.9.1",
     "@nanostores/preact": "^0.5.0",
     "astro": "^4.2.1",
     "nanostores": "^0.9.5",

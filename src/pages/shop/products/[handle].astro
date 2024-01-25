@@ -5,6 +5,7 @@ import Main from '@/components/main.astro'
 import Title from '@/components/title.astro'
 import Badge from '@/components/badge.astro'
 import RadioButton from '@/components/RadioButton.astro'
+import Button from '@/components/Button.astro'
 
 import AddToCartForm from '@/components/preact/AddToCartForm'
 
@@ -89,9 +90,7 @@ const { variants } = product
               value='1'
             />
           </div>
-          <button class='px-4 py-2 font-khmer border-2 border-white text-2xl'
-            >Add to cart</button
-          >
+          <Button>Add to cart</Button>
         </div>
       </AddToCartForm>
     </section>
