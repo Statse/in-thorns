@@ -1,5 +1,7 @@
 import { persistentAtom } from '@nanostores/persistent'
 
+//TODO: Think if we actually need this
+
 export type CartItem = {
     variant_id: string;
     quantity: number;
