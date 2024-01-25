@@ -22,11 +22,14 @@ const imgUrl = imageUrl || '/candles.jpg'
     <a href='/shop/about' class='col-start-4 font-khmer text-xl mr-auto'
       >About</a
     >
-    <button
+    <!-- TODO ALL LINK TO CART -->
+    <a
+      id='cart-link'
       class='bg-black border-2 border-white px-4 py-2 self-center ml-auto col-start-5'
+      href='/shop/cart/'
     >
       Cart
-    </button>
+    </a>
   </nav>
   <slot />
 </main>

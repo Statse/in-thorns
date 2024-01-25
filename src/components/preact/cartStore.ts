@@ -3,24 +3,25 @@ import { persistentAtom } from '@nanostores/persistent'
 //TODO: Think if we actually need this
 
 export type CartItem = {
-    variant_id: string;
+    variantId: string;
     quantity: number;
+    lineItemId: string
 };
 
 export type CartContent = CartItem[];
-export type CartItemDisplayInfo = Pick<CartItem, 'variant_id' | 'quantity'>;
+export type CartItemDisplayInfo = Pick<CartItem, 'variantId' | 'quantity'>;
 
-export const persistentCart = persistentAtom<CartContent>('cart', [], {
+export const persistentCart = persistentAtom<CartContent>('medusa_cart', [], {
     encode: JSON.stringify,
     decode: JSON.parse,
 });
 
-export function addCartItem({ variant_id, quantity, }: CartItem) {
-    const existingEntry = persistentCart.get().find((item) => item.variant_id === variant_id);
+export function addCartItem({ variantId, quantity, lineItemId }: CartItem) {
+    const existingEntry = persistentCart.get().find((item) => item.variantId === variantId);
 
     if (existingEntry) {
         persistentCart.set([
-            ...persistentCart.get().filter((item) => item.variant_id !== variant_id),
+            ...persistentCart.get().filter((item) => item.variantId !== variantId),
             {
                 ...existingEntry,
                 quantity: existingEntry.quantity + quantity,
@@ -30,8 +31,23 @@ export function addCartItem({ variant_id, quantity, }: CartItem) {
         persistentCart.set([
             ...persistentCart.get(),
             {
-                variant_id,
+                variantId,
                 quantity,
+                lineItemId
+            },
+        ]);
+    }
+}
+
+export function removeCartItem({ variantId, quantity }: CartItem) {
+    const existingEntry = persistentCart.get().find((item) => item.variantId === variantId);
+
+    if (existingEntry) {
+        persistentCart.set([
+            ...persistentCart.get().filter((item) => item.variantId !== variantId),
+            {
+                ...existingEntry,
+                quantity: existingEntry.quantity - quantity,
             },
         ]);
     }
