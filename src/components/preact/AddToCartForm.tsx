@@ -61,19 +61,6 @@ export default function AddToCartForm({ variants }: Props) {
       variant_id,
       quantity
     })
-    // .then(({ cart }) => {
-    //   cart.items.forEach((item) => {
-    //     console.log(item)
-    //     const { quantity, variant_id } = item
-    //     if (!quantity || !variant_id) {
-    //       throw new Error('quantity or variant_id is undefined')
-    //     }
-    //     addCartItem({
-    //       quantity: quantity,
-    //       variantId: variant_id
-    //     })
-    //   })
-    // })
 
     addCartItem({
       quantity,
