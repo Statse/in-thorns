@@ -47,78 +47,37 @@ export default function AddToCartForm({ variants }: Props) {
       .parse(formValues)
 
     const { quantity, variant_id } = validatedFormValues
-    const medusaCart = persistentCart.get()
-    console.log(medusaCart)
 
-    const cartId = persistentCartId.get()
-    console.log('cartId', cartId)
+    let cartId = persistentCartId.get()
 
-    // if (cartId) {
-    //   console.log(medusaCart)
+    if (!cartId) {
+      cartId = await medusa.carts.create().then(({ cart }) => {
+        persistentCartId.set(cart.id)
+        return cart.id
+      })
+    }
 
-    //   if (!medusaCart) {
-    //     console.log('create new item')
-    //     return await medusa.carts.lineItems
-    //       .create(cartId, {
-    //         variant_id,
-    //         quantity
-    //       })
-    //       .then(({ cart }) => {
-    //         cart.items.forEach(({ id, quantity, variant_id }) => {
-    //           if (!variant_id) {
-    //             throw new Error('No variant id')
-    //           }
-    //           addCartItem({
-    //             lineItemId: id,
-    //             variantId: variant_id,
-    //             quantity: quantity
-    //           })
-    //         })
-    //       })
-    //   }
-
-    //   return medusaCart.forEach(async (item) => {
-    //     if (item.variantId === variant_id) {
-    //       console.log('update item')
-    //       await medusa.carts.lineItems
-    //         .update(cartId, item.lineItemId, {
-    //           quantity: item.quantity + quantity
-    //         })
-    //         .then(({ cart }) => {
-    //           cart.items.forEach(({ id, quantity, variant_id }) => {
-    //             if (!variant_id) {
-    //               throw new Error('No variant id')
-    //             }
-    //             addCartItem({
-    //               lineItemId: id,
-    //               variantId: variant_id,
-    //               quantity: quantity
-    //             })
-    //           })
-    //         })
+    await medusa.carts.lineItems.create(cartId, {
+      variant_id,
+      quantity
+    })
+    // .then(({ cart }) => {
+    //   cart.items.forEach((item) => {
+    //     console.log(item)
+    //     const { quantity, variant_id } = item
+    //     if (!quantity || !variant_id) {
+    //       throw new Error('quantity or variant_id is undefined')
     //     }
+    //     addCartItem({
+    //       quantity: quantity,
+    //       variantId: variant_id
+    //     })
     //   })
-    // }
+    // })
 
-    await medusa.carts.create().then(({ cart }) => {
-      persistentCartId.set(cart.id)
-      medusa.carts.lineItems
-        .create(cart.id, {
-          variant_id,
-          quantity
-        })
-        .then(({ cart }) => {
-          cart.items.forEach(({ id, quantity, variant_id }) => {
-            if (!variant_id) {
-              throw new Error('No variant id')
-            }
-            addCartItem({
-              lineItemId: id,
-              variantId: variant_id,
-              quantity: quantity
-            })
-          })
-        })
+    addCartItem({
+      quantity,
+      variantId: variant_id
     })
   }
 
