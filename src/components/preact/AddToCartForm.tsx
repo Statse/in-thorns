@@ -2,13 +2,14 @@ import { z } from 'zod'
 import { useState } from 'preact/hooks'
 
 import {
-  addCartItem,
   persistentCartId,
-  persistentCart,
-  isInStock
+  isInStock,
+  cartItemCount,
+  countCartItems
 } from './cartStore'
 import { medusa } from '@/scripts/medusa'
 import RadioButton from '@/components/preact/RadioButton/RadioButton'
+import type { CartItemType } from './Cart'
 
 export type VariantType = {
   id: string
@@ -53,19 +54,19 @@ export default function AddToCartForm({ variants }: Props) {
     if (!cartId) {
       cartId = await medusa.carts.create().then(({ cart }) => {
         persistentCartId.set(cart.id)
+        cartItemCount.set(countCartItems(cart.items as CartItemType[]))
         return cart.id
       })
     }
 
-    await medusa.carts.lineItems.create(cartId, {
-      variant_id,
-      quantity
-    })
-
-    addCartItem({
-      quantity,
-      variantId: variant_id
-    })
+    await medusa.carts.lineItems
+      .create(cartId, {
+        variant_id,
+        quantity
+      })
+      .then(({ cart }) => {
+        cartItemCount.set(countCartItems(cart.items as CartItemType[]))
+      })
   }
 
   return (

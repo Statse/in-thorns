@@ -1,24 +1,26 @@
 import { z } from 'zod'
 
-import { persistentCart, persistentCartId } from './cartStore'
+import { persistentCartId, cartItemCount, countCartItems } from './cartStore'
 import { useStore } from '@nanostores/preact'
 import { useEffect, useState } from 'preact/hooks'
 import { medusa } from '@/scripts/medusa'
 
+export type CartItemType = {
+  id: string
+  title: string
+  quantity: number
+  unit_price: number
+  total: number
+  thumbnail: string
+  variant: {
+    title: string
+    inventory_quantity: number
+  }
+}
+
 export type CartType = {
   id: string
-  items: {
-    id: string
-    title: string
-    quantity: number
-    unit_price: number
-    total: number
-    thumbnail: string
-    variant: {
-      title: string
-      inventory_quantity: number
-    }
-  }[]
+  items: CartItemType[]
   subtotal: number
 }
 
@@ -39,6 +41,7 @@ export const Cart = () => {
   const deleteItem = async (itemId: string) => {
     await medusa.carts.lineItems.delete(cartId, itemId).then((res: any) => {
       setCart(res.cart as CartType)
+      cartItemCount.set(countCartItems(res.cart.items as CartItemType[]))
     })
   }
 
@@ -62,7 +65,10 @@ export const Cart = () => {
         .update(cartId, lineItemId, {
           quantity
         })
-        .then((res) => setCart(res.cart as CartType))
+        .then((res) => {
+          setCart(res.cart as CartType)
+          cartItemCount.set(countCartItems(res.cart.items as CartItemType[]))
+        })
     })
   }
 
