@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 import { persistentCart, persistentCartId } from './cartStore'
 import { useStore } from '@nanostores/preact'
 import { useEffect, useState } from 'preact/hooks'
@@ -39,16 +41,35 @@ export const Cart = () => {
   const deleteItem = async (itemId: string) => {
     await medusa.carts.lineItems.delete(cartId, itemId).then((res: any) => {
       setCart(res.cart as CartType)
-      // medusa.carts.retrieve(cartId).then((res) => {
-      //   setCart(res.cart as CartType)
-      // })
     })
   }
 
-  console.log(cart)
+  const onSubmit = async (e: SubmitEvent) => {
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    const formValues = Object.fromEntries(formData.entries())
+
+    console.log('formValues', formValues)
+
+    const validatedFormValues = z
+      .record(z.string(), z.coerce.number())
+      .parse(formValues)
+
+    const arr = Object.entries(validatedFormValues)
+
+    arr.forEach(async (formValue) => {
+      const lineItemId = formValue[0]
+      const quantity = formValue[1]
+      medusa.carts.lineItems
+        .update(cartId, lineItemId, {
+          quantity
+        })
+        .then((res) => setCart(res.cart as CartType))
+    })
+  }
 
   return (
-    <form class='w-full h-auto'>
+    <form class='w-full h-auto' onSubmit={onSubmit}>
       <table class='w-full font-khmer text-xl'>
         <tr class='h-16'>
           <th class='text-start font-thin font-khmer'>Image</th>
@@ -79,7 +100,6 @@ export const Cart = () => {
                   class='border-2 border-white w-16 flex items-center px-2 font-khmer text-2xl text-black'
                   name={item.id}
                   type='number'
-                  // defaultValue={`${item.quantity}`}
                   value={`${item.quantity}`}
                   min='1'
                   max={item.variant.inventory_quantity}
