@@ -29,7 +29,7 @@ const imgUrl = imageUrl || '/candles.jpg'
       >About</a
     >
     <!-- TODO ALL LINK TO CART -->
-    <CartButton client:load />
+    <CartButton client:load transition:persist transition:name='cart-button' />
   </nav>
   <slot />
 </main>

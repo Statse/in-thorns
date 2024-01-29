@@ -1,14 +1,13 @@
 ---
+import '@fontsource/koulen'
+import '@fontsource/roboto'
+import '@/components/preact/RadioButton/style.css'
+
 import { ViewTransitions } from 'astro:transitions'
 export const prerender = true
 interface Props {
   title: string
 }
-
-import '@fontsource/koulen'
-import '@fontsource/roboto'
-import '@/components/preact/RadioButton/style.css'
-
 const { title } = Astro.props
 ---
 
