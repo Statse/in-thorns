@@ -1,5 +1,3 @@
-import './style.css'
-
 type Props = {
   name: string
   value: string
