@@ -18,7 +18,9 @@ const regionResponse = await medusa.regions
   .catch((e) => console.error(e))
 
 if (!regionResponse) {
-  return
+  return {
+    status: 500
+  }
 }
 
 const { regions } = regionResponse
