@@ -1,10 +1,10 @@
 import { z } from 'zod'
 
-import { persistentCartId, cartItemCount, countCartItems } from './cartStore'
+import { persistentCartId, cartItemCount, countCartItems } from '../cartStore'
 import { useStore } from '@nanostores/preact'
 import { useEffect, useState } from 'preact/hooks'
 import { medusa } from '@/scripts/medusa'
-import { ShippingOptions } from './ShippingOptions'
+import { ShippingOptions } from '../Checkout/ShippingOptions'
 
 export type CartItemType = {
   id: string

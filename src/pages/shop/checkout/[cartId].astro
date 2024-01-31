@@ -3,7 +3,7 @@ import { medusa } from '@/scripts/medusa'
 import EcommLayout from '@/layouts/EcommLayout.astro'
 import Main from '@/components/main.astro'
 import Title from '@/components/title.astro'
-import { Checkout } from '@/components/preact/Checkout'
+import { Checkout } from '@/components/preact/Checkout/Checkout.tsx'
 
 const { cartId } = Astro.params
 
@@ -34,3 +34,4 @@ const { regions } = regionResponse
     </section>
   </Main>
 </EcommLayout>
+@/components/preact/Checkout/Checkout
