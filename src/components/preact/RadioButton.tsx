@@ -5,7 +5,12 @@ type Props = {
   onClick?: () => void
 }
 
-function RadioButton({ name, value, title, ...remainingProps }: Props) {
+export const RadioButton = ({
+  name,
+  value,
+  title,
+  ...remainingProps
+}: Props) => {
   return (
     <label class='radiobutton_container relative cursor-pointer font-khmer text-xl'>
       <input
@@ -21,5 +26,3 @@ function RadioButton({ name, value, title, ...remainingProps }: Props) {
     </label>
   )
 }
-
-export default RadioButton

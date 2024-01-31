@@ -50,8 +50,6 @@ export const Cart = () => {
     const formData = new FormData(e.target as HTMLFormElement)
     const formValues = Object.fromEntries(formData.entries())
 
-    console.log('formValues', formValues)
-
     const validatedFormValues = z
       .record(z.string(), z.coerce.number())
       .parse(formValues)

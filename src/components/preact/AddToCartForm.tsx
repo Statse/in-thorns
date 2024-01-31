@@ -8,7 +8,7 @@ import {
   countCartItems
 } from './cartStore'
 import { medusa } from '@/scripts/medusa'
-import RadioButton from '@/components/preact/RadioButton/RadioButton'
+import { RadioButton } from '@/components/preact/RadioButton'
 import type { CartItemType } from './Cart'
 
 export type VariantType = {
@@ -76,7 +76,6 @@ export default function AddToCartForm({ variants }: Props) {
         <div class='flex w-full flex-row flex-wrap h-auto gap-2 gap-y-6'>
           {variants
             ? variants.map((variant) => {
-                console.log(variant)
                 const { id, title, inventory_quantity } = variant
                 if (!id || !title) {
                   throw new Error('variant.id or variant.title is undefined')
