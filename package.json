@@ -18,6 +18,8 @@
     "@medusajs/medusa-js": "^6.1.5",
     "@nanostores/persistent": "^0.9.1",
     "@nanostores/preact": "^0.5.0",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.4.0",
     "astro": "^4.2.1",
     "nanostores": "^0.9.5",
     "preact": "^10.19.3",

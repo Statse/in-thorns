@@ -1,18 +1,24 @@
 import { z } from 'zod'
 
-import { persistentCartId, cartItemCount, countCartItems } from '../cartStore'
+import { persistentCartId } from '../cartStore'
 import { useStore } from '@nanostores/preact'
 import { useEffect, useState } from 'preact/hooks'
 import { medusa } from '@/scripts/medusa'
 import { ShippingOptions } from '../Checkout/ShippingOptions'
+import { CheckoutCart } from '../Checkout/CheckoutCart'
+import { Stripe } from './Stripe'
+import type { CartType } from '@/components/preact/Cart'
 
 type Props = {
   regions: any[]
+  cart: CartType | null
 }
 
-export const Checkout = ({ regions }: Props) => {
-  //   const [cart, setCart] = useState<CartType | null>(null)
+export const Checkout = ({ regions, cart }: Props) => {
+  const [currentCart, setCurrentCart] = useState<CartType | null>(cart)
   const cartId = useStore(persistentCartId)
+
+  console.log(currentCart)
 
   //   useEffect(() => {
   //     medusa.carts.retrieve(cartId).then((res) => {
@@ -121,7 +127,7 @@ export const Checkout = ({ regions }: Props) => {
           </div>
           <div class='flex flex-col gap-4'>
             <label for='country'>Country</label>
-            <select class='text-black'>
+            <select class='text-black' name='country_code'>
               {regions &&
                 regions[0].countries.map((country: any) => {
                   return (
@@ -143,7 +149,19 @@ export const Checkout = ({ regions }: Props) => {
             <Input type='text' name='postal_code' id='postal_code' />
           </div>
         </div>
-        <ShippingOptions cartId={cartId} />
+        <div class='flex flex-col gap-4'>
+          <ShippingOptions cartId={cartId} />
+          <CheckoutCart cartItems={cart?.items || null} />
+          <div>
+            stripe here
+            {/* TODO: Make some kind of login when to use it.  */}
+            {cartId && (
+              <span>
+                <Stripe cartId={cartId} />
+              </span>
+            )}
+          </div>
+        </div>
       </div>
       <button
         type='submit'

@@ -7,6 +7,6 @@ import preact from "@astrojs/preact";
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  integrations: [tailwind(), preact()],
+  integrations: [tailwind(), preact({ compat: true })],
   adapter: vercel()
 });
