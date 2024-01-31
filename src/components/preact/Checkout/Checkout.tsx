@@ -6,25 +6,6 @@ import { useEffect, useState } from 'preact/hooks'
 import { medusa } from '@/scripts/medusa'
 import { ShippingOptions } from '../Checkout/ShippingOptions'
 
-export type CartItemType = {
-  id: string
-  title: string
-  quantity: number
-  unit_price: number
-  total: number
-  thumbnail: string
-  variant: {
-    title: string
-    inventory_quantity: number
-  }
-}
-
-export type CartType = {
-  id: string
-  items: CartItemType[]
-  subtotal: number
-}
-
 type Props = {
   regions: any[]
 }
