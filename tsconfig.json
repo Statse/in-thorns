@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "C:/Users/aleks/OneDrive/Asiakirjat/GitHub/in-thorns",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "src/*"
