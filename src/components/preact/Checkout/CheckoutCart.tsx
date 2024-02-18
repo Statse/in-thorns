@@ -5,8 +5,6 @@ type Props = {
 }
 
 export const CheckoutCart = ({ cartItems }: Props) => {
-  console.log('hello from checkout cart')
-  console.log(cartItems)
   return (
     <div class='flex flex-col gap-4'>
       <h2>Cart</h2>
@@ -22,6 +20,7 @@ export const CheckoutCart = ({ cartItems }: Props) => {
         {cartItems &&
           cartItems.map((item) => {
             const unitPrice = item.unit_price / 100
+            //This might or might not have tax included. Depends on the medusa settings.
             const total = item.total ? item.total / 100 : 0
             return (
               <tr class='border-t-2 border-white h-16'>

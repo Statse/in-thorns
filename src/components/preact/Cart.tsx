@@ -22,6 +22,19 @@ export type CartType = {
   id: string
   items: CartItemType[]
   subtotal: number
+  email: string
+  shipping_address: {
+    first_name: string
+    last_name: string
+    address_1: string
+    address_2: string
+    company: string
+    city: string
+    country_code: string
+    province: string
+    postal_code: string
+    phone: string
+  }
 }
 
 export const Cart = () => {
