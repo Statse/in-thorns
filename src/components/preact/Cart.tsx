@@ -61,6 +61,7 @@ export const Cart = () => {
   const onSubmit = async (e: SubmitEvent) => {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
+    //@ts-ignore
     const formValues = Object.fromEntries(formData.entries())
 
     const validatedFormValues = z

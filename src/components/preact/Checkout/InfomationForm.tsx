@@ -28,7 +28,8 @@ export const InfomationForm = ({
   const onSubmit = async (e: SubmitEvent) => {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
-    const formValues = Object.fromEntries(formData.entries())
+    //@ts-ignore
+    const formValues = Object.fromEntries(formData)
     const schema = z.object({
       email: z.string().email(),
       first_name: z.string().min(2),

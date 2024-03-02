@@ -1,35 +1,46 @@
 import { medusa } from '@/scripts/medusa'
 import { useState, useEffect } from 'preact/hooks'
 import { RadioButton } from '@/components/preact/RadioButton'
+import type { CartType } from '@/components/preact/Cart'
+import type { ShippingOptionsType } from '@/types/cart'
 
 type Props = {
   cartId: string
+  shippingOptions: ShippingOptionsType[]
+  updateCart: (cart: CartType) => void
 }
 
-export const ShippingOptions = ({ cartId }: Props) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [shippingOptions, setShippingOptions] = useState<any>([])
-
-  useEffect(() => {
-    medusa.shippingOptions
-      .listCartOptions(cartId)
-      .then(({ shipping_options }) => {
-        setShippingOptions(shipping_options)
-        setIsLoading(false)
+export const ShippingOptions = ({
+  cartId,
+  updateCart,
+  shippingOptions
+}: Props) => {
+  const [selectedShippingOption, setSelectedShippingOption] =
+    useState<ShippingOptionsType | null>(null)
+  const onSubmit = async (e: SubmitEvent) => {
+    e.preventDefault()
+    console.log('onSubmit')
+    if (!selectedShippingOption) {
+      return
+    }
+    await medusa.carts
+      .addShippingMethod(cartId, {
+        option_id: selectedShippingOption.id
       })
-  }, [])
-
-  console.log(shippingOptions)
+      .then((res) => {
+        console.log('res.cart', res.cart)
+        updateCart(res.cart as CartType)
+      })
+  }
 
   return (
-    <div>
-      {isLoading && <span>Loading...</span>}
+    <form onSubmit={onSubmit}>
       {shippingOptions && !shippingOptions.length && (
         <span>No shipping options</span>
       )}
       {shippingOptions && (
         <ul>
-          {shippingOptions.map((shippingOption: any) => (
+          {shippingOptions.map((shippingOption) => (
             <RadioButton
               key={shippingOption.id}
               name={shippingOption.name}
@@ -40,10 +51,14 @@ export const ShippingOptions = ({ cartId }: Props) => {
                 shippingOption.price_incl_tax / 100 +
                 '€'
               }
+              onClick={async () => {
+                setSelectedShippingOption(shippingOption)
+              }}
             />
           ))}
         </ul>
       )}
-    </div>
+      <button type='submit'>Continue</button>
+    </form>
   )
 }

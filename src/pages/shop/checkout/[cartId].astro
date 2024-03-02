@@ -5,6 +5,7 @@ import Main from '@/components/main.astro'
 import Title from '@/components/title.astro'
 import { Checkout } from '@/components/preact/Checkout/Checkout.tsx'
 import type { CartType } from '@/components/preact/Cart'
+import type { ShippingOptionsType } from '@/types/cart'
 
 const { cartId } = Astro.params
 
@@ -19,9 +20,10 @@ const cartResponse = await medusa.carts
   .catch((e) => console.error(e))
 
 if (!cartResponse) {
-  return {
-    status: 404
-  }
+  return new Response(null, {
+    status: 500,
+    statusText: 'Server error'
+  })
 }
 
 const regionResponse = await medusa.regions
@@ -29,13 +31,26 @@ const regionResponse = await medusa.regions
   .catch((e) => console.error(e))
 
 if (!regionResponse) {
-  return {
-    status: 500
-  }
+  return new Response(null, {
+    status: 500,
+    statusText: 'Server error'
+  })
+}
+
+const shippingOptionsResponse =
+  await medusa.shippingOptions.listCartOptions(cartId)
+
+if (!shippingOptionsResponse) {
+  return new Response(null, {
+    status: 500,
+    statusText: 'Server error'
+  })
 }
 
 const { cart } = cartResponse
 const { regions } = regionResponse
+const { shipping_options } = shippingOptionsResponse
+console.log('shipping_options', shipping_options)
 ---
 
 <EcommLayout title='checkout'>
@@ -43,11 +58,11 @@ const { regions } = regionResponse
     <section
       class='border-white border-2 my-16 h-auto max-w-[1000px] w-full p-16 bg-opacity-90 bg-black items-center justify-center flex flex-col gap-4'
     >
-      <Title>Checkout</Title>
       <Checkout
         client:only='preact'
         regions={regions}
         cart={(cart as CartType) || null}
+        shippingOptions={shipping_options}
       />
     </section>
   </Main>
