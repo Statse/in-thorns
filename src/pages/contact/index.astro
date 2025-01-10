@@ -18,20 +18,17 @@ import Social from '@/components/social.astro'
         <Social link='https://www.youtube.com/@inthornsband' src='yt.png' />
         <Social link='https://www.facebook.com/inthorns' src='fb.png' />
       </ul>
+      <div class='md:flex md:justify-center'></div>
       <img src='it-logo-white.png' class='w-48 md:w-80 p-4 md:mx-auto' />
-      <ul class='flex flex-row gap-2 h-14 md:absolute right-5'>
-        <ul class='flex flex-row gap-2'>
-          <li><a href='/press-kit' class='hover:underline'>Press kit</a></li>
-          <li><a href='/contact' class='hover:underline'>contact</a></li>
-        </ul>
-      </ul>
     </nav>
     <section
-      class='flex flex-col gap-4 px-4 w-full h-auto flex-grow justify-center items-center'
+      class='flex flex-col gap-4 px-4 w-full h-full justify-center items-center flex-grow'
     >
-      <div class='flex flex-col bg-black text-white w-auto sm:w-96'>
-        Debut album Last bead on a song of cords available now!
-        <img src='TLBOACOS.jpg' class='h-auto w-full' />
+      <div
+        id='bio'
+        class='flex flex-col bg-black text-white w-auto sm:w-96 p-8 md:min-w-[600px]'
+      >
+        <div>inthornsband@gmail.com</div>
       </div>
     </section>
   </main>
