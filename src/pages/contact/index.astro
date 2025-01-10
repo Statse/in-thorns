@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Social from '@/components/social.astro'
+import Menu from '@/components/menu.astro'
 ---
 
 <Layout title='Sail into the unknown.'>
@@ -8,19 +8,7 @@ import Social from '@/components/social.astro'
     class='m-4 border-white text-white border-2 flex flex-grow flex-col w-auto h-auto bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
     style='background-image:  url(candles.jpg);'
   >
-    <nav class='w-full flex flex-row px-6 items-center justify-between z-50'>
-      <ul class='flex flex-row gap-2 h-14 md:absolute'>
-        <Social link='https://www.instagram.com/inxthorns/' src='ig.png' />
-        <Social
-          link='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ'
-          src='spotify.png'
-        />
-        <Social link='https://www.youtube.com/@inthornsband' src='yt.png' />
-        <Social link='https://www.facebook.com/inthorns' src='fb.png' />
-      </ul>
-      <div class='md:flex md:justify-center'></div>
-      <img src='it-logo-white.png' class='w-48 md:w-80 p-4 md:mx-auto' />
-    </nav>
+    <Menu />
     <section
       class='flex flex-col gap-4 px-4 w-full h-full justify-center items-center flex-grow'
     >
