@@ -31,7 +31,7 @@ try {
 
 {!error && (
   <section class='w-full flex flex-col gap-4'>
-    <h2 class='text-2xl font-bold text-white bg-black/80 border border-white p-4 text-center'>Tour Dates</h2>
+    <h2 class='text-3xl font-bold text-white'>Tour Dates</h2>
 
     {events && events.length === 0 && (
       <div class='bg-gray-800 text-white p-4 rounded'>
@@ -46,8 +46,8 @@ try {
             class='bg-black/80 border border-white text-white p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2'
           >
             <div class='flex flex-col'>
-              <span class='font-bold'>{event.date}</span>
-              <span class='text-sm'>
+              <span class='font-bold text-lg'>{event.date}</span>
+              <span class='text-base'>
                 {event.venue} - {event.city}, {event.country}
               </span>
             </div>

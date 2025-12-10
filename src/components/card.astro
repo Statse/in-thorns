@@ -1,14 +1,11 @@
 ---
 interface Props {
-  title: string
-  href: string
-  body: string
+  class?: string;
 }
 
-const { title, href, body } = Astro.props
+const { class: className } = Astro.props;
 ---
 
-<div>
-  <a class='text-black' href={href}>{title}</a>
-  <div class='text-black'>{body}</div>
+<div class={`bg-black/80 border border-white text-white p-4 md:p-8 ${className || ''}`}>
+  <slot />
 </div>
