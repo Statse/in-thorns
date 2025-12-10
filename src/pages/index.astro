@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Menu from '@/components/menu.astro'
+import Events from '@/components/events.astro'
 ---
 
 <Layout title='Sail into the unknown.'>
@@ -12,9 +13,8 @@ import Menu from '@/components/menu.astro'
     <section
       class='flex flex-col gap-4 px-4 w-full h-auto flex-grow justify-center items-center'
     >
-      <div class='flex flex-col bg-black text-white w-auto sm:w-96'>
-        Debut album Last bead on a song of cords available now!
-        <img src='TLBOACOS.jpg' class='h-auto w-full' />
+      <div class='w-full max-w-4xl'>
+        <Events limit={5} />
       </div>
     </section>
   </main>
