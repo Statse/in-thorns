@@ -48,13 +48,12 @@ try {
     <div class='flex flex-col gap-3'>
       {events.map((event) => (
         <div
-          key={event.id}
           class='bg-black/80 border border-white text-white p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2'
         >
           <div class='flex flex-col'>
             <span class='font-bold'>{event.date}</span>
             <span class='text-sm'>
-              {event.venue} - {event.city}, {event.region}, {event.country}
+              {event.venue} - {event.city}, {event.country}
             </span>
           </div>
 
