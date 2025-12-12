@@ -70,15 +70,15 @@ import Events from '@/components/events.astro'
 		<div class='h-px bg-ew-green'></div>
 
 		<!-- Music Section -->
-		<section id='music' class='min-h-screen bg-black py-20 px-4'>
+		<section id='music' class='min-h-screen bg-black py-20 px-4 md:px-6'>
 			<div class='container mx-auto max-w-6xl'>
 				<h2 class='text-4xl md:text-5xl font-bold text-ew-orange mb-16 text-center'>
 					<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Music</span>
 				</h2>
 
-				<div class='grid md:grid-cols-2 gap-12 mb-16'>
+				<div class='grid md:grid-cols-2 gap-6 md:gap-12 mb-16'>
 					<!-- Exit Wounds Single -->
-					<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-8 border-2 border-ew-orange/30 hover:border-ew-orange transition-all'>
+					<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-4 md:p-8 border-2 border-ew-orange/30 hover:border-ew-orange transition-all'>
 						<div class='aspect-square mb-6 relative overflow-hidden'>
 							<img
 								src='/exit_wounds/3E30015C-F774-41CB-A41E-FCBBF2606004.jpg'
@@ -96,7 +96,7 @@ import Events from '@/components/events.astro'
 					</div>
 
 					<!-- Album -->
-					<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-8 border-2 border-ew-red/30 hover:border-ew-red transition-all'>
+					<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-4 md:p-8 border-2 border-ew-red/30 hover:border-ew-red transition-all'>
 						<div class='aspect-square mb-6 relative overflow-hidden'>
 							<img
 								src='/TLBOACOS.jpg'
@@ -193,7 +193,7 @@ import Events from '@/components/events.astro'
 					<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 82, 82, 0.5);'>Bio</span>
 				</h2>
 
-				<div class='bg-black/50 border-2 border-ew-red/30 p-8 md:p-12 backdrop-blur-sm'>
+				<div class='bg-black/50 border-2 border-ew-red/30 p-4 md:p-8 lg:p-12 backdrop-blur-sm'>
 					<div class='prose prose-invert max-w-none'>
 						<p class='text-ew-cream/90 leading-relaxed mb-6'>
 							Jyväskyläläinen metallikollektiivi In Thorns julkaisi tammikuussa 2024
@@ -270,6 +270,11 @@ import Events from '@/components/events.astro'
 <style>
 	html {
 		scroll-behavior: smooth;
+		overflow-x: hidden;
+	}
+
+	body {
+		overflow-x: hidden;
 	}
 
 	/* Film grain effect */
