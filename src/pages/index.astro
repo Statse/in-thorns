@@ -1,21 +1,322 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Menu from '@/components/menu.astro'
 import Events from '@/components/events.astro'
 ---
 
-<Layout title='Sail into the unknown.'>
-  <main
-    class='m-4 border-white text-white border-2 flex flex-grow flex-col w-auto h-auto bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
-    style='background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(candles.jpg);'
-  >
-    <Menu />
-    <section
-      class='flex flex-col gap-4 px-4 w-full h-auto flex-grow justify-center items-center'
-    >
-      <div class='w-full max-w-4xl'>
-        <Events limit={5} />
-      </div>
-    </section>
-  </main>
+<Layout title='In Thorns - Let\u2019s Sail into the Unknown'>
+	<div class='scroll-smooth'>
+		<!-- Navigation -->
+		<nav class='fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-ew-orange/30'>
+			<div class='container mx-auto px-4'>
+				<div class='flex items-center justify-between h-16'>
+					<!-- Logo -->
+					<a href='#hero' class='transition-transform hover:scale-105'>
+						<img src='/it-logo-white.png' alt='In Thorns' class='h-12' />
+					</a>
+
+					<!-- Nav Links -->
+					<ul class='flex gap-6 text-sm md:text-base'>
+						<li><a href='#music' class='hover:text-ew-orange transition-colors'>Music</a></li>
+						<li><a href='#tour' class='hover:text-ew-orange transition-colors'>Tour</a></li>
+						<li><a href='#photos' class='hover:text-ew-orange transition-colors'>Photos</a></li>
+						<li><a href='#about' class='hover:text-ew-orange transition-colors'>About</a></li>
+						<li><a href='#contact' class='hover:text-ew-orange transition-colors'>Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section id='hero' class='relative min-h-screen flex items-center justify-center overflow-hidden'>
+			<!-- Background -->
+			<div class='absolute inset-0'>
+				<img
+					src='/exit_wounds/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.jpg'
+					alt='In Thorns'
+					class='w-full h-full object-cover'
+				/>
+				<div class='absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black'></div>
+				<!-- Film grain overlay -->
+				<div class='absolute inset-0 opacity-30 mix-blend-overlay' style='background-image: url(/itbg.gif); background-size: cover;'></div>
+			</div>
+
+			<!-- Content -->
+			<div class='relative z-10 text-center px-4 max-w-4xl'>
+				<img src='/it-logo-white.png' alt='In Thorns' class='w-full max-w-2xl mx-auto mb-8 animate-glitch-skew' />
+				<h1 class='text-3xl md:text-5xl lg:text-6xl mb-6 tracking-wider text-ew-cream'>
+					Let's Sail into the Unknown
+				</h1>
+
+				<!-- Exit Wounds Announcement -->
+				<div class='inline-block bg-ew-orange/20 border-2 border-ew-orange px-8 py-4 backdrop-blur-sm'>
+					<p class='text-ew-orange text-sm uppercase tracking-widest mb-2'>New Single</p>
+					<p class='text-2xl md:text-3xl font-bold text-white'>Exit Wounds</p>
+					<p class='text-ew-cream mt-2'>Out 23.1.2025</p>
+				</div>
+
+				<!-- Scroll indicator -->
+				<div class='mt-16'>
+					<a href='#music' class='inline-block text-ew-orange animate-bounce'>
+						<svg class='w-8 h-8' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+							<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 14l-7 7m0 0l-7-7m7 7V3'></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Barcode Divider -->
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent'></div>
+		<div class='h-px bg-ew-green'></div>
+
+		<!-- Music Section -->
+		<section id='music' class='min-h-screen bg-black py-20 px-4'>
+			<div class='container mx-auto max-w-6xl'>
+				<h2 class='text-4xl md:text-5xl font-bold text-ew-orange mb-16 text-center'>
+					<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Music</span>
+				</h2>
+
+				<div class='grid md:grid-cols-2 gap-12 mb-16'>
+					<!-- Exit Wounds Single -->
+					<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-8 border-2 border-ew-orange/30 hover:border-ew-orange transition-all'>
+						<div class='aspect-square mb-6 relative overflow-hidden'>
+							<img
+								src='/exit_wounds/3E30015C-F774-41CB-A41E-FCBBF2606004.jpg'
+								alt='Exit Wounds'
+								class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+							/>
+							<div class='absolute inset-0 bg-gradient-to-t from-black/80 to-transparent'></div>
+						</div>
+						<h3 class='text-2xl font-bold text-white mb-2'>Exit Wounds</h3>
+						<p class='text-ew-orange mb-4'>Single • Out 23.1.2025</p>
+						<p class='text-ew-cream/70 mb-6'>New single coming soon...</p>
+						<div class='space-y-3'>
+							<p class='text-sm text-ew-green-light'>Pre-save links coming soon</p>
+						</div>
+					</div>
+
+					<!-- Album -->
+					<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-8 border-2 border-ew-red/30 hover:border-ew-red transition-all'>
+						<div class='aspect-square mb-6 relative overflow-hidden'>
+							<img
+								src='/TLBOACOS.jpg'
+								alt='the last bead on a cord of songs'
+								class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+							/>
+						</div>
+						<h3 class='text-2xl font-bold text-white mb-2'>the last bead on a cord of songs</h3>
+						<p class='text-ew-red mb-4'>Album • 2024</p>
+						<p class='text-ew-cream/70 mb-6'>Debut album featuring crushing soundscapes, nihilistic themes, and massive melodies.</p>
+						<a
+							href='https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+						>
+							Listen on Spotify
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Barcode Divider -->
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent'></div>
+
+		<!-- Tour Dates Section -->
+		<section id='tour' class='min-h-screen bg-gradient-to-b from-black to-ew-green-dark/20 py-20 px-4'>
+			<div class='container mx-auto max-w-6xl'>
+				<h2 class='text-4xl md:text-5xl font-bold text-ew-green-light mb-16 text-center'>
+					<span class='inline-block' style='text-shadow: 0 0 20px rgba(20, 255, 236, 0.5);'>Tour Dates</span>
+				</h2>
+
+				<div class='max-w-4xl mx-auto'>
+					<Events limit={10} />
+				</div>
+			</div>
+		</section>
+
+		<!-- Barcode Divider -->
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent'></div>
+
+		<!-- Photos Section -->
+		<section id='photos' class='min-h-screen bg-black py-20 px-4'>
+			<div class='container mx-auto max-w-7xl'>
+				<h2 class='text-4xl md:text-5xl font-bold text-ew-orange mb-16 text-center'>
+					<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Photos</span>
+				</h2>
+
+				<div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/3E30015C-F774-41CB-A41E-FCBBF2606004.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-orange/0 group-hover:bg-ew-orange/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/455A8D0B-D5E4-4E9C-8002-D06F2E7D87E7.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-green/0 group-hover:bg-ew-green/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/5F0E6E7C-210E-453A-9008-48B415987CF8.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-orange/0 group-hover:bg-ew-orange/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/6AE5AA53-E14B-4437-AC9E-A19D624213BC.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-red/0 group-hover:bg-ew-red/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/A382B952-B517-48B9-B466-7A252ED22616.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-green/0 group-hover:bg-ew-green/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/B22BB973-351E-4D26-8A3C-067E8F1059B3.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-orange/0 group-hover:bg-ew-orange/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square md:col-span-2'>
+						<img src='/exit_wounds/D068D024-DAC5-4C38-A951-403E822B0797.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-red/0 group-hover:bg-ew-red/20 transition-colors'></div>
+					</div>
+					<div class='relative overflow-hidden group aspect-square'>
+						<img src='/exit_wounds/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.jpg' alt='In Thorns' class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500' />
+						<div class='absolute inset-0 bg-ew-green/0 group-hover:bg-ew-green/20 transition-colors'></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Barcode Divider -->
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent'></div>
+
+		<!-- About Section -->
+		<section id='about' class='min-h-screen bg-gradient-to-b from-black via-ew-red-dark/20 to-black py-20 px-4'>
+			<div class='container mx-auto max-w-4xl'>
+				<h2 class='text-4xl md:text-5xl font-bold text-ew-red-light mb-16 text-center'>
+					<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 82, 82, 0.5);'>Bio</span>
+				</h2>
+
+				<div class='bg-black/50 border-2 border-ew-red/30 p-8 md:p-12 backdrop-blur-sm'>
+					<div class='prose prose-invert max-w-none'>
+						<p class='text-ew-cream/90 leading-relaxed mb-6'>
+							Jyväskyläläinen metallikollektiivi In Thorns julkaisi tammikuussa 2024
+							debyyttialbuminsa "the last bead on a cord of songs", jolla yhtye
+							nousi Kaaoszinen lukijoiden äänestyksellä Vuoden tulokas 2024
+							-listaukseen. Yhtyeen kokenut kaarti on valmis keikkalavoille vetämään
+							heidän näköisen shownsa täydellä sydämellä. Kollektiivi kuvailee
+							musiikkiaan metallina, jota ohjailee murskaavat soundimaailmat,
+							nihilistiset ja tummanpuhuvat sanoitukset sekä isot melodiat. Yhtye
+							ammentaa inspiraatiota surrealistisesta taiteesta ja modernista
+							kauhusta.
+						</p>
+
+						<h3 class='text-2xl text-ew-orange mt-8 mb-4'>Jäsenet</h3>
+						<ul class='text-ew-cream/80 space-y-2 list-none pl-0'>
+							<li class='border-l-2 border-ew-orange/50 pl-4'>Kristian Ruutala (huutolaulu), nyk. Kätfish</li>
+							<li class='border-l-2 border-ew-orange/50 pl-4'>Aleksi Statsevich (huutolaulu), ex-Funeral For The Masses</li>
+							<li class='border-l-2 border-ew-orange/50 pl-4'>Aavee Tikkanen (laulu/kitara), ex-See No Sorrow, ex. Kätfish</li>
+							<li class='border-l-2 border-ew-orange/50 pl-4'>Aleksi Ruotsalainen (kitara), ex-Founding Neverland, nyk. Arttu Lindeman</li>
+							<li class='border-l-2 border-ew-orange/50 pl-4'>Jimi Kinnunen (rummut), nyk. Luna Kills</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id='contact' class='bg-black border-t-2 border-ew-orange/30 py-12 px-4'>
+			<div class='container mx-auto max-w-6xl'>
+				<div class='grid md:grid-cols-3 gap-8 mb-8'>
+					<!-- Logo -->
+					<div class='flex items-center justify-center md:justify-start'>
+						<img src='/it-logo-white.png' alt='In Thorns' class='h-16' />
+					</div>
+
+					<!-- Social Links -->
+					<div class='text-center'>
+						<h3 class='text-ew-orange text-lg mb-4'>Follow Us</h3>
+						<div class='flex gap-4 justify-center'>
+							<a href='https://www.instagram.com/inxthorns/' target='_blank' rel='noopener noreferrer' class='hover:opacity-70 transition-opacity'>
+								<img src='/ig.png' alt='Instagram' class='w-8 h-8' />
+							</a>
+							<a href='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ' target='_blank' rel='noopener noreferrer' class='hover:opacity-70 transition-opacity'>
+								<img src='/spotify.png' alt='Spotify' class='w-8 h-8' />
+							</a>
+							<a href='https://www.youtube.com/@inthornsband' target='_blank' rel='noopener noreferrer' class='hover:opacity-70 transition-opacity'>
+								<img src='/yt.png' alt='YouTube' class='w-8 h-8' />
+							</a>
+							<a href='https://www.facebook.com/inthorns' target='_blank' rel='noopener noreferrer' class='hover:opacity-70 transition-opacity'>
+								<img src='/fb.png' alt='Facebook' class='w-8 h-8' />
+							</a>
+						</div>
+					</div>
+
+					<!-- Contact -->
+					<div class='text-center md:text-right'>
+						<h3 class='text-ew-orange text-lg mb-4'>Contact</h3>
+						<p class='text-ew-cream'>
+							<a href='mailto:inthornsband@gmail.com' class='hover:text-ew-orange transition-colors'>
+								inthornsband@gmail.com
+							</a>
+						</p>
+					</div>
+				</div>
+
+				<div class='border-t border-ew-orange/20 pt-8 text-center text-ew-cream/50 text-sm'>
+					<p>&copy; 2025 In Thorns. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+	</div>
 </Layout>
+
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Film grain effect */
+	@keyframes grain {
+		0%, 100% { transform: translate(0, 0); }
+		10% { transform: translate(-5%, -10%); }
+		30% { transform: translate(3%, -15%); }
+		50% { transform: translate(12%, 9%); }
+		70% { transform: translate(9%, 4%); }
+		90% { transform: translate(-1%, 7%); }
+	}
+</style>
+
+<script>
+	// Smooth scroll behavior for anchor links
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function (e) {
+			e.preventDefault();
+			const target = document.querySelector(this.getAttribute('href'));
+			if (target) {
+				target.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+			}
+		});
+	});
+
+	// Add active state to nav links on scroll
+	const sections = document.querySelectorAll('section[id]');
+	const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+	window.addEventListener('scroll', () => {
+		let current = '';
+		sections.forEach(section => {
+			const sectionTop = section.offsetTop;
+			const sectionHeight = section.clientHeight;
+			if (window.pageYOffset >= sectionTop - 200) {
+				current = section.getAttribute('id');
+			}
+		});
+
+		navLinks.forEach(link => {
+			link.classList.remove('text-ew-orange');
+			if (link.getAttribute('href') === `#${current}`) {
+				link.classList.add('text-ew-orange');
+			}
+		});
+	});
+</script>
