@@ -19,3 +19,12 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Claude Code review screenshots
+claude-review/
+review-*.png
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/

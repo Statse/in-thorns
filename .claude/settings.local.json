@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx playwright install)",
+      "Bash(node review-site.mjs:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

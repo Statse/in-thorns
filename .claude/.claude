@@ -1,0 +1,55 @@
+# In Thorns - Band Website
+
+## Project Overview
+This is the official website for the metal band "In Thorns". It's a static site built with Astro, showcasing the band's music, press materials, and contact information.
+
+## Tech Stack
+- **Framework**: Astro 5.x (Static Site Generator)
+- **Styling**: Tailwind CSS
+- **UI Components**: Preact
+- **Fonts**: Koulen, Roboto (@fontsource)
+- **Deployment**: Vercel (via @astrojs/vercel adapter)
+
+## Project Structure
+```
+/
+├── public/          # Static assets (images, logos, album art)
+├── src/
+│   ├── components/  # Reusable Astro components
+│   │   ├── card.astro
+│   │   ├── menu.astro
+│   │   └── social.astro
+│   ├── layouts/     # Page layouts
+│   │   └── Layout.astro
+│   └── pages/       # Routes (file-based routing)
+│       ├── index.astro         # Homepage
+│       ├── contact/
+│       └── press-kit/
+├── astro.config.mjs
+├── tailwind.config.cjs
+└── tsconfig.json
+```
+
+## Development Commands
+- `npm run dev` - Start dev server at localhost:4321
+- `npm run build` - Build production site to ./dist/
+- `npm run preview` - Preview production build locally
+
+## Coding Conventions
+- Use Astro components (.astro) for templating
+- Tailwind utility classes for styling
+- Path aliases: `@/` maps to `src/`
+- TypeScript enabled via tsconfig.json
+
+## Design Notes
+- Dark theme with white borders
+- Background images on main sections
+- Responsive design (mobile-first with Tailwind breakpoints)
+- Social media integration (Facebook, Instagram, YouTube, Spotify)
+
+## Content
+- Debut album: "Last bead on a song of cords" (TLBOACOS)
+- Band assets stored in /public directory
+
+## Deployment
+Configured for Vercel deployment via @astrojs/vercel adapter.
