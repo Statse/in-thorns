@@ -62,20 +62,30 @@ import Contact from '@/components/contact/contact.astro'
 </style>
 
 <script>
+	// Prevent auto-scroll on page load
+	if ('scrollRestoration' in history) {
+		history.scrollRestoration = 'manual';
+	}
+
 	// Store scroll position when clicking a photo
 	document.addEventListener('astro:page-load', () => {
 		// Re-attach listeners after view transition
 		attachPhotoClickListeners();
 		attachHashScrollListeners();
 
-		// Restore scroll position if coming back from photo viewer
+		// Restore scroll position ONLY if coming back from photo viewer
 		const savedScroll = sessionStorage.getItem('galleryScrollPosition');
 		if (savedScroll && window.location.pathname === '/') {
-			// Use setTimeout to ensure DOM is ready and view transition is complete
-			setTimeout(() => {
-				window.scrollTo(0, parseInt(savedScroll));
-				sessionStorage.removeItem('galleryScrollPosition');
-			}, 0);
+			// Restore to saved position instantly (no smooth scroll)
+			window.scrollTo({
+				top: parseInt(savedScroll),
+				left: 0,
+				behavior: 'instant'
+			});
+			sessionStorage.removeItem('galleryScrollPosition');
+		} else if (window.location.pathname === '/' && !window.location.hash) {
+			// Fresh page load - ensure we're at the top
+			window.scrollTo(0, 0);
 		}
 	});
 
