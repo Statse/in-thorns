@@ -1,49 +1,40 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 
-import photo1 from '@/components/photos/assets/3E30015C-F774-41CB-A41E-FCBBF2606004.webp'
-import photo2 from '@/components/photos/assets/455A8D0B-D5E4-4E9C-8002-D06F2E7D87E7.webp'
-import photo3 from '@/components/photos/assets/5F0E6E7C-210E-453A-9008-48B415987CF8.webp'
-import photo4 from '@/components/photos/assets/6AE5AA53-E14B-4437-AC9E-A19D624213BC.webp'
-import photo5 from '@/components/photos/assets/A382B952-B517-48B9-B466-7A252ED22616.webp'
-import photo6 from '@/components/photos/assets/B22BB973-351E-4D26-8A3C-067E8F1059B3.webp'
-import photo7 from '@/components/photos/assets/D068D024-DAC5-4C38-A951-403E822B0797.webp'
-import photo8 from '@/components/photos/assets/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp'
-
 const { id } = Astro.params
 
 // Map of all available photos
 const photos = {
 	'1': {
-		src: photo1.src,
+		src: '/photos/exit_wounds/3E30015C-F774-41CB-A41E-FCBBF2606004.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'2': {
-		src: photo2.src,
+		src: '/photos/exit_wounds/455A8D0B-D5E4-4E9C-8002-D06F2E7D87E7.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'3': {
-		src: photo3.src,
+		src: '/photos/exit_wounds/5F0E6E7C-210E-453A-9008-48B415987CF8.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'4': {
-		src: photo4.src,
+		src: '/photos/exit_wounds/6AE5AA53-E14B-4437-AC9E-A19D624213BC.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'5': {
-		src: photo5.src,
+		src: '/photos/exit_wounds/A382B952-B517-48B9-B466-7A252ED22616.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'6': {
-		src: photo6.src,
+		src: '/photos/exit_wounds/B22BB973-351E-4D26-8A3C-067E8F1059B3.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'7': {
-		src: photo7.src,
+		src: '/photos/exit_wounds/D068D024-DAC5-4C38-A951-403E822B0797.webp',
 		alt: 'In Thorns - Exit Wounds'
 	},
 	'8': {
-		src: photo8.src,
+		src: '/photos/exit_wounds/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp',
 		alt: 'In Thorns - Exit Wounds'
 	}
 }

@@ -1,12 +1,12 @@
 ---
-import heroBackground from './assets/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp'
+// Hero section component
 ---
 
 <section id='hero' class='relative min-h-screen flex items-center justify-center overflow-hidden pt-16'>
 	<!-- Background -->
 	<div class='absolute inset-0'>
 		<img
-			src={heroBackground.src}
+			src='/hero/background.webp'
 			alt='In Thorns'
 			class='w-full h-full object-cover'
 		/>
@@ -17,7 +17,7 @@ import heroBackground from './assets/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp'
 
 	<!-- Content -->
 	<div class='relative z-10 text-center px-4 max-w-4xl'>
-		<img src='/it-logo-white.png' alt='In Thorns' class='w-full max-w-2xl mx-auto mb-8' />
+		<img id='hero-logo' src='/it-logo-white.png' alt='In Thorns' class='w-full max-w-2xl mx-auto mb-8 transition-all duration-500' />
 		<h1 class='text-3xl md:text-5xl lg:text-6xl mb-6 tracking-wider text-ew-cream'>
 			Let's Sail into the Unknown
 		</h1>

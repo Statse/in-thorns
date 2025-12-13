@@ -9,7 +9,7 @@ import About from '@/components/about/about.astro'
 import Contact from '@/components/contact/contact.astro'
 ---
 
-<Layout title='In Thorns - Let's Sail into the Unknown'>
+<Layout title="In Thorns - Let's Sail into the Unknown">
 	<div class='scroll-smooth'>
 		<Navigation />
 
@@ -122,6 +122,8 @@ import Contact from '@/components/contact/contact.astro'
 	// Add black background to nav after scrolling past hero
 	const mainNav = document.getElementById('main-nav') as HTMLElement;
 	const heroSection = document.getElementById('hero') as HTMLElement;
+	const heroLogo = document.getElementById('hero-logo') as HTMLElement;
+	const navLogo = document.getElementById('nav-logo') as HTMLElement;
 
 	// Add active state to nav links on scroll + handle nav background
 	const sections = document.querySelectorAll('section[id]') as NodeListOf<HTMLElement>;
@@ -130,6 +132,22 @@ import Contact from '@/components/contact/contact.astro'
 	window.addEventListener('scroll', () => {
 		const scrollPosition = window.pageYOffset;
 		const heroHeight = heroSection.offsetHeight;
+
+		// Logo animation threshold (halfway through hero section)
+		const logoThreshold = heroHeight * 0.5;
+
+		// Animate logo transition
+		if (scrollPosition > logoThreshold) {
+			// Fade out hero logo, fade in nav logo
+			heroLogo.style.opacity = '0';
+			heroLogo.style.transform = 'scale(0.3) translateY(-300px)';
+			navLogo.style.opacity = '1';
+		} else {
+			// Reset to original state
+			heroLogo.style.opacity = '1';
+			heroLogo.style.transform = 'scale(1) translateY(0)';
+			navLogo.style.opacity = '0';
+		}
 
 		// Add black background after scrolling past hero
 		if (scrollPosition > heroHeight - 100) {

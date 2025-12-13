@@ -8,7 +8,8 @@
       "Bash(git commit:*)",
       "Bash(node review-sections.mjs:*)",
       "Bash(node optimize-images.mjs:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(git diff:*)"
     ],
     "deny": [],
     "ask": []
