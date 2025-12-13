@@ -77,15 +77,28 @@ import Contact from '@/components/contact/contact.astro'
 		const savedScroll = sessionStorage.getItem('galleryScrollPosition');
 		if (savedScroll && window.location.pathname === '/') {
 			// Restore to saved position instantly (no smooth scroll)
-			window.scrollTo({
-				top: parseInt(savedScroll),
-				left: 0,
-				behavior: 'instant'
-			});
+			setTimeout(() => {
+				window.scrollTo({
+					top: parseInt(savedScroll),
+					left: 0,
+					behavior: 'instant'
+				});
+			}, 0);
 			sessionStorage.removeItem('galleryScrollPosition');
 		} else if (window.location.pathname === '/' && !window.location.hash) {
 			// Fresh page load - ensure we're at the top
 			window.scrollTo(0, 0);
+		} else if (window.location.hash) {
+			// Handle hash scroll if present and no saved position
+			setTimeout(() => {
+				const target = document.querySelector(window.location.hash);
+				if (target) {
+					target.scrollIntoView({
+						behavior: 'instant',
+						block: 'start'
+					});
+				}
+			}, 0);
 		}
 	});
 
