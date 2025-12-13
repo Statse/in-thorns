@@ -7,29 +7,30 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const sourceDir = join(__dirname, 'public', 'exit_wounds');
-const outputDir = join(__dirname, 'public', 'exit_wounds_optimized');
+const sourceDir = join(__dirname, 'public', 'music');
+const outputDir = join(__dirname, 'public', 'music');
 
 // Special handling for specific images
 const imageConfig = {
-	// Hero background - wider for full-screen
-	'DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.jpg': {
-		width: 2400,
-		quality: 85,
-		description: 'Hero background'
-	},
-	// Album cover - square format
-	'cover.png': {
+	// TLBOACOS Album cover - square format
+	'tlboacos-album.jpg': {
 		width: 1200,
 		height: 1200,
 		quality: 90,
 		description: 'Album cover'
 	},
-	// Gallery photos - standard size
+	// Exit Wounds single cover - square format
+	'exit-wounds-cover.webp': {
+		width: 1200,
+		height: 1200,
+		quality: 90,
+		description: 'Single cover'
+	},
+	// Default for any other images
 	default: {
 		width: 1200,
-		quality: 82,
-		description: 'Gallery photo'
+		quality: 85,
+		description: 'Music asset'
 	}
 };
 
@@ -131,8 +132,8 @@ async function main() {
 	console.log(`\n✨ Optimized images saved to: ${outputDir}`);
 	console.log('\n💡 Next steps:');
 	console.log('   1. Review the optimized images');
-	console.log('   2. If satisfied, replace exit_wounds with exit_wounds_optimized');
-	console.log('   3. Update image references to use .webp extension\n');
+	console.log('   2. If satisfied, replace files in public/music/');
+	console.log('   3. Update image references to use .webp extension if needed\n');
 }
 
 main().catch(console.error);
