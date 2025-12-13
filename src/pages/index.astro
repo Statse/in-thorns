@@ -61,46 +61,22 @@ import Contact from '@/components/contact/contact.astro'
 </style>
 
 <script>
-	// Prevent auto-scroll on page load
-	if ('scrollRestoration' in history) {
-		history.scrollRestoration = 'manual';
-	}
-
-	// Handle hash navigation on page load - wait for DOM to be fully ready
+	// Handle hash navigation after page fully loads (after images and layout stabilize)
 	if (window.location.hash) {
-		// Use requestAnimationFrame to ensure DOM is painted
-		requestAnimationFrame(() => {
+		window.addEventListener('load', () => {
 			const target = document.querySelector(window.location.hash);
 			if (target) {
-				// Jump instantly to the hash target
-				window.scrollTo({
-					top: target.offsetTop,
-					left: 0,
-					behavior: 'instant'
-				});
+				target.scrollIntoView({ behavior: 'instant', block: 'start' });
 			}
 		});
-	} else {
-		// No hash - ensure we're at the top
-		window.scrollTo(0, 0);
 	}
 
 	// Store scroll position when clicking a photo
 	document.addEventListener('astro:page-load', () => {
 		// Re-attach listeners after view transition
-		attachPhotoClickListeners();
 		attachHashScrollListeners();
 		setupScrollEffects();
 	});
-
-	function attachPhotoClickListeners() {
-		document.querySelectorAll('a[href^="/photos/"]').forEach(link => {
-			link.addEventListener('click', () => {
-				// Save current scroll position before navigating to photo
-				sessionStorage.setItem('galleryScrollPosition', window.scrollY.toString());
-			});
-		});
-	}
 
 	function attachHashScrollListeners() {
 		// Smooth scroll behavior ONLY for navigation links
@@ -120,7 +96,6 @@ import Contact from '@/components/contact/contact.astro'
 	}
 
 	// Initial attachment
-	attachPhotoClickListeners();
 	attachHashScrollListeners();
 	setupScrollEffects();
 
