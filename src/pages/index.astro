@@ -72,6 +72,7 @@ import Contact from '@/components/contact/contact.astro'
 		// Re-attach listeners after view transition
 		attachPhotoClickListeners();
 		attachHashScrollListeners();
+		setupScrollEffects();
 
 		// Restore scroll position ONLY if coming back from photo viewer
 		const savedScroll = sessionStorage.getItem('galleryScrollPosition');
@@ -131,18 +132,20 @@ import Contact from '@/components/contact/contact.astro'
 	// Initial attachment
 	attachPhotoClickListeners();
 	attachHashScrollListeners();
+	setupScrollEffects();
 
-	// Add black background to nav after scrolling past hero
-	const mainNav = document.getElementById('main-nav') as HTMLElement;
-	const heroSection = document.getElementById('hero') as HTMLElement;
-	const heroLogo = document.getElementById('hero-logo') as HTMLElement;
-	const navLogo = document.getElementById('nav-logo') as HTMLElement;
+	function setupScrollEffects() {
+		// Add black background to nav after scrolling past hero
+		const mainNav = document.getElementById('main-nav') as HTMLElement;
+		const heroSection = document.getElementById('hero') as HTMLElement;
+		const heroLogo = document.getElementById('hero-logo') as HTMLElement;
+		const navLogo = document.getElementById('nav-logo') as HTMLElement;
 
-	// Add active state to nav links on scroll + handle nav background
-	const sections = document.querySelectorAll('section[id]') as NodeListOf<HTMLElement>;
-	const navLinks = document.querySelectorAll('nav a[href^="#"]');
+		// Add active state to nav links on scroll + handle nav background
+		const sections = document.querySelectorAll('section[id]') as NodeListOf<HTMLElement>;
+		const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
-	window.addEventListener('scroll', () => {
+		window.addEventListener('scroll', () => {
 		const scrollPosition = window.pageYOffset;
 		const heroHeight = heroSection.offsetHeight;
 
@@ -185,5 +188,6 @@ import Contact from '@/components/contact/contact.astro'
 				link.classList.add('text-ew-orange');
 			}
 		});
-	});
+		});
+	}
 </script>
