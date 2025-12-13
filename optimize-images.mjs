@@ -7,8 +7,14 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const sourceDir = join(__dirname, 'public', 'music');
-const outputDir = join(__dirname, 'public', 'music');
+// Check command line arguments for which folder to optimize
+const args = process.argv.slice(2);
+const isPhotos = args.includes('--photos');
+
+const sourceDir = isPhotos
+	? join(__dirname, 'public', 'photos', 'exit_wounds')
+	: join(__dirname, 'public', 'music');
+const outputDir = sourceDir; // Output to same directory
 
 // Special handling for specific images
 const imageConfig = {
@@ -26,7 +32,13 @@ const imageConfig = {
 		quality: 90,
 		description: 'Single cover'
 	},
-	// Default for any other images
+	// Default for photos
+	photos: {
+		width: 1200,
+		quality: 85,
+		description: 'Band photo'
+	},
+	// Default for music
 	default: {
 		width: 1200,
 		quality: 85,
@@ -109,7 +121,7 @@ async function main() {
 	for (const file of imageFiles) {
 		const inputPath = join(sourceDir, file);
 		const outputPath = join(outputDir, file);
-		const config = imageConfig[file] || imageConfig.default;
+		const config = imageConfig[file] || (isPhotos ? imageConfig.photos : imageConfig.default);
 
 		const result = await optimizeImage(inputPath, outputPath, config);
 		if (result) {

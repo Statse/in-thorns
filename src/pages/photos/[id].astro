@@ -1,43 +1,29 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { readdirSync } from 'fs'
+import { join } from 'path'
 
 const { id } = Astro.params
 
-// Map of all available photos
-const photos = {
-	'1': {
-		src: '/photos/exit_wounds/3E30015C-F774-41CB-A41E-FCBBF2606004.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'2': {
-		src: '/photos/exit_wounds/455A8D0B-D5E4-4E9C-8002-D06F2E7D87E7.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'3': {
-		src: '/photos/exit_wounds/5F0E6E7C-210E-453A-9008-48B415987CF8.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'4': {
-		src: '/photos/exit_wounds/6AE5AA53-E14B-4437-AC9E-A19D624213BC.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'5': {
-		src: '/photos/exit_wounds/A382B952-B517-48B9-B466-7A252ED22616.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'6': {
-		src: '/photos/exit_wounds/B22BB973-351E-4D26-8A3C-067E8F1059B3.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'7': {
-		src: '/photos/exit_wounds/D068D024-DAC5-4C38-A951-403E822B0797.webp',
-		alt: 'In Thorns - Exit Wounds'
-	},
-	'8': {
-		src: '/photos/exit_wounds/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp',
+// Read images from public/photos/exit_wounds directory
+const photosDir = join(process.cwd(), 'public', 'photos', 'exit_wounds')
+const imageFiles = readdirSync(photosDir)
+	.filter((file) => file.endsWith('.webp'))
+	.sort((a, b) => {
+		// Extract numbers from filenames for proper numeric sorting
+		const numA = parseInt(a.match(/\d+/)?.[0] || '0')
+		const numB = parseInt(b.match(/\d+/)?.[0] || '0')
+		return numA - numB
+	})
+
+// Build photos map dynamically
+const photos: Record<string, { src: string; alt: string }> = {}
+imageFiles.forEach((file, index) => {
+	photos[String(index + 1)] = {
+		src: `/photos/exit_wounds/${file}`,
 		alt: 'In Thorns - Exit Wounds'
 	}
-}
+})
 
 const photo = photos[id as keyof typeof photos]
 

@@ -9,7 +9,8 @@
       "Bash(node review-sections.mjs:*)",
       "Bash(node optimize-images.mjs:*)",
       "Bash(npm run build:*)",
-      "Bash(git diff:*)"
+      "Bash(git diff:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

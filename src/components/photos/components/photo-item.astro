@@ -4,17 +4,17 @@ interface Props {
 	src: string
 	alt: string
 	colorClass?: string
-	colspan?: boolean
+	large?: boolean
 }
 
-const { id, src, alt, colorClass = 'ew-orange', colspan = false } = Astro.props
+const { id, src, alt, colorClass = 'ew-orange', large = false } = Astro.props
 ---
 
 <a
 	href={`/photos/${id}`}
 	class:list={[
-		'relative overflow-hidden group aspect-square cursor-pointer',
-		{ 'md:col-span-2': colspan }
+		'relative overflow-hidden group cursor-pointer aspect-square',
+		large ? 'md:col-span-2 md:row-span-2' : ''
 	]}
 >
 	<img

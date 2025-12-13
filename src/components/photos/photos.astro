@@ -1,5 +1,77 @@
 ---
 import PhotoItem from './components/photo-item.astro'
+import { readdirSync } from 'fs'
+import { join } from 'path'
+
+// Read images from public/photos/exit_wounds directory
+const photosDir = join(process.cwd(), 'public', 'photos', 'exit_wounds')
+const imageFiles = readdirSync(photosDir)
+	.filter((file) => file.endsWith('.webp'))
+	.sort((a, b) => {
+		// Extract numbers from filenames for proper numeric sorting
+		const numA = parseInt(a.match(/\d+/)?.[0] || '0')
+		const numB = parseInt(b.match(/\d+/)?.[0] || '0')
+		return numA - numB
+	})
+
+// Color classes to cycle through
+const colorClasses = ['ew-orange', 'ew-green', 'ew-red']
+
+// Create asymmetric layout: alternating between large groups and small groups
+// Pattern: [large+2small, 3small, 2small+large, 3small, ...]
+const photos: any[] = []
+let photoIndex = 0
+let groupType = 0 // 0: large left, 1: 3 small, 2: large right, 3: 3 small
+
+while (photoIndex < imageFiles.length) {
+	if (groupType === 0) {
+		// Group 1: Large left + 2 small right (L shape)
+		if (photoIndex + 2 < imageFiles.length) {
+			photos.push(
+				{ id: String(photoIndex + 1), src: `/photos/exit_wounds/${imageFiles[photoIndex]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[photoIndex % colorClasses.length], large: true },
+				{ id: String(photoIndex + 2), src: `/photos/exit_wounds/${imageFiles[photoIndex + 1]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 1) % colorClasses.length], large: false },
+				{ id: String(photoIndex + 3), src: `/photos/exit_wounds/${imageFiles[photoIndex + 2]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 2) % colorClasses.length], large: false }
+			)
+			photoIndex += 3
+		}
+	} else if (groupType === 1) {
+		// Group 2: 3 small
+		for (let i = 0; i < 3 && photoIndex < imageFiles.length; i++) {
+			photos.push({
+				id: String(photoIndex + 1),
+				src: `/photos/exit_wounds/${imageFiles[photoIndex]}`,
+				alt: 'In Thorns - Exit Wounds',
+				colorClass: colorClasses[photoIndex % colorClasses.length],
+				large: false
+			})
+			photoIndex++
+		}
+	} else if (groupType === 2) {
+		// Group 3: 2 small left + large right (reversed L)
+		if (photoIndex + 2 < imageFiles.length) {
+			photos.push(
+				{ id: String(photoIndex + 1), src: `/photos/exit_wounds/${imageFiles[photoIndex]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[photoIndex % colorClasses.length], large: false },
+				{ id: String(photoIndex + 2), src: `/photos/exit_wounds/${imageFiles[photoIndex + 1]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 1) % colorClasses.length], large: false },
+				{ id: String(photoIndex + 3), src: `/photos/exit_wounds/${imageFiles[photoIndex + 2]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 2) % colorClasses.length], large: true }
+			)
+			photoIndex += 3
+		}
+	} else {
+		// Group 4: 3 small
+		for (let i = 0; i < 3 && photoIndex < imageFiles.length; i++) {
+			photos.push({
+				id: String(photoIndex + 1),
+				src: `/photos/exit_wounds/${imageFiles[photoIndex]}`,
+				alt: 'In Thorns - Exit Wounds',
+				colorClass: colorClasses[photoIndex % colorClasses.length],
+				large: false
+			})
+			photoIndex++
+		}
+	}
+
+	groupType = (groupType + 1) % 4
+}
 ---
 
 <section id='photos' class='min-h-screen bg-black py-20 px-4'>
@@ -8,15 +80,18 @@ import PhotoItem from './components/photo-item.astro'
 			<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Photos</span>
 		</h2>
 
-		<div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-			<PhotoItem id='1' src='/photos/exit_wounds/3E30015C-F774-41CB-A41E-FCBBF2606004.webp' alt='In Thorns - Exit Wounds' colorClass='ew-orange' />
-			<PhotoItem id='2' src='/photos/exit_wounds/455A8D0B-D5E4-4E9C-8002-D06F2E7D87E7.webp' alt='In Thorns - Exit Wounds' colorClass='ew-green' />
-			<PhotoItem id='3' src='/photos/exit_wounds/5F0E6E7C-210E-453A-9008-48B415987CF8.webp' alt='In Thorns - Exit Wounds' colorClass='ew-orange' />
-			<PhotoItem id='4' src='/photos/exit_wounds/6AE5AA53-E14B-4437-AC9E-A19D624213BC.webp' alt='In Thorns - Exit Wounds' colorClass='ew-red' />
-			<PhotoItem id='5' src='/photos/exit_wounds/A382B952-B517-48B9-B466-7A252ED22616.webp' alt='In Thorns - Exit Wounds' colorClass='ew-green' />
-			<PhotoItem id='6' src='/photos/exit_wounds/B22BB973-351E-4D26-8A3C-067E8F1059B3.webp' alt='In Thorns - Exit Wounds' colorClass='ew-orange' />
-			<PhotoItem id='7' src='/photos/exit_wounds/D068D024-DAC5-4C38-A951-403E822B0797.webp' alt='In Thorns - Exit Wounds' colorClass='ew-red' colspan={true} />
-			<PhotoItem id='8' src='/photos/exit_wounds/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp' alt='In Thorns - Exit Wounds' colorClass='ew-green' />
+		<div class='grid grid-cols-1 md:grid-cols-3 gap-4'>
+			{
+				photos.map((photo) => (
+					<PhotoItem
+						id={photo.id}
+						src={photo.src}
+						alt={photo.alt}
+						colorClass={photo.colorClass}
+						large={photo.large}
+					/>
+				))
+			}
 		</div>
 	</div>
 </section>
