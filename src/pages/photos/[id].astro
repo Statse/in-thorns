@@ -40,7 +40,7 @@ const nextId = currentId === totalPhotos ? 1 : currentId + 1
 ---
 
 <Layout title='In Thorns - Photos'>
-	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative' transition:animate='none'>
+	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative'>
 		<!-- Close Button -->
 		<a
 			href='/#photos'
@@ -80,6 +80,7 @@ const nextId = currentId === totalPhotos ? 1 : currentId + 1
 				src={photo.src}
 				alt={photo.alt}
 				class='max-w-full max-h-[90vh] object-contain'
+				transition:name={`photo-${id}`}
 			/>
 		</div>
 
