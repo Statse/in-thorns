@@ -10,7 +10,7 @@ import Contact from '@/components/contact/contact.astro'
 ---
 
 <Layout title="In Thorns - Let's Sail into the Unknown">
-	<div class='scroll-smooth'>
+	<div>
 		<Navigation />
 
 		<Hero />
@@ -42,7 +42,6 @@ import Contact from '@/components/contact/contact.astro'
 
 <style>
 	html {
-		scroll-behavior: smooth;
 		overflow-x: hidden;
 	}
 
@@ -67,40 +66,31 @@ import Contact from '@/components/contact/contact.astro'
 		history.scrollRestoration = 'manual';
 	}
 
+	// Handle hash navigation on page load - wait for DOM to be fully ready
+	if (window.location.hash) {
+		// Use requestAnimationFrame to ensure DOM is painted
+		requestAnimationFrame(() => {
+			const target = document.querySelector(window.location.hash);
+			if (target) {
+				// Jump instantly to the hash target
+				window.scrollTo({
+					top: target.offsetTop,
+					left: 0,
+					behavior: 'instant'
+				});
+			}
+		});
+	} else {
+		// No hash - ensure we're at the top
+		window.scrollTo(0, 0);
+	}
+
 	// Store scroll position when clicking a photo
 	document.addEventListener('astro:page-load', () => {
 		// Re-attach listeners after view transition
 		attachPhotoClickListeners();
 		attachHashScrollListeners();
 		setupScrollEffects();
-
-		// Restore scroll position ONLY if coming back from photo viewer
-		const savedScroll = sessionStorage.getItem('galleryScrollPosition');
-		if (savedScroll && window.location.pathname === '/') {
-			// Restore to saved position instantly (no smooth scroll)
-			setTimeout(() => {
-				window.scrollTo({
-					top: parseInt(savedScroll),
-					left: 0,
-					behavior: 'instant'
-				});
-			}, 0);
-			sessionStorage.removeItem('galleryScrollPosition');
-		} else if (window.location.pathname === '/' && !window.location.hash) {
-			// Fresh page load - ensure we're at the top
-			window.scrollTo(0, 0);
-		} else if (window.location.hash) {
-			// Handle hash scroll if present and no saved position
-			setTimeout(() => {
-				const target = document.querySelector(window.location.hash);
-				if (target) {
-					target.scrollIntoView({
-						behavior: 'instant',
-						block: 'start'
-					});
-				}
-			}, 0);
-		}
 	});
 
 	function attachPhotoClickListeners() {
@@ -113,8 +103,8 @@ import Contact from '@/components/contact/contact.astro'
 	}
 
 	function attachHashScrollListeners() {
-		// Smooth scroll behavior for anchor links
-		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		// Smooth scroll behavior ONLY for navigation links
+		document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
 				e.preventDefault();
 				//@ts-ignore
