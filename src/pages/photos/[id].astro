@@ -57,39 +57,7 @@ if (!photo) {
 ---
 
 <Layout title='In Thorns - Photos'>
-	<style>
-		@keyframes slideFromRight {
-			from {
-				opacity: 0;
-				transform: translateX(100%);
-			}
-			to {
-				opacity: 1;
-				transform: translateX(0);
-			}
-		}
-
-		@keyframes slideToRight {
-			from {
-				opacity: 1;
-				transform: translateX(0);
-			}
-			to {
-				opacity: 0;
-				transform: translateX(100%);
-			}
-		}
-
-		::view-transition-old(slide-it) {
-			animation: slideToRight 0.3s ease-in-out;
-		}
-
-		::view-transition-new(slide-it) {
-			animation: slideFromRight 0.3s ease-in-out;
-		}
-	</style>
-
-	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative' transition:name='slide-it'>
+	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative'>
 		<!-- Back Button -->
 		<button
 			onclick='history.back()'
