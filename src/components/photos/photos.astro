@@ -1,5 +1,4 @@
 ---
-import PhotoItem from './components/photo-item.astro'
 import { readdirSync } from 'fs'
 import { join } from 'path'
 
@@ -17,61 +16,30 @@ const imageFiles = readdirSync(photosDir)
 // Color classes to cycle through
 const colorClasses = ['ew-orange', 'ew-green', 'ew-red']
 
-// Create asymmetric layout: alternating between large groups and small groups
-// Pattern: [large+2small, 3small, 2small+large, 3small, ...]
-const photos: any[] = []
-let photoIndex = 0
-let groupType = 0 // 0: large left, 1: 3 small, 2: large right, 3: 3 small
+// Mosaic layout pattern matching the design
+// tall = 2 rows, wide = 2 cols, large = 2x2
+const mosaicPattern = [
+	'large',  // 1: Large 2x2 (top left)
+	'normal', // 2: Small 1x1 (top right)
+	'tall',   // 3: Tall 1x2 (right side)
+	'normal', // 4: Small 1x1
+	'normal', // 5: Small 1x1
+	'normal', // 6: Small 1x1 (left)
+	'large',  // 7: Large 2x2 (right)
+	'wide',   // 8: Wide 2x1
+	'wide',   // 9: Wide 2x1
+	'normal', // 10: Small 1x1
+	'normal', // 11: Small 1x1
+	'large',  // 12: Large 2x2
+]
 
-while (photoIndex < imageFiles.length) {
-	if (groupType === 0) {
-		// Group 1: Large left + 2 small right (L shape)
-		if (photoIndex + 2 < imageFiles.length) {
-			photos.push(
-				{ id: String(photoIndex + 1), src: `/photos/exit_wounds/${imageFiles[photoIndex]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[photoIndex % colorClasses.length], large: true },
-				{ id: String(photoIndex + 2), src: `/photos/exit_wounds/${imageFiles[photoIndex + 1]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 1) % colorClasses.length], large: false },
-				{ id: String(photoIndex + 3), src: `/photos/exit_wounds/${imageFiles[photoIndex + 2]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 2) % colorClasses.length], large: false }
-			)
-			photoIndex += 3
-		}
-	} else if (groupType === 1) {
-		// Group 2: 3 small
-		for (let i = 0; i < 3 && photoIndex < imageFiles.length; i++) {
-			photos.push({
-				id: String(photoIndex + 1),
-				src: `/photos/exit_wounds/${imageFiles[photoIndex]}`,
-				alt: 'In Thorns - Exit Wounds',
-				colorClass: colorClasses[photoIndex % colorClasses.length],
-				large: false
-			})
-			photoIndex++
-		}
-	} else if (groupType === 2) {
-		// Group 3: 2 small left + large right (reversed L)
-		if (photoIndex + 2 < imageFiles.length) {
-			photos.push(
-				{ id: String(photoIndex + 1), src: `/photos/exit_wounds/${imageFiles[photoIndex]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[photoIndex % colorClasses.length], large: false },
-				{ id: String(photoIndex + 2), src: `/photos/exit_wounds/${imageFiles[photoIndex + 1]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 1) % colorClasses.length], large: false },
-				{ id: String(photoIndex + 3), src: `/photos/exit_wounds/${imageFiles[photoIndex + 2]}`, alt: 'In Thorns - Exit Wounds', colorClass: colorClasses[(photoIndex + 2) % colorClasses.length], large: true }
-			)
-			photoIndex += 3
-		}
-	} else {
-		// Group 4: 3 small
-		for (let i = 0; i < 3 && photoIndex < imageFiles.length; i++) {
-			photos.push({
-				id: String(photoIndex + 1),
-				src: `/photos/exit_wounds/${imageFiles[photoIndex]}`,
-				alt: 'In Thorns - Exit Wounds',
-				colorClass: colorClasses[photoIndex % colorClasses.length],
-				large: false
-			})
-			photoIndex++
-		}
-	}
-
-	groupType = (groupType + 1) % 4
-}
+const photos = imageFiles.map((file, index) => ({
+	id: String(index + 1),
+	src: `/photos/exit_wounds/${file}`,
+	alt: 'In Thorns - Exit Wounds',
+	colorClass: colorClasses[index % colorClasses.length],
+	layout: mosaicPattern[index % mosaicPattern.length]
+}))
 ---
 
 <section id='photos' class='min-h-screen bg-black py-20 px-4'>
@@ -80,16 +48,31 @@ while (photoIndex < imageFiles.length) {
 			<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Photos</span>
 		</h2>
 
-		<div class='grid grid-cols-1 md:grid-cols-3 gap-4'>
+		<div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]'>
 			{
 				photos.map((photo) => (
-					<PhotoItem
-						id={photo.id}
-						src={photo.src}
-						alt={photo.alt}
-						colorClass={photo.colorClass}
-						large={photo.large}
-					/>
+					<a
+						href={`/photos/${photo.id}`}
+						class:list={[
+							'relative overflow-hidden group cursor-pointer',
+							{
+								'md:col-span-2 md:row-span-2': photo.layout === 'large',
+								'md:col-span-2': photo.layout === 'wide',
+								'md:row-span-2': photo.layout === 'tall'
+							}
+						]}
+					>
+						<img
+							src={photo.src}
+							alt={photo.alt}
+							class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
+							transition:name={`photo-${photo.id}`}
+						/>
+						<div class:list={[
+							'absolute inset-0 group-hover:bg-opacity-20 bg-opacity-0 transition-colors',
+							`bg-${photo.colorClass}`
+						]} />
+					</a>
 				))
 			}
 		</div>
