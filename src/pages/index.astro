@@ -293,6 +293,7 @@ import Events from '@/components/events.astro'
 	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 		anchor.addEventListener('click', function (e) {
 			e.preventDefault();
+			//@ts-ignore
 			const target = document.querySelector(this.getAttribute('href'));
 			if (target) {
 				target.scrollIntoView({
@@ -304,11 +305,11 @@ import Events from '@/components/events.astro'
 	});
 
 	// Add black background to nav after scrolling past hero
-	const mainNav = document.getElementById('main-nav');
-	const heroSection = document.getElementById('hero');
+	const mainNav = document.getElementById('main-nav') as HTMLElement;
+	const heroSection = document.getElementById('hero') as HTMLElement;
 
 	// Add active state to nav links on scroll + handle nav background
-	const sections = document.querySelectorAll('section[id]');
+	const sections = document.querySelectorAll('section[id]') as NodeListOf<HTMLElement>;
 	const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
 	window.addEventListener('scroll', () => {
@@ -328,7 +329,7 @@ import Events from '@/components/events.astro'
 			const sectionTop = section.offsetTop;
 			const sectionHeight = section.clientHeight;
 			if (scrollPosition >= sectionTop - 200) {
-				current = section.getAttribute('id');
+				current = section.getAttribute('id') as string;
 			}
 		});
 
