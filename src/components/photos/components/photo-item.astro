@@ -1,0 +1,30 @@
+---
+interface Props {
+	id: string
+	src: string
+	alt: string
+	colorClass?: string
+	colspan?: boolean
+}
+
+const { id, src, alt, colorClass = 'ew-orange', colspan = false } = Astro.props
+---
+
+<a
+	href={`/photos/${id}`}
+	class:list={[
+		'relative overflow-hidden group aspect-square cursor-pointer',
+		{ 'md:col-span-2': colspan }
+	]}
+>
+	<img
+		src={src}
+		alt={alt}
+		class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
+		transition:name={`photo-${id}`}
+	/>
+	<div class:list={[
+		'absolute inset-0 group-hover:bg-opacity-20 bg-opacity-0 transition-colors',
+		`bg-${colorClass}`
+	]}></div>
+</a>

@@ -1,0 +1,119 @@
+---
+import Layout from '@/layouts/Layout.astro'
+
+import photo1 from '@/components/photos/assets/3E30015C-F774-41CB-A41E-FCBBF2606004.webp'
+import photo2 from '@/components/photos/assets/455A8D0B-D5E4-4E9C-8002-D06F2E7D87E7.webp'
+import photo3 from '@/components/photos/assets/5F0E6E7C-210E-453A-9008-48B415987CF8.webp'
+import photo4 from '@/components/photos/assets/6AE5AA53-E14B-4437-AC9E-A19D624213BC.webp'
+import photo5 from '@/components/photos/assets/A382B952-B517-48B9-B466-7A252ED22616.webp'
+import photo6 from '@/components/photos/assets/B22BB973-351E-4D26-8A3C-067E8F1059B3.webp'
+import photo7 from '@/components/photos/assets/D068D024-DAC5-4C38-A951-403E822B0797.webp'
+import photo8 from '@/components/photos/assets/DA93CD43-944B-4EF9-8AC8-5B33C4DE2171.webp'
+
+const { id } = Astro.params
+
+// Map of all available photos
+const photos = {
+	'1': {
+		src: photo1.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'2': {
+		src: photo2.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'3': {
+		src: photo3.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'4': {
+		src: photo4.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'5': {
+		src: photo5.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'6': {
+		src: photo6.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'7': {
+		src: photo7.src,
+		alt: 'In Thorns - Exit Wounds'
+	},
+	'8': {
+		src: photo8.src,
+		alt: 'In Thorns - Exit Wounds'
+	}
+}
+
+const photo = photos[id as keyof typeof photos]
+
+// If photo not found, redirect to home
+if (!photo) {
+	return Astro.redirect('/#photos')
+}
+---
+
+<Layout title='In Thorns - Photos'>
+	<style>
+		@keyframes slideFromRight {
+			from {
+				opacity: 0;
+				transform: translateX(100%);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes slideToRight {
+			from {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			to {
+				opacity: 0;
+				transform: translateX(100%);
+			}
+		}
+
+		::view-transition-old(slide-it) {
+			animation: slideToRight 0.3s ease-in-out;
+		}
+
+		::view-transition-new(slide-it) {
+			animation: slideFromRight 0.3s ease-in-out;
+		}
+	</style>
+
+	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative' transition:name='slide-it'>
+		<!-- Back Button -->
+		<button
+			onclick='history.back()'
+			class='fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center bg-ew-orange/20 border-2 border-ew-orange hover:bg-ew-orange hover:border-ew-orange-light transition-all group cursor-pointer'
+			aria-label='Back to gallery'
+		>
+			<svg class='w-6 h-6 text-ew-orange group-hover:text-black transition-colors' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path>
+			</svg>
+		</button>
+
+		<!-- Image Container -->
+		<div class='w-full h-full max-w-7xl max-h-screen flex items-center justify-center'>
+			<img
+				src={photo.src}
+				alt={photo.alt}
+				class='max-w-full max-h-[90vh] object-contain'
+				transition:name={`photo-${id}`}
+			/>
+		</div>
+
+		<!-- Image info overlay -->
+		<div class='fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm border-2 border-ew-orange/30 px-6 py-3'>
+			<p class='text-ew-cream text-sm'>{photo.alt}</p>
+		</div>
+	</main>
+</Layout>

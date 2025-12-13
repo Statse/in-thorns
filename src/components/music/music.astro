@@ -1,0 +1,53 @@
+---
+import exitWoundsCover from './assets/cover.webp'
+---
+
+<section id='music' class='min-h-screen bg-black py-20 px-4 md:px-6'>
+	<div class='container mx-auto max-w-6xl'>
+		<h2 class='text-4xl md:text-5xl font-bold text-ew-orange mb-16 text-center'>
+			<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Music</span>
+		</h2>
+
+		<div class='grid md:grid-cols-2 gap-6 md:gap-12 mb-16'>
+			<!-- Exit Wounds Single -->
+			<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-4 md:p-8 border-2 border-ew-orange/30 hover:border-ew-orange transition-all'>
+				<div class='aspect-square mb-6 relative overflow-hidden'>
+					<img
+						src={exitWoundsCover.src}
+						alt='Exit Wounds'
+						class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+					/>
+					<div class='absolute inset-0 bg-gradient-to-t from-black/80 to-transparent'></div>
+				</div>
+				<h3 class='text-2xl font-bold text-white mb-2'>Exit Wounds</h3>
+				<p class='text-ew-orange mb-4'>Single • Out 23.1.2025</p>
+				<p class='text-ew-cream/70 mb-6'>New single coming soon...</p>
+				<div class='space-y-3'>
+					<p class='text-sm text-ew-green-light'>Pre-save links coming soon</p>
+				</div>
+			</div>
+
+			<!-- Album -->
+			<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-4 md:p-8 border-2 border-ew-red/30 hover:border-ew-red transition-all'>
+				<div class='aspect-square mb-6 relative overflow-hidden'>
+					<img
+						src='/TLBOACOS.jpg'
+						alt='the last bead on a cord of songs'
+						class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+					/>
+				</div>
+				<h3 class='text-2xl font-bold text-white mb-2'>the last bead on a cord of songs</h3>
+				<p class='text-ew-red mb-4'>Album • 2024</p>
+				<p class='text-ew-cream/70 mb-6'>Debut album featuring crushing soundscapes, nihilistic themes, and massive melodies.</p>
+				<a
+					href='https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy'
+					target='_blank'
+					rel='noopener noreferrer'
+					class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+				>
+					Listen on Spotify
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

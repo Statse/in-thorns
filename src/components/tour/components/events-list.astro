@@ -1,0 +1,81 @@
+---
+import type { TourEventsAPIResponse } from '@/types/bandsintown';
+
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+
+// Fetch events from our API endpoint
+let events: TourEventsAPIResponse['data'] = [];
+let error: string | null = null;
+
+try {
+  const apiUrl = new URL('/api/events', Astro.url.origin);
+  apiUrl.searchParams.set('date', 'upcoming');
+
+  const response = await fetch(apiUrl.toString());
+  const data: TourEventsAPIResponse = await response.json();
+
+  if (data.success && data.data) {
+    events = limit ? data.data.slice(0, limit) : data.data;
+  } else {
+    error = data.error || 'Failed to load events';
+  }
+} catch (err) {
+  console.error('Error fetching events:', err);
+  error = 'Failed to load tour dates';
+}
+---
+
+{!error && (
+  <div class='w-full flex flex-col gap-4'>
+    {events && events.length === 0 && (
+      <div class='bg-ew-green-dark/20 border-2 border-ew-green/30 text-ew-cream p-6 text-center backdrop-blur-sm'>
+        No upcoming tour dates scheduled.
+      </div>
+    )}
+
+    {events && events.length > 0 && (
+      <div class='flex flex-col gap-4'>
+        {events.map((event) => (
+          <div
+            class='bg-black/50 border-2 border-ew-green/30 hover:border-ew-green transition-all text-white p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 backdrop-blur-sm group'
+          >
+            <div class='flex flex-col gap-1'>
+              <span class='font-bold text-xl text-ew-green-light'>{event.date}</span>
+              <span class='text-ew-cream'>
+                {event.venue}
+              </span>
+              <span class='text-ew-cream/70 text-sm'>
+                {event.city}, {event.country}
+              </span>
+            </div>
+
+            <div class='flex gap-3 flex-wrap'>
+              <a
+                href={event.eventUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                class='bg-ew-green hover:bg-ew-green-light text-white px-6 py-2 transition-all text-sm font-bold uppercase tracking-wider'
+              >
+                Details
+              </a>
+              {event.ticketUrl && (
+                <a
+                  href={event.ticketUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='bg-ew-orange hover:bg-ew-orange-light text-white px-6 py-2 transition-all text-sm font-bold uppercase tracking-wider'
+                >
+                  Tickets
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
