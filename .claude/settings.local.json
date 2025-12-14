@@ -10,7 +10,8 @@
       "Bash(node optimize-images.mjs:*)",
       "Bash(npm run build:*)",
       "Bash(git diff:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npm i:*)"
     ],
     "deny": [],
     "ask": []
