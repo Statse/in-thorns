@@ -1,0 +1,92 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Navigation from '@/components/navigation/navigation.astro'
+import Contact from '@/components/contact/contact.astro'
+import { Image } from 'astro:assets'
+
+const tracks = [
+	{ number: 1, title: 'maniya', duration: '4:22', spotifyUrl: 'https://open.spotify.com/track/1dS6zDr54ZVfXXN2u3J4Zk' },
+	{ number: 2, title: 'xiii (the death)', duration: '4:00', spotifyUrl: 'https://open.spotify.com/track/6V4GC2bHeKPcRpy9De8JTU' },
+	{ number: 3, title: 'colorblind', duration: '4:14', spotifyUrl: 'https://open.spotify.com/track/2Qf8QmjDmSWtMGJRlOJwPS' },
+	{ number: 4, title: 'shut your mouth', duration: '2:54', spotifyUrl: 'https://open.spotify.com/track/5wYqGpxhrDHs7nunqL7LZ5' },
+	{ number: 5, title: 'we are expendable', duration: '4:26', spotifyUrl: 'https://open.spotify.com/track/1jeq3OmgcaGckBqNmgGhzF' },
+	{ number: 6, title: 'medusa', duration: '5:02', spotifyUrl: 'https://open.spotify.com/track/28Pjxc8qjgdq7mOOff88Su' },
+	{ number: 7, title: 'sleeper I (crossroads)', duration: '3:05', spotifyUrl: 'https://open.spotify.com/track/6xmqsTTY6hOD1qz0xvqG4H' },
+	{ number: 8, title: 'sleeper II (final breath)', duration: '4:45', spotifyUrl: 'https://open.spotify.com/track/3sD1z2RjiDIntkKLqQXgW9' },
+]
+---
+
+<Layout title='the last bead on a cord of songs - In Thorns'>
+	<header>
+		<Navigation />
+	</header>
+	<main id='main-content' class='min-h-screen bg-black py-20 px-4'>
+		<div class='container mx-auto max-w-4xl pt-16'>
+			<!-- Album Cover -->
+			<div class='flex justify-center mb-8'>
+				<Image
+					src='/music/tlboacos-album.webp'
+					alt='the last bead on a cord of songs'
+					width={400}
+					height={400}
+					class='w-64 h-64 md:w-80 md:h-80 object-cover border-2 border-ew-red/30'
+				/>
+			</div>
+
+			<h1 class='text-3xl md:text-4xl font-bold text-ew-red mb-4 text-center'>
+				the last bead on a cord of songs
+			</h1>
+			<p class='text-xl text-ew-cream/70 mb-12 text-center'>In Thorns • 2024</p>
+
+			<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-6 md:p-12 border-2 border-ew-red/30'>
+				<h2 class='text-2xl text-ew-orange mb-6'>Tracklist</h2>
+
+				<div class='space-y-3'>
+					{tracks.map(track => (
+						<a
+							href={track.spotifyUrl}
+							target='_blank'
+							rel='noopener noreferrer'
+							class='flex items-center justify-between p-3 bg-black/30 hover:bg-ew-red/20 transition-colors border-l-2 border-ew-red/50 hover:border-ew-red group'
+						>
+							<div class='flex items-center gap-4'>
+								<span class='text-ew-orange font-bold text-lg w-8'>{track.number}.</span>
+								<span class='text-ew-cream text-base md:text-lg group-hover:text-ew-orange transition-colors'>{track.title}</span>
+							</div>
+							<span class='text-ew-cream/50 text-sm'>{track.duration}</span>
+						</a>
+					))}
+				</div>
+
+				<div class='mt-8 pt-8 border-t border-ew-orange/20'>
+					<h3 class='text-xl text-ew-orange mb-4'>Listen Now</h3>
+					<div class='flex flex-wrap gap-4'>
+						<a
+							href='https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+						>
+							Listen on Spotify
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class='text-center mt-8'>
+				<a href='/#music' class='inline-block text-ew-orange hover:text-ew-orange-light transition-colors'>
+					← Back to Music
+				</a>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<Contact />
+	</footer>
+</Layout>
+
+<style>
+	.prose a {
+		transition: color 0.2s;
+	}
+</style>
