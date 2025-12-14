@@ -6,7 +6,7 @@ import { Image } from 'astro:assets'
 
 const tracks = [
 	{ number: 1, title: 'maniya', duration: '4:22', spotifyUrl: 'https://open.spotify.com/track/1dS6zDr54ZVfXXN2u3J4Zk' },
-	{ number: 2, title: 'xiii (the death)', duration: '4:00', spotifyUrl: 'https://open.spotify.com/track/6V4GC2bHeKPcRpy9De8JTU' },
+	{ number: 2, title: 'xiii (the death)', duration: '4:00', spotifyUrl: 'https://open.spotify.com/track/6V4GC2bHeKPcRpy9De8JTU', videoUrl: 'https://www.youtube.com/watch?v=rjff_WUvBhk' },
 	{ number: 3, title: 'colorblind', duration: '4:14', spotifyUrl: 'https://open.spotify.com/track/2Qf8QmjDmSWtMGJRlOJwPS' },
 	{ number: 4, title: 'shut your mouth', duration: '2:54', spotifyUrl: 'https://open.spotify.com/track/5wYqGpxhrDHs7nunqL7LZ5' },
 	{ number: 5, title: 'we are expendable', duration: '4:26', spotifyUrl: 'https://open.spotify.com/track/1jeq3OmgcaGckBqNmgGhzF' },
@@ -43,31 +43,70 @@ const tracks = [
 
 				<div class='space-y-3'>
 					{tracks.map(track => (
-						<a
-							href={track.spotifyUrl}
-							target='_blank'
-							rel='noopener noreferrer'
-							class='flex items-center justify-between p-3 bg-black/30 hover:bg-ew-red/20 transition-colors border-l-2 border-ew-red/50 hover:border-ew-red group'
-						>
-							<div class='flex items-center gap-4'>
-								<span class='text-ew-orange font-bold text-lg w-8'>{track.number}.</span>
-								<span class='text-ew-cream text-base md:text-lg group-hover:text-ew-orange transition-colors'>{track.title}</span>
-							</div>
-							<span class='text-ew-cream/50 text-sm'>{track.duration}</span>
-						</a>
+						<div class='flex items-center gap-2'>
+							<a
+								href={track.spotifyUrl}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='flex items-center justify-between p-3 bg-black/30 hover:bg-ew-red/20 transition-colors border-l-2 border-ew-red/50 hover:border-ew-red group flex-grow'
+							>
+								<div class='flex items-center gap-4'>
+									<span class='text-ew-orange font-bold text-lg w-8'>{track.number}.</span>
+									<span class='text-ew-cream text-base md:text-lg group-hover:text-ew-orange transition-colors'>{track.title}</span>
+								</div>
+								<span class='text-ew-cream/50 text-sm'>{track.duration}</span>
+							</a>
+							{track.videoUrl && (
+								<a
+									href={track.videoUrl}
+									target='_blank'
+									rel='noopener noreferrer'
+									title='Watch Music Video'
+									class='p-3 bg-ew-red/20 hover:bg-ew-red/40 transition-colors border-2 border-ew-red/50 hover:border-ew-red flex items-center justify-center group'
+								>
+									<svg class='w-6 h-6 text-ew-orange group-hover:text-white transition-colors' fill='currentColor' viewBox='0 0 24 24'>
+										<path d='M8 5v14l11-7z'/>
+									</svg>
+								</a>
+							)}
+						</div>
 					))}
 				</div>
 
 				<div class='mt-8 pt-8 border-t border-ew-orange/20'>
 					<h3 class='text-xl text-ew-orange mb-4'>Listen Now</h3>
-					<div class='flex flex-wrap gap-4'>
+					<div class='flex flex-wrap gap-3'>
 						<a
 							href='https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy'
 							target='_blank'
 							rel='noopener noreferrer'
 							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
 						>
-							Listen on Spotify
+							Spotify
+						</a>
+						<a
+							href='https://music.apple.com/tr/album/the-last-bead-on-a-cord-of-songs/1723544456'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+						>
+							Apple Music
+						</a>
+						<a
+							href='https://music.youtube.com/playlist?list=OLAK5uy_kS6yu_-rFmwegiEajR2Ey7JPOCLe7FEpw'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+						>
+							YouTube Music
+						</a>
+						<a
+							href='https://www.deezer.com/fi/album/529196392'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+						>
+							Deezer
 						</a>
 					</div>
 				</div>
