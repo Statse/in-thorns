@@ -2,13 +2,14 @@
 interface Props {
   link: string
   src: string
+  alt: string
 }
 
-const { link, src } = Astro.props
+const { link, src, alt } = Astro.props
 ---
 
 <li>
-  <a href={link} target='_blank'>
-    <img src={src} class='w-8' />
+  <a href={link} target='_blank' rel='noopener noreferrer' aria-label={alt}>
+    <img src={src} alt={alt} class='w-8' />
   </a>
 </li>

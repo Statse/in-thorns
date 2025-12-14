@@ -11,30 +11,34 @@ import Contact from '@/components/contact/contact.astro'
 
 <Layout title="In Thorns - Let's Sail into the Unknown">
 	<div>
-		<Navigation />
+		<header>
+			<Navigation />
+		</header>
 
-		<Hero />
+		<main id='main-content'>
+			<Hero />
 
 		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent'></div>
-		<div class='h-px bg-ew-green'></div>
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent' aria-hidden='true'></div>
+		<div class='h-px bg-ew-green' aria-hidden='true'></div>
 
 		<Music />
 
 		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent'></div>
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent' aria-hidden='true'></div>
 
 		<Tour />
 
 		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent'></div>
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent' aria-hidden='true'></div>
 
 		<Photos />
 
 		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent'></div>
+		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent' aria-hidden='true'></div>
 
 		<About />
+		</main>
 
 		<Contact />
 	</div>
