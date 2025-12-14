@@ -10,6 +10,7 @@ export interface Album {
 	slug: string
 	title: string
 	year: number
+	releaseDate?: string
 	coverImage: string
 	description: string
 	tracks: Track[]
@@ -26,6 +27,7 @@ export const albums: Album[] = [
 		slug: 'the-last-bead-on-a-cord-of-songs',
 		title: 'the last bead on a cord of songs',
 		year: 2024,
+		releaseDate: '12.1.2024',
 		coverImage: '/music/tlboacos-album.webp',
 		description: 'Debut album featuring crushing soundscapes, nihilistic themes, and massive melodies.',
 		tracks: [

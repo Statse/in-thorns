@@ -37,7 +37,7 @@ const mosaicPattern = [
 const photos = imageFiles.map((file, index) => ({
 	id: String(index + 1),
 	src: `/photos/exit_wounds/${file}`,
-	alt: 'In Thorns - Exit Wounds',
+	alt: 'In Thorns - exit wounds',
 	colorClass: colorClasses[index % colorClasses.length],
 	layout: mosaicPattern[index % mosaicPattern.length]
 }))
