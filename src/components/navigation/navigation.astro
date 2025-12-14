@@ -5,6 +5,9 @@ import { Image } from 'astro:assets'
 // Check if we're on the homepage
 const isHomepage = Astro.url.pathname === '/'
 const linkPrefix = isHomepage ? '#' : '/#'
+
+// Check if we're on an album page
+const isAlbumPage = Astro.url.pathname.startsWith('/album/')
 ---
 
 <nav id='main-nav' aria-label='Main navigation' class='fixed top-0 left-0 right-0 z-50 transition-all duration-500'>
@@ -12,17 +15,24 @@ const linkPrefix = isHomepage ? '#' : '/#'
 		<div class='flex items-center justify-between h-16'>
 			<!-- Logo -->
 			<a href={isHomepage ? '#hero' : '/'} aria-label={isHomepage ? 'Go to top of page' : 'Go to homepage'} class='transition-transform hover:scale-105'>
-				<Image id='nav-logo' src='/it-logo-white.png' alt='In Thorns logo' width={192} height={48} class='h-12 opacity-0 transition-opacity duration-500' loading='eager' />
+				<Image id='nav-logo' src='/it-logo-white.png' alt='In Thorns logo' width={192} height={48} class={`h-12 transition-opacity duration-500 ${isAlbumPage ? 'opacity-100' : 'opacity-0'}`} loading='eager' />
 			</a>
 
-			<!-- Nav Links -->
-			<ul class='flex gap-6 text-sm md:text-base text-white'>
-				<li><a href={`${linkPrefix}music`} class='hover:text-ew-orange transition-colors'>Music</a></li>
-				<li><a href={`${linkPrefix}tour`} class='hover:text-ew-orange transition-colors'>Tour</a></li>
-				<li><a href={`${linkPrefix}photos`} class='hover:text-ew-orange transition-colors'>Photos</a></li>
-				<li><a href={`${linkPrefix}about`} class='hover:text-ew-orange transition-colors'>Bio</a></li>
-				<li><a href={`${linkPrefix}contact`} class='hover:text-ew-orange transition-colors'>Contact</a></li>
-			</ul>
+			{isAlbumPage ? (
+				<!-- Minimal nav for album pages -->
+				<a href='/#music' class='text-white hover:text-ew-orange transition-colors text-sm md:text-base'>
+					← Back to Music
+				</a>
+			) : (
+				<!-- Full nav links for homepage -->
+				<ul class='flex gap-6 text-sm md:text-base text-white'>
+					<li><a href={`${linkPrefix}music`} class='hover:text-ew-orange transition-colors'>Music</a></li>
+					<li><a href={`${linkPrefix}tour`} class='hover:text-ew-orange transition-colors'>Tour</a></li>
+					<li><a href={`${linkPrefix}photos`} class='hover:text-ew-orange transition-colors'>Photos</a></li>
+					<li><a href={`${linkPrefix}about`} class='hover:text-ew-orange transition-colors'>Bio</a></li>
+					<li><a href={`${linkPrefix}contact`} class='hover:text-ew-orange transition-colors'>Contact</a></li>
+				</ul>
+			)}
 		</div>
 	</div>
 </nav>
