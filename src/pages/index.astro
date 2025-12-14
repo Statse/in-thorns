@@ -7,6 +7,7 @@ import Tour from '@/components/tour/tour.astro'
 import Photos from '@/components/photos/photos.astro'
 import About from '@/components/about/about.astro'
 import Contact from '@/components/contact/contact.astro'
+import BarcodeDivider from '@/components/barcode-divider.astro'
 ---
 
 <Layout title="In Thorns - Let's Sail into the Unknown">
@@ -18,24 +19,19 @@ import Contact from '@/components/contact/contact.astro'
 		<main id='main-content'>
 			<Hero />
 
-		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent' aria-hidden='true'></div>
-		<div class='h-px bg-ew-green' aria-hidden='true'></div>
+		<BarcodeDivider variant='double' color='orange' />
 
 		<Music />
 
-		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent' aria-hidden='true'></div>
+		<BarcodeDivider color='green' />
 
 		<Tour />
 
-		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-orange to-transparent' aria-hidden='true'></div>
+		<BarcodeDivider color='orange' />
 
 		<Photos />
 
-		<!-- Barcode Divider -->
-		<div class='h-1 bg-gradient-to-r from-transparent via-ew-green to-transparent' aria-hidden='true'></div>
+		<BarcodeDivider color='green' />
 
 		<About />
 		</main>
