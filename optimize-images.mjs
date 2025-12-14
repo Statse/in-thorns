@@ -9,11 +9,20 @@ const __dirname = dirname(__filename);
 
 // Check command line arguments for which folder to optimize
 const args = process.argv.slice(2);
-const isPhotos = args.includes('--photos');
+const folderArg = args.find(arg => arg.startsWith('--folder='));
+const folder = folderArg ? folderArg.split('=')[1] : null;
 
-const sourceDir = isPhotos
-	? join(__dirname, 'public', 'photos', 'exit_wounds')
-	: join(__dirname, 'public', 'music');
+let sourceDir;
+if (folder) {
+	// Custom folder path (e.g., --folder=photos/tlbocos)
+	sourceDir = join(__dirname, 'public', folder);
+} else if (args.includes('--photos')) {
+	// Legacy photos flag
+	sourceDir = join(__dirname, 'public', 'photos', 'exit_wounds');
+} else {
+	// Default to music
+	sourceDir = join(__dirname, 'public', 'music');
+}
 const outputDir = sourceDir; // Output to same directory
 
 // Special handling for specific images
@@ -118,10 +127,11 @@ async function main() {
 	console.log(`\nFound ${imageFiles.length} images to optimize`);
 
 	const results = [];
+	const isPhotosFolder = sourceDir.includes('photos');
 	for (const file of imageFiles) {
 		const inputPath = join(sourceDir, file);
 		const outputPath = join(outputDir, file);
-		const config = imageConfig[file] || (isPhotos ? imageConfig.photos : imageConfig.default);
+		const config = imageConfig[file] || (isPhotosFolder ? imageConfig.photos : imageConfig.default);
 
 		const result = await optimizeImage(inputPath, outputPath, config);
 		if (result) {

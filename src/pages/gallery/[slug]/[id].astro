@@ -1,0 +1,164 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Navigation from '@/components/navigation/navigation.astro'
+import { readdirSync } from 'fs'
+import { join } from 'path'
+import { Image } from 'astro:assets'
+
+export const prerender = true
+
+const { slug, id } = Astro.params
+
+// Gallery configurations
+const galleries = {
+	'exit-wounds': {
+		title: 'exit wounds',
+		folder: 'exit_wounds',
+		colorClass: 'ew-orange'
+	},
+	'tlboacos': {
+		title: 'the last bead on a cord of songs',
+		folder: 'tlbocos',
+		colorClass: 'ew-red'
+	},
+	'live': {
+		title: 'live',
+		folder: 'live/poppari_2025',
+		colorClass: 'ew-green'
+	}
+}
+
+const gallery = galleries[slug as keyof typeof galleries]
+
+if (!gallery) {
+	return Astro.redirect('/gallery')
+}
+
+// Read images from directory
+const photosDir = join(process.cwd(), 'public', 'photos', gallery.folder)
+const imageFiles = readdirSync(photosDir)
+	.filter((file) => file.endsWith('.webp'))
+	.sort((a, b) => {
+		const numA = parseInt(a.match(/\d+/)?.[0] || '0')
+		const numB = parseInt(b.match(/\d+/)?.[0] || '0')
+		return numA - numB
+	})
+
+const photos: Record<string, { src: string; alt: string }> = {}
+imageFiles.forEach((file, index) => {
+	photos[String(index + 1)] = {
+		src: `/photos/${gallery.folder}/${file}`,
+		alt: `In Thorns - ${gallery.title}`
+	}
+})
+
+const photo = photos[id as keyof typeof photos]
+
+if (!photo) {
+	return Astro.redirect(`/gallery/${slug}`)
+}
+
+const currentIndex = parseInt(id!)
+const totalPhotos = Object.keys(photos).length
+const prevId = currentIndex > 1 ? String(currentIndex - 1) : null
+const nextId = currentIndex < totalPhotos ? String(currentIndex + 1) : null
+
+export async function getStaticPaths() {
+	const paths: { params: { slug: string; id: string } }[] = []
+
+	const galleryConfigs = {
+		'exit-wounds': 'exit_wounds',
+		'tlboacos': 'tlbocos',
+		'live': 'live/poppari_2025'
+	}
+
+	for (const [slug, folder] of Object.entries(galleryConfigs)) {
+		const photosDir = join(process.cwd(), 'public', 'photos', folder)
+		const imageFiles = readdirSync(photosDir)
+			.filter((file) => file.endsWith('.webp'))
+
+		imageFiles.forEach((_, index) => {
+			paths.push({
+				params: {
+					slug,
+					id: String(index + 1)
+				}
+			})
+		})
+	}
+
+	return paths
+}
+---
+
+<Layout title={`Photo ${id} - ${gallery.title} - In Thorns`}>
+	<Navigation />
+
+	<main class='min-h-screen bg-black pt-24 pb-20'>
+		<div class='container mx-auto max-w-7xl px-4'>
+			{/* Breadcrumb */}
+			<nav class='mb-8'>
+				<ol class='flex items-center gap-2 text-sm'>
+					<li><a href='/gallery' class='text-ew-cream/70 hover:text-ew-orange transition-colors'>Gallery</a></li>
+					<li class='text-ew-cream/50'>/</li>
+					<li><a href={`/gallery/${slug}`} class='text-ew-cream/70 hover:text-ew-orange transition-colors'>{gallery.title}</a></li>
+					<li class='text-ew-cream/50'>/</li>
+					<li class={`text-${gallery.colorClass}`}>Photo {id}</li>
+				</ol>
+			</nav>
+
+			<div class='flex flex-col items-center'>
+				<div class='w-full max-w-5xl mb-8'>
+					<Image
+						src={photo.src}
+						alt={photo.alt}
+						width={1200}
+						height={1200}
+						class='w-full h-auto'
+						transition:name={`photo-${slug}-${id}`}
+					/>
+				</div>
+
+				{/* Navigation */}
+				<div class='flex items-center gap-4 mb-8'>
+					{prevId ? (
+						<a
+							href={`/gallery/${slug}/${prevId}`}
+							class={`px-6 py-3 bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass}/50 hover:border-${gallery.colorClass} text-white transition-colors`}
+						>
+							← Previous
+						</a>
+					) : (
+						<div class='px-6 py-3 bg-gray-800/20 border-2 border-gray-800/50 text-gray-600'>
+							← Previous
+						</div>
+					)}
+
+					<span class='text-ew-cream/70'>
+						{id} / {totalPhotos}
+					</span>
+
+					{nextId ? (
+						<a
+							href={`/gallery/${slug}/${nextId}`}
+							class={`px-6 py-3 bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass}/50 hover:border-${gallery.colorClass} text-white transition-colors`}
+						>
+							Next →
+						</a>
+					) : (
+						<div class='px-6 py-3 bg-gray-800/20 border-2 border-gray-800/50 text-gray-600'>
+							Next →
+						</div>
+					)}
+				</div>
+
+				<a
+					href={`/gallery/${slug}`}
+					class={`text-${gallery.colorClass} hover:underline`}
+				>
+					← Back to {gallery.title} gallery
+				</a>
+			</div>
+		</div>
+	</main>
+</Layout>

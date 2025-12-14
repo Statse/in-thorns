@@ -1,0 +1,81 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Navigation from '@/components/navigation/navigation.astro'
+import { Image } from 'astro:assets'
+
+// Get preview images for each gallery category
+const galleries = [
+	{
+		slug: 'exit-wounds',
+		title: 'exit wounds',
+		description: 'Promo photos from the exit wounds single era',
+		previewImage: '/photos/exit_wounds/exit_wounds_1.webp',
+		colorClass: 'ew-orange',
+		count: 12
+	},
+	{
+		slug: 'tlboacos',
+		title: 'the last bead on a cord of songs',
+		description: 'Album promo and behind the scenes',
+		previewImage: '/photos/tlbocos/2A2FE513-7654-45A3-9120-25FAD6AFF06C.webp',
+		colorClass: 'ew-red',
+		count: 7
+	},
+	{
+		slug: 'live',
+		title: 'live',
+		description: 'Live performance photos',
+		previewImage: '/photos/live/poppari_2025/_X2A5650.webp',
+		colorClass: 'ew-green',
+		count: 15
+	}
+]
+---
+
+<Layout title='Gallery - In Thorns'>
+	<Navigation />
+
+	<main class='min-h-screen bg-black pt-24 pb-20 px-4'>
+		<div class='container mx-auto max-w-6xl'>
+			<h1 class='text-4xl md:text-6xl font-bold text-ew-orange mb-4 text-center'>
+				<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Gallery</span>
+			</h1>
+			<p class='text-ew-cream/70 text-center mb-16 max-w-2xl mx-auto'>
+				Browse through our collection of promo photos, album artwork, and live performances
+			</p>
+
+			<div class='grid md:grid-cols-3 gap-8'>
+				{galleries.map((gallery) => (
+					<a
+						href={`/gallery/${gallery.slug}`}
+						class={`group relative overflow-hidden bg-gradient-to-br from-${gallery.colorClass}/10 to-black border-2 border-${gallery.colorClass}/30 hover:border-${gallery.colorClass} transition-all duration-300`}
+					>
+						<div class='aspect-square relative overflow-hidden'>
+							<Image
+								src={gallery.previewImage}
+								alt={gallery.title}
+								width={600}
+								height={600}
+								class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
+							/>
+							<div class={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent`} />
+
+							{/* Hover overlay */}
+							<div class={`absolute inset-0 bg-${gallery.colorClass}/0 group-hover:bg-${gallery.colorClass}/20 transition-colors`} />
+						</div>
+
+						<div class='p-6'>
+							<h2 class={`text-2xl font-bold text-white mb-2 group-hover:text-${gallery.colorClass} transition-colors`}>
+								{gallery.title}
+							</h2>
+							<p class='text-ew-cream/70 text-sm mb-3'>{gallery.description}</p>
+							<p class={`text-${gallery.colorClass} text-sm uppercase tracking-wider`}>
+								{gallery.count} photos →
+							</p>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</main>
+</Layout>
