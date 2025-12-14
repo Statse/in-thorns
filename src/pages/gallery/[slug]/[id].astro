@@ -1,9 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Navigation from '@/components/navigation/navigation.astro'
 import { readdirSync } from 'fs'
 import { join } from 'path'
-import { Image } from 'astro:assets'
 
 export const prerender = true
 
@@ -58,10 +56,11 @@ if (!photo) {
 	return Astro.redirect(`/gallery/${slug}`)
 }
 
-const currentIndex = parseInt(id!)
+// Calculate prev/next with looping
+const currentId = parseInt(id as string)
 const totalPhotos = Object.keys(photos).length
-const prevId = currentIndex > 1 ? String(currentIndex - 1) : null
-const nextId = currentIndex < totalPhotos ? String(currentIndex + 1) : null
+const prevId = currentId === 1 ? totalPhotos : currentId - 1
+const nextId = currentId === totalPhotos ? 1 : currentId + 1
 
 export async function getStaticPaths() {
 	const paths: { params: { slug: string; id: string } }[] = []
@@ -91,74 +90,54 @@ export async function getStaticPaths() {
 }
 ---
 
-<Layout title={`Photo ${id} - ${gallery.title} - In Thorns`}>
-	<Navigation />
+<Layout title='In Thorns - Photos'>
+	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative'>
+		<!-- Close Button -->
+		<a
+			href={`/gallery/${slug}`}
+			class={`fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass} hover:bg-${gallery.colorClass} hover:border-${gallery.colorClass}-light transition-all group cursor-pointer`}
+			aria-label='Close and return to gallery'
+		>
+			<svg class={`w-6 h-6 text-${gallery.colorClass} group-hover:text-black transition-colors`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path>
+			</svg>
+		</a>
 
-	<main class='min-h-screen bg-black pt-24 pb-20'>
-		<div class='container mx-auto max-w-7xl px-4'>
-			{/* Breadcrumb */}
-			<nav class='mb-8'>
-				<ol class='flex items-center gap-2 text-sm'>
-					<li><a href='/#photos' class='text-ew-cream/70 hover:text-ew-orange transition-colors'>Home</a></li>
-					<li class='text-ew-cream/50'>/</li>
-					<li><a href={`/gallery/${slug}`} class='text-ew-cream/70 hover:text-ew-orange transition-colors'>{gallery.title}</a></li>
-					<li class='text-ew-cream/50'>/</li>
-					<li class={`text-${gallery.colorClass}`}>Photo {id}</li>
-				</ol>
-			</nav>
+		<!-- Previous Photo Button -->
+		<a
+			href={`/gallery/${slug}/${prevId}`}
+			class={`fixed left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass} hover:bg-${gallery.colorClass} hover:border-${gallery.colorClass}-light transition-all group cursor-pointer`}
+			aria-label='Previous photo'
+		>
+			<svg class={`w-6 h-6 text-${gallery.colorClass} group-hover:text-black transition-colors`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'></path>
+			</svg>
+		</a>
 
-			<div class='flex flex-col items-center'>
-				<div class='w-full max-w-5xl mb-8'>
-					<Image
-						src={photo.src}
-						alt={photo.alt}
-						width={1200}
-						height={1200}
-						class='w-full h-auto'
-						transition:name={`photo-${slug}-${id}`}
-					/>
-				</div>
+		<!-- Next Photo Button -->
+		<a
+			href={`/gallery/${slug}/${nextId}`}
+			class={`fixed right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass} hover:bg-${gallery.colorClass} hover:border-${gallery.colorClass}-light transition-all group cursor-pointer`}
+			aria-label='Next photo'
+		>
+			<svg class={`w-6 h-6 text-${gallery.colorClass} group-hover:text-black transition-colors`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+			</svg>
+		</a>
 
-				{/* Navigation */}
-				<div class='flex items-center gap-4 mb-8'>
-					{prevId ? (
-						<a
-							href={`/gallery/${slug}/${prevId}`}
-							class={`px-6 py-3 bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass}/50 hover:border-${gallery.colorClass} text-white transition-colors`}
-						>
-							← Previous
-						</a>
-					) : (
-						<div class='px-6 py-3 bg-gray-800/20 border-2 border-gray-800/50 text-gray-600'>
-							← Previous
-						</div>
-					)}
+		<!-- Image Container -->
+		<div class='w-full h-full max-w-7xl max-h-screen flex items-center justify-center'>
+			<img
+				src={photo.src}
+				alt={photo.alt}
+				class='max-w-full max-h-[90vh] object-contain'
+				transition:name={`photo-${slug}-${id}`}
+			/>
+		</div>
 
-					<span class='text-ew-cream/70'>
-						{id} / {totalPhotos}
-					</span>
-
-					{nextId ? (
-						<a
-							href={`/gallery/${slug}/${nextId}`}
-							class={`px-6 py-3 bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass}/50 hover:border-${gallery.colorClass} text-white transition-colors`}
-						>
-							Next →
-						</a>
-					) : (
-						<div class='px-6 py-3 bg-gray-800/20 border-2 border-gray-800/50 text-gray-600'>
-							Next →
-						</div>
-					)}
-				</div>
-
-				<a
-					href={`/gallery/${slug}`}
-					class={`text-${gallery.colorClass} hover:underline`}
-				>
-					← Back to {gallery.title} gallery
-				</a>
-			</div>
+		<!-- Image info overlay -->
+		<div class={`fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm border-2 border-${gallery.colorClass}/30 px-6 py-3 z-50`}>
+			<p class='text-ew-cream text-sm'>{photo.alt}</p>
 		</div>
 	</main>
 </Layout>
