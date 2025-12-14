@@ -1,5 +1,6 @@
 ---
 // Navigation component
+import { Image } from 'astro:assets'
 ---
 
 <nav id='main-nav' aria-label='Main navigation' class='fixed top-0 left-0 right-0 z-50 transition-all duration-500'>
@@ -7,7 +8,7 @@
 		<div class='flex items-center justify-between h-16'>
 			<!-- Logo -->
 			<a href='#hero' aria-label='Go to top of page' class='transition-transform hover:scale-105'>
-				<img id='nav-logo' src='/it-logo-white.png' alt='In Thorns logo' class='h-12 opacity-0 transition-opacity duration-500' />
+				<Image id='nav-logo' src='/it-logo-white.png' alt='In Thorns logo' width={192} height={48} class='h-12 opacity-0 transition-opacity duration-500' />
 			</a>
 
 			<!-- Nav Links -->

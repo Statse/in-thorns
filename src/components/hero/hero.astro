@@ -1,14 +1,19 @@
 ---
 // Hero section component
+import { Image } from 'astro:assets'
 ---
 
 <section id='hero' class='relative min-h-screen flex items-center justify-center overflow-hidden pt-16'>
 	<!-- Background -->
 	<div class='absolute inset-0' aria-hidden='true'>
-		<img
+		<Image
 			src='/hero/background.webp'
 			alt=''
+			width={1920}
+			height={1080}
 			class='w-full h-full object-cover'
+			loading='eager'
+			decoding='async'
 		/>
 		<div class='absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black'></div>
 		<!-- Film grain overlay -->
@@ -17,7 +22,7 @@
 
 	<!-- Content -->
 	<div class='relative z-10 text-center px-4 max-w-4xl'>
-		<img id='hero-logo' src='/it-logo-white.png' alt='In Thorns' class='w-full max-w-2xl mx-auto mb-8 transition-all duration-500' />
+		<Image id='hero-logo' src='/it-logo-white.png' alt='In Thorns' width={800} height={200} class='w-full max-w-2xl mx-auto mb-8 transition-all duration-500' loading='eager' />
 		<h1 class='text-3xl md:text-5xl lg:text-6xl mb-6 tracking-wider text-ew-cream'>
 			Let's Sail into the Unknown
 		</h1>

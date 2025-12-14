@@ -1,21 +1,22 @@
 ---
 // Social media links component
+import { Image } from 'astro:assets'
 ---
 
 <div class='text-center'>
 	<h3 class='text-ew-orange text-lg mb-4'>Follow Us</h3>
 	<div class='flex gap-4 justify-center'>
 		<a href='https://www.instagram.com/inxthorns/' target='_blank' rel='noopener noreferrer' aria-label='Follow In Thorns on Instagram' class='hover:opacity-70 transition-opacity'>
-			<img src='/ig.png' alt='Instagram' class='w-8 h-8' />
+			<Image src='/ig.png' alt='Instagram' width={32} height={32} class='w-8 h-8' />
 		</a>
 		<a href='https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d?si=W41OIFdzQ5io5Lr0VZanwQ' target='_blank' rel='noopener noreferrer' aria-label='Listen to In Thorns on Spotify' class='hover:opacity-70 transition-opacity'>
-			<img src='/spotify.png' alt='Spotify' class='w-8 h-8' />
+			<Image src='/spotify.png' alt='Spotify' width={32} height={32} class='w-8 h-8' />
 		</a>
 		<a href='https://www.youtube.com/@inthornsband' target='_blank' rel='noopener noreferrer' aria-label='Watch In Thorns on YouTube' class='hover:opacity-70 transition-opacity'>
-			<img src='/yt.png' alt='YouTube' class='w-8 h-8' />
+			<Image src='/yt.png' alt='YouTube' width={32} height={32} class='w-8 h-8' />
 		</a>
 		<a href='https://www.facebook.com/inthorns' target='_blank' rel='noopener noreferrer' aria-label='Follow In Thorns on Facebook' class='hover:opacity-70 transition-opacity'>
-			<img src='/fb.png' alt='Facebook' class='w-8 h-8' />
+			<Image src='/fb.png' alt='Facebook' width={32} height={32} class='w-8 h-8' />
 		</a>
 	</div>
 </div>

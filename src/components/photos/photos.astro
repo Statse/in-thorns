@@ -1,6 +1,7 @@
 ---
 import { readdirSync } from 'fs'
 import { join } from 'path'
+import { Image } from 'astro:assets'
 
 // Read images from public/photos/exit_wounds directory
 const photosDir = join(process.cwd(), 'public', 'photos', 'exit_wounds')
@@ -62,9 +63,11 @@ const photos = imageFiles.map((file, index) => ({
 							}
 						]}
 					>
-						<img
+						<Image
 							src={photo.src}
 							alt={photo.alt}
+							width={800}
+							height={800}
 							class='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
 							transition:name={`photo-${photo.id}`}
 						/>

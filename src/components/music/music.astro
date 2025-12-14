@@ -1,5 +1,6 @@
 ---
 // Music section component
+import { Image } from 'astro:assets'
 ---
 
 <section id='music' class='min-h-screen bg-black py-20 px-4 md:px-6'>
@@ -12,9 +13,11 @@
 			<!-- Exit Wounds Single -->
 			<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-4 md:p-8 border-2 border-ew-orange/30 hover:border-ew-orange transition-all'>
 				<div class='aspect-square mb-6 relative overflow-hidden'>
-					<img
+					<Image
 						src='/music/exit-wounds-cover.webp'
 						alt='Exit Wounds'
+						width={600}
+						height={600}
 						class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
 					/>
 					<div class='absolute inset-0 bg-gradient-to-t from-black/80 to-transparent'></div>
@@ -30,9 +33,11 @@
 			<!-- Album -->
 			<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-4 md:p-8 border-2 border-ew-red/30 hover:border-ew-red transition-all'>
 				<div class='aspect-square mb-6 relative overflow-hidden'>
-					<img
+					<Image
 						src='/music/tlboacos-album.webp'
 						alt='the last bead on a cord of songs'
+						width={600}
+						height={600}
 						class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
 					/>
 				</div>

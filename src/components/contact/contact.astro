@@ -1,5 +1,6 @@
 ---
 import SocialLinks from './components/social-links.astro'
+import { Image } from 'astro:assets'
 ---
 
 <footer id='contact' class='bg-black border-t-2 border-ew-orange/30 py-12 px-4'>
@@ -7,7 +8,7 @@ import SocialLinks from './components/social-links.astro'
 		<div class='grid md:grid-cols-3 gap-8 mb-8'>
 			<!-- Logo -->
 			<div class='flex items-center justify-center md:justify-start'>
-				<img src='/it-logo-white.png' alt='In Thorns' class='h-16' />
+				<Image src='/it-logo-white.png' alt='In Thorns' width={256} height={64} class='h-16' />
 			</div>
 
 			<!-- Social Links -->
