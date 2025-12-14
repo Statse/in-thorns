@@ -12,7 +12,10 @@
       "Bash(git diff:*)",
       "Bash(ls:*)",
       "Bash(npm i:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm outdated:*)",
+      "Bash(npx npm-check-updates -u)",
+      "Bash(npm info:*)"
     ],
     "deny": [],
     "ask": []
