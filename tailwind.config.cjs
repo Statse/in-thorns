@@ -1,6 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	safelist: [
+		// Gallery color classes for dynamic usage
+		'text-ew-orange',
+		'text-ew-red',
+		'text-ew-green-light',
+		'border-ew-orange',
+		'border-ew-red',
+		'border-ew-green-light',
+		'bg-ew-orange',
+		'bg-ew-red',
+		'bg-ew-green-light',
+		'bg-ew-orange/20',
+		'bg-ew-red/20',
+		'bg-ew-green-light/20',
+		'border-ew-orange-light',
+		'border-ew-red-light',
+		'hover:bg-ew-orange',
+		'hover:bg-ew-red',
+		'hover:bg-ew-green-light',
+	],
 	theme: {
 		extend: {
 			colors: {
