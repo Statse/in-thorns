@@ -15,7 +15,7 @@
   "dependencies": {
     "@astrojs/preact": "^4.1.3",
     "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/vercel": "^9.0.2",
+    "@astrojs/vercel": "^8.0.4",
     "@fontsource/koulen": "^5.2.7",
     "@fontsource/roboto": "^5.2.9",
     "@vercel/analytics": "^1.6.1",
