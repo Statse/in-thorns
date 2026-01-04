@@ -12,17 +12,20 @@ const galleries = {
 	'exit-wounds': {
 		title: 'exit wounds',
 		folder: 'exit_wounds',
-		colorClass: 'ew-orange'
+		colorClass: 'ew-orange',
+		photographer: 'Aslak Junttu'
 	},
 	'tlboacos': {
 		title: 'the last bead on a cord of songs',
 		folder: 'tlbocos',
-		colorClass: 'ew-red'
+		colorClass: 'ew-red',
+		photographer: 'Aslak Junttu'
 	},
 	'live': {
 		title: 'live',
 		folder: 'live/poppari_2025',
-		colorClass: 'ew-green-light'
+		colorClass: 'ew-green-light',
+		photographer: 'Heikki Sulander'
 	}
 }
 
@@ -137,7 +140,10 @@ export async function getStaticPaths() {
 
 		<!-- Image info overlay -->
 		<div class={`fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm border-2 border-${gallery.colorClass}/30 px-6 py-3 z-50`}>
-			<p class='text-ew-cream text-sm'>{photo.alt}</p>
+			<p class='text-ew-cream text-sm'>
+				{photo.alt}
+				{gallery.photographer && <span class='text-ew-cream/60'> • Photo by {gallery.photographer}</span>}
+			</p>
 		</div>
 	</main>
 </Layout>
