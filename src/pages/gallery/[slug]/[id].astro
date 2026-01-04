@@ -1,0 +1,149 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { readdirSync } from 'fs'
+import { join } from 'path'
+
+export const prerender = true
+
+const { slug, id } = Astro.params
+
+// Gallery configurations
+const galleries = {
+	'exit-wounds': {
+		title: 'exit wounds',
+		folder: 'exit_wounds',
+		colorClass: 'ew-orange',
+		photographer: 'Aslak Junttu'
+	},
+	'tlboacos': {
+		title: 'the last bead on a cord of songs',
+		folder: 'tlbocos',
+		colorClass: 'ew-red',
+		photographer: 'Aslak Junttu'
+	},
+	'live': {
+		title: 'live',
+		folder: 'live/poppari_2025',
+		colorClass: 'ew-green-light',
+		photographer: 'Heikki Sulander'
+	}
+}
+
+const gallery = galleries[slug as keyof typeof galleries]
+
+if (!gallery) {
+	return Astro.redirect('/gallery')
+}
+
+// Read images from directory
+const photosDir = join(process.cwd(), 'public', 'photos', gallery.folder)
+const imageFiles = readdirSync(photosDir)
+	.filter((file) => file.endsWith('.webp'))
+	.sort((a, b) => {
+		const numA = parseInt(a.match(/\d+/)?.[0] || '0')
+		const numB = parseInt(b.match(/\d+/)?.[0] || '0')
+		return numA - numB
+	})
+
+const photos: Record<string, { src: string; alt: string }> = {}
+imageFiles.forEach((file, index) => {
+	photos[String(index + 1)] = {
+		src: `/photos/${gallery.folder}/${file}`,
+		alt: `In Thorns - ${gallery.title}`
+	}
+})
+
+const photo = photos[id as keyof typeof photos]
+
+if (!photo) {
+	return Astro.redirect(`/gallery/${slug}`)
+}
+
+// Calculate prev/next with looping
+const currentId = parseInt(id as string)
+const totalPhotos = Object.keys(photos).length
+const prevId = currentId === 1 ? totalPhotos : currentId - 1
+const nextId = currentId === totalPhotos ? 1 : currentId + 1
+
+export async function getStaticPaths() {
+	const paths: { params: { slug: string; id: string } }[] = []
+
+	const galleryConfigs = {
+		'exit-wounds': 'exit_wounds',
+		'tlboacos': 'tlbocos',
+		'live': 'live/poppari_2025'
+	}
+
+	for (const [slug, folder] of Object.entries(galleryConfigs)) {
+		const photosDir = join(process.cwd(), 'public', 'photos', folder)
+		const imageFiles = readdirSync(photosDir)
+			.filter((file) => file.endsWith('.webp'))
+
+		imageFiles.forEach((_, index) => {
+			paths.push({
+				params: {
+					slug,
+					id: String(index + 1)
+				}
+			})
+		})
+	}
+
+	return paths
+}
+---
+
+<Layout title='In Thorns - Photos'>
+	<main class='min-h-screen w-full bg-black flex items-center justify-center p-4 relative'>
+		<!-- Close Button -->
+		<a
+			href={`/gallery/${slug}`}
+			class={`fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass} hover:bg-${gallery.colorClass} hover:border-${gallery.colorClass}-light transition-all group cursor-pointer`}
+			aria-label='Close and return to gallery'
+		>
+			<svg class={`w-6 h-6 text-${gallery.colorClass} group-hover:text-black transition-colors`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path>
+			</svg>
+		</a>
+
+		<!-- Previous Photo Button -->
+		<a
+			href={`/gallery/${slug}/${prevId}`}
+			class={`fixed left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass} hover:bg-${gallery.colorClass} hover:border-${gallery.colorClass}-light transition-all group cursor-pointer`}
+			aria-label='Previous photo'
+		>
+			<svg class={`w-6 h-6 text-${gallery.colorClass} group-hover:text-black transition-colors`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'></path>
+			</svg>
+		</a>
+
+		<!-- Next Photo Button -->
+		<a
+			href={`/gallery/${slug}/${nextId}`}
+			class={`fixed right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 flex items-center justify-center bg-${gallery.colorClass}/20 border-2 border-${gallery.colorClass} hover:bg-${gallery.colorClass} hover:border-${gallery.colorClass}-light transition-all group cursor-pointer`}
+			aria-label='Next photo'
+		>
+			<svg class={`w-6 h-6 text-${gallery.colorClass} group-hover:text-black transition-colors`} fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+				<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+			</svg>
+		</a>
+
+		<!-- Image Container -->
+		<div class='w-full h-full max-w-7xl max-h-screen flex items-center justify-center'>
+			<img
+				src={photo.src}
+				alt={photo.alt}
+				class='max-w-full max-h-[90vh] object-contain'
+				transition:name={`photo-${slug}-${id}`}
+			/>
+		</div>
+
+		<!-- Image info overlay -->
+		<div class={`fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm border-2 border-${gallery.colorClass}/30 px-6 py-3 z-50`}>
+			<p class='text-ew-cream text-sm'>
+				{photo.alt}
+				{gallery.photographer && <span class='text-ew-cream/60'> • Photo by {gallery.photographer}</span>}
+			</p>
+		</div>
+	</main>
+</Layout>

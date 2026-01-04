@@ -1,0 +1,51 @@
+---
+import SocialLinks from "./components/social-links.astro";
+import { Image } from "astro:assets";
+---
+
+<footer id="contact" class="bg-black border-t-2 border-ew-orange/30 py-12 px-4">
+	<div class="container mx-auto max-w-6xl">
+		<div class="grid md:grid-cols-3 gap-8 mb-8">
+			<!-- Logo -->
+			<div class="flex items-center justify-center md:justify-start">
+				<Image
+					src="/it-logo-white.png"
+					alt="In Thorns"
+					width={256}
+					height={64}
+					class="h-16"
+				/>
+			</div>
+
+			<!-- Social Links -->
+			<SocialLinks />
+
+			<!-- Contact -->
+			<div class="text-center md:text-right">
+				<h3 class="text-ew-orange text-lg mb-4">Contact and booking</h3>
+				<p class="text-ew-cream">
+					<a
+						href="mailto:inthornsband@gmail.com"
+						class="hover:text-ew-orange transition-colors"
+					>
+						inthornsband@gmail.com
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<div
+			class="border-t border-ew-orange/20 pt-8 text-center text-ew-cream/50 text-sm"
+		>
+			<p class="mb-2">&copy; 2025 In Thorns. All rights reserved.</p>
+			<p>
+				<a
+					href="/privacy"
+					class="hover:text-ew-orange transition-colors underline"
+				>
+					Privacy Policy
+				</a>
+			</p>
+		</div>
+	</div>
+</footer>

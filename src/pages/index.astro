@@ -1,21 +1,175 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import Menu from '@/components/menu.astro'
-import Events from '@/components/events.astro'
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/navigation/navigation.astro";
+import Hero from "@/components/hero/hero.astro";
+import Music from "@/components/music/music.astro";
+import Tour from "@/components/tour/tour.astro";
+import Photos from "@/components/photos/photos.astro";
+import About from "@/components/about/about.astro";
+import Contact from "@/components/contact/contact.astro";
+import BarcodeDivider from "@/components/barcode-divider.astro";
 ---
 
-<Layout title='Sail into the unknown.'>
-  <main
-    class='m-4 border-white text-white border-2 flex flex-grow flex-col w-auto h-auto bg-no-repeat bg-center bg-cover bg-opacity-50 relative'
-    style='background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(candles.jpg);'
-  >
-    <Menu />
-    <section
-      class='flex flex-col gap-4 px-4 w-full h-auto flex-grow justify-center items-center'
-    >
-      <div class='w-full max-w-4xl'>
-        <Events limit={5} />
-      </div>
-    </section>
-  </main>
+<Layout title="In Thorns - The pain won't cease">
+	<header>
+		<Navigation />
+	</header>
+	<main id="main-content">
+		<Hero />
+		<BarcodeDivider variant="double" color="orange" />
+		<Music />
+		<BarcodeDivider color="green" />
+		<Tour />
+		<BarcodeDivider color="orange" />
+		<Photos />
+		<BarcodeDivider color="green" />
+		<About />
+	</main>
+	<footer>
+		<Contact />
+	</footer>
 </Layout>
+
+<style>
+	html {
+		overflow-x: hidden;
+	}
+
+	body {
+		overflow-x: hidden;
+	}
+
+	/* Film grain effect */
+	@keyframes grain {
+		0%,
+		100% {
+			transform: translate(0, 0);
+		}
+		10% {
+			transform: translate(-5%, -10%);
+		}
+		30% {
+			transform: translate(3%, -15%);
+		}
+		50% {
+			transform: translate(12%, 9%);
+		}
+		70% {
+			transform: translate(9%, -1%);
+		}
+		90% {
+			transform: translate(-1%, 7%);
+		}
+	}
+</style>
+
+<script>
+	// Handle hash navigation after page fully loads (after images and layout stabilize)
+	if (window.location.hash) {
+		window.addEventListener("load", () => {
+			const target = document.querySelector(window.location.hash);
+			if (target) {
+				target.scrollIntoView({ behavior: "instant", block: "start" });
+			}
+		});
+	}
+
+	// Store scroll position when clicking a photo
+	document.addEventListener("astro:page-load", () => {
+		// Re-attach listeners after view transition
+		attachHashScrollListeners();
+		setupScrollEffects();
+	});
+
+	function attachHashScrollListeners() {
+		// Smooth scroll behavior ONLY for navigation links
+		document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
+			anchor.addEventListener("click", (e) => {
+				e.preventDefault();
+				const href = (anchor as HTMLAnchorElement).getAttribute("href");
+				if (href) {
+					const target = document.querySelector(href);
+					if (target) {
+						target.scrollIntoView({
+							behavior: "smooth",
+							block: "start",
+						});
+					}
+				}
+			});
+		});
+	}
+
+	// Initial attachment
+	attachHashScrollListeners();
+	setupScrollEffects();
+
+	function setupScrollEffects() {
+		// Add black background to nav after scrolling past hero
+		const mainNav = document.getElementById("main-nav") as HTMLElement;
+		const heroSection = document.getElementById("hero") as HTMLElement;
+		const heroLogo = document.getElementById("hero-logo") as HTMLElement;
+		const navLogo = document.getElementById("nav-logo") as HTMLElement;
+
+		// Add active state to nav links on scroll + handle nav background
+		const sections = document.querySelectorAll(
+			"section[id]",
+		) as NodeListOf<HTMLElement>;
+		const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+		window.addEventListener("scroll", () => {
+			const scrollPosition = window.pageYOffset;
+			const heroHeight = heroSection.offsetHeight;
+
+			// Logo animation threshold (halfway through hero section)
+			const logoThreshold = heroHeight * 0.5;
+
+			// Animate logo transition
+			if (scrollPosition > logoThreshold) {
+				// Fade out hero logo, fade in nav logo
+				heroLogo.style.opacity = "0";
+				heroLogo.style.transform = "scale(0.3) translateY(-300px)";
+				navLogo.style.opacity = "1";
+			} else {
+				// Reset to original state
+				heroLogo.style.opacity = "1";
+				heroLogo.style.transform = "scale(1) translateY(0)";
+				navLogo.style.opacity = "0";
+			}
+
+			// Add black background after scrolling past hero
+			if (scrollPosition > heroHeight - 100) {
+				mainNav.classList.add(
+					"bg-black/90",
+					"backdrop-blur-sm",
+					"border-b",
+					"border-ew-orange/30",
+				);
+			} else {
+				mainNav.classList.remove(
+					"bg-black/90",
+					"backdrop-blur-sm",
+					"border-b",
+					"border-ew-orange/30",
+				);
+			}
+
+			// Update active nav link
+			let current = "";
+			sections.forEach((section) => {
+				const sectionTop = section.offsetTop;
+				const sectionHeight = section.clientHeight;
+				if (scrollPosition >= sectionTop - 200) {
+					current = section.getAttribute("id") as string;
+				}
+			});
+
+			navLinks.forEach((link) => {
+				link.classList.remove("text-ew-orange");
+				if (link.getAttribute("href") === `#${current}`) {
+					link.classList.add("text-ew-orange");
+				}
+			});
+		});
+	}
+</script>

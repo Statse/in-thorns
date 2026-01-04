@@ -1,0 +1,25 @@
+---
+interface Props {
+	color?: 'orange' | 'green' | 'red'
+	variant?: 'single' | 'double'
+}
+
+const { color = 'orange', variant = 'single' } = Astro.props
+
+const colorMap = {
+	orange: 'ew-orange',
+	green: 'ew-green',
+	red: 'ew-red'
+}
+
+const colorClass = colorMap[color]
+---
+
+{variant === 'double' ? (
+	<>
+		<div class={`h-1 bg-gradient-to-r from-transparent via-${colorClass} to-transparent`} aria-hidden='true'></div>
+		<div class='h-px bg-ew-green' aria-hidden='true'></div>
+	</>
+) : (
+	<div class={`h-1 bg-gradient-to-r from-transparent via-${colorClass} to-transparent`} aria-hidden='true'></div>
+)}

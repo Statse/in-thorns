@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx playwright install)",
+      "Bash(node review-site.mjs:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node review-sections.mjs:*)",
+      "Bash(node optimize-images.mjs:*)",
+      "Bash(npm run build:*)",
+      "Bash(git diff:*)",
+      "Bash(ls:*)",
+      "Bash(npm i:*)",
+      "Bash(git push:*)",
+      "Bash(npm outdated:*)",
+      "Bash(npx npm-check-updates -u)",
+      "Bash(npm info:*)",
+      "WebFetch(domain:open.spotify.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

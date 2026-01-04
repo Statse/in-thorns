@@ -1,0 +1,76 @@
+---
+// Music section component
+import { Image } from 'astro:assets'
+---
+
+<section id='music' class='min-h-screen bg-black py-20 px-4 md:px-6'>
+	<div class='container mx-auto max-w-6xl'>
+		<h2 class='text-4xl md:text-5xl font-bold text-ew-orange mb-16 text-center'>
+			<span class='inline-block' style='text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);'>Music</span>
+		</h2>
+
+		<div class='grid md:grid-cols-2 gap-6 md:gap-12 mb-16'>
+			<!-- Exit Wounds Single -->
+			<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-4 md:p-8 border-2 border-ew-orange/30 hover:border-ew-orange transition-all'>
+				<div class='aspect-square mb-6 relative overflow-hidden'>
+					<Image
+						src='/music/exit-wounds-cover.webp'
+						alt='exit wounds'
+						width={600}
+						height={600}
+						class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+					/>
+					<div class='absolute inset-0 bg-gradient-to-t from-black/80 to-transparent'></div>
+				</div>
+				<h3 class='text-2xl font-bold text-white mb-2'>exit wounds</h3>
+				<p class='text-ew-orange mb-4'>Single • Out 23.1.2026</p>
+				<p class='text-ew-cream/70 mb-6'>New single coming soon...</p>
+				<div class='space-y-3'>
+					<a
+						href='https://distrokid.com/hyperfollow/inthorns/exit-wounds'
+						target='_blank'
+						rel='noopener noreferrer'
+						class='inline-block bg-ew-green hover:bg-ew-green-light text-white px-6 py-3 transition-colors'
+					>
+						Pre-save Now
+					</a>
+				</div>
+			</div>
+
+			<!-- Album -->
+			<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-4 md:p-8 border-2 border-ew-red/30 hover:border-ew-red transition-all'>
+				<a href='/album/the-last-bead-on-a-cord-of-songs' class='block aspect-square mb-6 relative overflow-hidden group'>
+					<Image
+						src='/music/tlboacos-album.webp'
+						alt='the last bead on a cord of songs'
+						width={600}
+						height={600}
+						class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+					/>
+					<div class='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center'>
+						<span class='opacity-0 group-hover:opacity-100 transition-opacity text-white text-lg font-bold'>View Tracklist</span>
+					</div>
+				</a>
+				<h3 class='text-2xl font-bold text-white mb-2'>the last bead on a cord of songs</h3>
+				<p class='text-ew-red mb-4'>Album • 12.1.2024</p>
+				<p class='text-ew-cream/70 mb-6'>Debut album featuring crushing soundscapes, nihilistic themes, and massive melodies.</p>
+				<div class='flex flex-wrap gap-3'>
+					<a
+						href='/album/the-last-bead-on-a-cord-of-songs'
+						class='inline-block bg-ew-orange hover:bg-ew-orange-light text-white px-6 py-3 transition-colors'
+					>
+						View Tracklist
+					</a>
+					<a
+						href='https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy'
+						target='_blank'
+						rel='noopener noreferrer'
+						class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+					>
+						Listen on Spotify
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

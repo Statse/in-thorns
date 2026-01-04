@@ -1,0 +1,161 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Navigation from '@/components/navigation/navigation.astro'
+import Contact from '@/components/contact/contact.astro'
+import { Image } from 'astro:assets'
+import { getAlbumBySlug, getAllAlbums } from '@/data/albums'
+
+// Prerender this page at build time even though the site uses SSR
+export const prerender = true
+
+export async function getStaticPaths() {
+	const albums = getAllAlbums()
+	return albums.map(album => ({
+		params: { slug: album.slug },
+		props: { album }
+	}))
+}
+
+const { album } = Astro.props
+
+if (!album) {
+	return Astro.redirect('/404')
+}
+---
+
+<Layout title={`${album.title} - In Thorns`}>
+	<header>
+		<Navigation />
+	</header>
+	<main id='main-content' class='min-h-screen bg-black py-20 px-4'>
+		<div class='container mx-auto max-w-4xl pt-16'>
+			<!-- Breadcrumbs -->
+			<nav aria-label='Breadcrumb' class='mb-8'>
+				<ol class='flex items-center gap-2 text-sm text-ew-cream/70'>
+					<li>
+						<a href='/' class='hover:text-ew-orange transition-colors'>Home</a>
+					</li>
+					<li aria-hidden='true' class='text-ew-orange/50'>/</li>
+					<li>
+						<a href='/#music' class='hover:text-ew-orange transition-colors'>Music</a>
+					</li>
+					<li aria-hidden='true' class='text-ew-orange/50'>/</li>
+					<li aria-current='page' class='text-ew-orange font-medium'>
+						{album.title}
+					</li>
+				</ol>
+			</nav>
+
+			<!-- Album Cover -->
+			<div class='flex justify-center mb-8'>
+				<Image
+					src={album.coverImage}
+					alt={album.title}
+					width={400}
+					height={400}
+					class='w-64 h-64 md:w-80 md:h-80 object-cover border-2 border-ew-red/30'
+				/>
+			</div>
+
+			<h1 class='text-3xl md:text-4xl font-bold text-ew-red mb-4 text-center'>
+				{album.title}
+			</h1>
+			<p class='text-xl text-ew-cream/70 mb-12 text-center'>In Thorns • {album.year}</p>
+
+			<div class='bg-gradient-to-br from-ew-red/10 to-ew-orange/10 p-6 md:p-12 border-2 border-ew-red/30'>
+				<h2 class='text-2xl text-ew-orange mb-6'>Tracklist</h2>
+
+				<div class='space-y-3'>
+					{album.tracks.map(track => (
+						<div class='flex items-center gap-2'>
+							<a
+								href={track.spotifyUrl}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='flex items-center justify-between p-3 bg-black/30 hover:bg-ew-red/20 transition-colors border-l-2 border-ew-red/50 hover:border-ew-red group flex-grow'
+							>
+								<div class='flex items-center gap-4'>
+									<span class='text-ew-orange font-bold text-lg w-8'>{track.number}.</span>
+									<span class='text-ew-cream text-base md:text-lg group-hover:text-ew-orange transition-colors'>{track.title}</span>
+								</div>
+								<span class='text-ew-cream/50 text-sm'>{track.duration}</span>
+							</a>
+							{track.videoUrl && (
+								<a
+									href={track.videoUrl}
+									target='_blank'
+									rel='noopener noreferrer'
+									title='Watch Music Video on YouTube'
+									class='p-3 bg-ew-red/20 hover:bg-ew-red/40 transition-colors border-2 border-ew-red/50 hover:border-ew-red flex items-center justify-center group'
+								>
+									<svg class='w-6 h-6 text-ew-orange group-hover:text-white transition-colors' fill='currentColor' viewBox='0 0 24 24'>
+										<path d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/>
+									</svg>
+								</a>
+							)}
+						</div>
+					))}
+				</div>
+
+				<div class='mt-8 pt-8 border-t border-ew-orange/20'>
+					<h3 class='text-xl text-ew-orange mb-4'>Listen Now</h3>
+					<div class='flex flex-wrap gap-3'>
+						<a
+							href={album.streamingLinks.spotify}
+							target='_blank'
+							rel='noopener noreferrer'
+							class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+						>
+							Spotify
+						</a>
+						{album.streamingLinks.appleMusic && (
+							<a
+								href={album.streamingLinks.appleMusic}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+							>
+								Apple Music
+							</a>
+						)}
+						{album.streamingLinks.youtubeMusic && (
+							<a
+								href={album.streamingLinks.youtubeMusic}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+							>
+								YouTube Music
+							</a>
+						)}
+						{album.streamingLinks.deezer && (
+							<a
+								href={album.streamingLinks.deezer}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='inline-block bg-ew-red hover:bg-ew-red-light text-white px-6 py-3 transition-colors'
+							>
+								Deezer
+							</a>
+						)}
+					</div>
+				</div>
+			</div>
+
+			<div class='text-center mt-8'>
+				<a href='/#music' class='inline-block text-ew-orange hover:text-ew-orange-light transition-colors'>
+					← Back to Music
+				</a>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<Contact />
+	</footer>
+</Layout>
+
+<style>
+	.prose a {
+		transition: color 0.2s;
+	}
+</style>

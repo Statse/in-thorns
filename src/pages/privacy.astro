@@ -1,0 +1,117 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Navigation from '@/components/navigation/navigation.astro'
+import Contact from '@/components/contact/contact.astro'
+---
+
+<Layout title='Privacy Policy - In Thorns'>
+	<header>
+		<Navigation />
+	</header>
+	<main id='main-content' class='min-h-screen bg-black py-20 px-4'>
+		<div class='container mx-auto max-w-4xl pt-16'>
+			<h1 class='text-4xl md:text-5xl font-bold text-ew-orange mb-8 text-center'>
+				Privacy Policy
+			</h1>
+
+			<div class='bg-gradient-to-br from-ew-orange/10 to-ew-green/10 p-6 md:p-12 border-2 border-ew-orange/30'>
+				<div class='prose prose-invert max-w-none text-ew-cream'>
+					<p class='text-lg mb-6'>
+						Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Overview</h2>
+					<p class='mb-4'>
+						In Thorns ("we", "us", "our") respects your privacy. This policy explains how we handle information when you visit our website.
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Analytics & Performance Monitoring</h2>
+					<p class='mb-4'>
+						We use <strong>Vercel Web Analytics</strong> to monitor our website's performance and understand how visitors use our site. This helps us improve the user experience.
+					</p>
+
+					<h3 class='text-xl text-ew-green-light mt-6 mb-3'>What Data is Collected</h3>
+					<p class='mb-4'>
+						Vercel Analytics collects only anonymous, aggregated data including:
+					</p>
+					<ul class='list-disc pl-6 mb-4 space-y-2'>
+						<li>Page views and navigation patterns</li>
+						<li>Performance metrics (page load times, web vitals)</li>
+						<li>Browser type and device information (user agent)</li>
+						<li>Referring websites</li>
+					</ul>
+
+					<h3 class='text-xl text-ew-green-light mt-6 mb-3'>What is NOT Collected</h3>
+					<p class='mb-4'>
+						<strong>We do not collect:</strong>
+					</p>
+					<ul class='list-disc pl-6 mb-4 space-y-2'>
+						<li>IP addresses or any personally identifiable information (PII)</li>
+						<li>Cookies - our analytics does not use cookies</li>
+						<li>User IDs or tracking across websites</li>
+						<li>Any personal data</li>
+					</ul>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Cookies</h2>
+					<p class='mb-4'>
+						Our website does not use cookies for analytics or tracking purposes. No cookie consent banner is required.
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Third-Party Services</h2>
+					<p class='mb-4'>
+						Our analytics are provided by Vercel. You can review their privacy policy here:
+						<a
+							href='https://vercel.com/legal/privacy-policy'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='text-ew-orange hover:text-ew-orange-light underline'
+						>
+							Vercel Privacy Policy
+						</a>
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Data Storage & Processing</h2>
+					<p class='mb-4'>
+						All analytics data is processed and stored by Vercel in accordance with GDPR and other data protection regulations. The data is anonymized and cannot be used to identify individual visitors.
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Your Rights</h2>
+					<p class='mb-4'>
+						Since we do not collect any personal data, there is no personal information to access, modify, or delete. Our analytics are completely anonymous.
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Contact Information</h2>
+					<p class='mb-4'>
+						If you have any questions about this privacy policy, please contact us at:
+						<a
+							href='mailto:inthornsband@gmail.com'
+							class='text-ew-orange hover:text-ew-orange-light underline'
+						>
+							inthornsband@gmail.com
+						</a>
+					</p>
+
+					<h2 class='text-2xl text-ew-orange mt-8 mb-4'>Updates to This Policy</h2>
+					<p class='mb-4'>
+						We may update this privacy policy from time to time. Any changes will be posted on this page with an updated revision date.
+					</p>
+				</div>
+			</div>
+
+			<div class='text-center mt-8'>
+				<a href='/' class='inline-block text-ew-orange hover:text-ew-orange-light transition-colors'>
+					← Back to Home
+				</a>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<Contact />
+	</footer>
+</Layout>
+
+<style>
+	.prose a {
+		transition: color 0.2s;
+	}
+</style>

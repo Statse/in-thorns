@@ -1,0 +1,168 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/navigation/navigation.astro";
+import { readdirSync } from "fs";
+import { join } from "path";
+import { Image } from "astro:assets";
+
+export const prerender = true;
+
+const { slug } = Astro.params;
+
+// Gallery configurations
+const galleries = {
+	"exit-wounds": {
+		title: "exit wounds",
+		description: "Exit wounds promo",
+		folder: "exit_wounds",
+		colorClass: "ew-orange",
+	},
+	tlboacos: {
+		title: "the last bead on a cord of songs",
+		description: "Album promo",
+		folder: "tlbocos",
+		colorClass: "ew-red",
+	},
+	live: {
+		title: "live",
+		description: "Live performance photos",
+		folder: "live/poppari_2025",
+		colorClass: "ew-green-light",
+	},
+};
+
+const gallery = galleries[slug as keyof typeof galleries];
+
+if (!gallery) {
+	return Astro.redirect("/gallery");
+}
+
+// Read images from the appropriate directory
+const photosDir = join(process.cwd(), "public", "photos", gallery.folder);
+const imageFiles = readdirSync(photosDir)
+	.filter((file) => file.endsWith(".webp"))
+	.sort((a, b) => {
+		// Extract numbers from filenames for proper numeric sorting
+		const numA = parseInt(a.match(/\d+/)?.[0] || "0");
+		const numB = parseInt(b.match(/\d+/)?.[0] || "0");
+		return numA - numB;
+	});
+
+// Color classes to cycle through
+const colorClasses = ["ew-orange", "ew-green", "ew-red"];
+
+// Mosaic layout pattern matching the design
+// tall = 2 rows, wide = 2 cols, large = 2x2
+const mosaicPattern = [
+	"large", // 1: Large 2x2 (top left)
+	"normal", // 2: Small 1x1 (top right)
+	"tall", // 3: Tall 1x2 (right side)
+	"normal", // 4: Small 1x1
+	"normal", // 5: Small 1x1
+	"normal", // 6: Small 1x1 (left)
+	"large", // 7: Large 2x2 (right)
+	"wide", // 8: Wide 2x1
+	"wide", // 9: Wide 2x1
+	"normal", // 10: Small 1x1
+	"normal", // 11: Small 1x1
+	"large", // 12: Large 2x2
+];
+
+const photos = imageFiles.map((file, index) => ({
+	id: String(index + 1),
+	src: `/photos/${gallery.folder}/${file}`,
+	alt: `In Thorns - ${gallery.title}`,
+	colorClass: colorClasses[index % colorClasses.length],
+	layout: mosaicPattern[index % mosaicPattern.length],
+	category: slug,
+}));
+
+export async function getStaticPaths() {
+	return [
+		{ params: { slug: "exit-wounds" } },
+		{ params: { slug: "tlboacos" } },
+		{ params: { slug: "live" } },
+	];
+}
+---
+
+<Layout title={`${gallery.title} - Gallery - In Thorns`}>
+	<Navigation />
+
+	<main class="min-h-screen bg-black pt-24 pb-20 px-4">
+		<div class="container mx-auto max-w-7xl">
+			{/* Breadcrumb */}
+			<nav class="mb-8">
+				<ol class="flex items-center gap-2 text-sm">
+					<li>
+						<a
+							href="/#photos"
+							class="text-ew-cream/70 hover:text-ew-orange transition-colors"
+							>Home</a
+						>
+					</li>
+					<li class="text-ew-cream/50">/</li>
+					<li class={`text-${gallery.colorClass}`}>
+						{gallery.title}
+					</li>
+				</ol>
+			</nav>
+
+			<h1
+				class={`text-4xl md:text-6xl font-bold text-${gallery.colorClass} mb-4`}
+			>
+				<span
+					class="inline-block"
+					style={`text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);`}
+					>{gallery.title}</span
+				>
+			</h1>
+			<p class="text-ew-cream/70 mb-6 max-w-2xl">
+				{gallery.description}
+			</p>
+
+			<a
+				href="/#photos"
+				class={`inline-block mb-12 text-${gallery.colorClass} hover:underline`}
+			>
+				← Back to all galleries
+			</a>
+
+			<div
+				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]"
+			>
+				{
+					photos.map((photo) => (
+						<a
+							href={`/gallery/${slug}/${photo.id}`}
+							class:list={[
+								"relative overflow-hidden group cursor-pointer",
+								{
+									"md:col-span-2 md:row-span-2":
+										photo.layout === "large",
+									"md:col-span-2": photo.layout === "wide",
+									"md:row-span-2": photo.layout === "tall",
+								},
+							]}
+						>
+							<Image
+								src={photo.src}
+								alt={photo.alt}
+								width={800}
+								height={800}
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+								transition:name={`photo-${slug}-${photo.id}`}
+							/>
+							<div
+								class:list={[
+									"absolute inset-0 group-hover:bg-opacity-20 bg-opacity-0 transition-colors",
+									`bg-${photo.colorClass}`,
+								]}
+							/>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</main>
+</Layout>

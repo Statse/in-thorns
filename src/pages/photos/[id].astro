@@ -1,0 +1,6 @@
+---
+// Redirect old /photos/[id] routes to new /gallery/exit-wounds/[id] structure
+const { id } = Astro.params
+
+return Astro.redirect(`/gallery/exit-wounds/${id}`)
+---
