@@ -1,0 +1,163 @@
+---
+import { Image } from "astro:assets";
+
+// Media items - both photo galleries and videos
+const mediaItems = [
+	{
+		slug: "exit-wounds",
+		title: "exit wounds",
+		description: "Exit wounds promo",
+		previewImage: "/photos/exit_wounds/1.webp",
+		colorClass: "ew-orange",
+		type: "gallery",
+	},
+	{
+		slug: "tlboacos",
+		title: "the last bead on a cord of songs",
+		description: "Album promo",
+		previewImage:
+			"/photos/tlbocos/2A2FE513-7654-45A3-9120-25FAD6AFF06C.webp",
+		colorClass: "ew-red",
+		type: "gallery",
+	},
+	{
+		slug: "live",
+		title: "live",
+		description: "Live performance photos",
+		previewImage: "/photos/live/poppari_2025/_X2A5650.webp",
+		colorClass: "ew-green",
+		type: "gallery",
+	},
+	{
+		slug: "exit-wounds-video",
+		title: "exit wounds",
+		description: "Music video",
+		videoUrl: "https://www.youtube.com/watch?v=N1hDSYaVzFU",
+		videoId: "N1hDSYaVzFU",
+		colorClass: "ew-orange",
+		type: "video",
+	},
+	{
+		slug: "xii-video",
+		title: "xii",
+		description: "Music video (never)",
+		videoUrl: "https://www.youtube.com/watch?v=rjff_WUvBhk",
+		videoId: "rjff_WUvBhk",
+		colorClass: "ew-red",
+		type: "video",
+	},
+];
+---
+
+<section id="media" class="min-h-screen bg-black py-20 px-4">
+	<div class="container mx-auto max-w-6xl">
+		<h2
+			class="text-4xl md:text-5xl font-bold text-ew-orange mb-4 text-center"
+		>
+			<span
+				class="inline-block"
+				style="text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);"
+				>Media</span
+			>
+		</h2>
+		<p class="text-ew-cream/70 text-center mb-16 max-w-2xl mx-auto">
+			Browse through our collection of promo photos, album artwork, live
+			performances, and music videos
+		</p>
+
+		<div class="grid md:grid-cols-3 gap-8">
+			{
+				mediaItems.map((item) => (
+					item.type === "gallery" ? (
+						<a
+							href={`/gallery/${item.slug}`}
+							class={`group relative overflow-hidden bg-gradient-to-br from-${item.colorClass}/10 to-black border-2 border-${item.colorClass}/30 hover:border-${item.colorClass} transition-all duration-300`}
+						>
+							<div class="aspect-square relative overflow-hidden">
+								<Image
+									src={item.previewImage!}
+									alt={item.title}
+									width={600}
+									height={600}
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+								/>
+								<div
+									class={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent`}
+								/>
+
+								{/* Hover overlay */}
+								<div
+									class={`absolute inset-0 bg-${item.colorClass}/0 group-hover:bg-${item.colorClass}/20 transition-colors`}
+								/>
+							</div>
+
+							<div class="p-6">
+								<h3
+									class={`text-2xl font-bold text-white mb-2 group-hover:text-${item.colorClass} transition-colors`}
+								>
+									{item.title}
+								</h3>
+								<p class="text-ew-cream/70 text-sm mb-3">
+									{item.description}
+								</p>
+								<p
+									class={`text-${item.colorClass} text-sm uppercase tracking-wider`}
+								>
+									View Gallery →
+								</p>
+							</div>
+						</a>
+					) : (
+						<a
+							href={item.videoUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class={`group relative overflow-hidden bg-gradient-to-br from-${item.colorClass}/10 to-black border-2 border-${item.colorClass}/30 hover:border-${item.colorClass} transition-all duration-300`}
+						>
+							<div class="aspect-square relative overflow-hidden">
+								<img
+									src={`https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg`}
+									alt={item.title}
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+								/>
+								<div
+									class={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent`}
+								/>
+
+								{/* Play button overlay */}
+								<div class="absolute inset-0 flex items-center justify-center">
+									<div class={`w-16 h-16 rounded-full bg-${item.colorClass}/80 group-hover:bg-${item.colorClass} transition-all flex items-center justify-center group-hover:scale-110`}>
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-8 h-8 ml-1">
+											<path d="M8 5v14l11-7z"/>
+										</svg>
+									</div>
+								</div>
+
+								{/* Hover overlay */}
+								<div
+									class={`absolute inset-0 bg-${item.colorClass}/0 group-hover:bg-${item.colorClass}/20 transition-colors`}
+								/>
+							</div>
+
+							<div class="p-6">
+								<h3
+									class={`text-2xl font-bold text-white mb-2 group-hover:text-${item.colorClass} transition-colors`}
+								>
+									{item.title}
+								</h3>
+								<p class="text-ew-cream/70 text-sm mb-3">
+									{item.description}
+								</p>
+								<p
+									class={`text-${item.colorClass} text-sm uppercase tracking-wider`}
+								>
+									Watch Video →
+								</p>
+							</div>
+						</a>
+					)
+				))
+			}
+		</div>
+	</div>
+</section>
