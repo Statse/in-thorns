@@ -42,15 +42,15 @@ async function reviewSections() {
   await tourSection.screenshot({ path: 'claude-review/section-3-tour.png' });
   console.log('✅ Tour section saved');
 
-  // Scroll to Photos section
-  console.log('📸 Capturing Photos section...');
+  // Scroll to Media section
+  console.log('📸 Capturing Media section...');
   await page.evaluate(() => {
-    document.querySelector('#photos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('#media').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   await page.waitForTimeout(1500);
-  const photosSection = await page.locator('#photos');
-  await photosSection.screenshot({ path: 'claude-review/section-4-photos.png' });
-  console.log('✅ Photos section saved');
+  const mediaSection = await page.locator('#media');
+  await mediaSection.screenshot({ path: 'claude-review/section-4-media.png' });
+  console.log('✅ Media section saved');
 
   // Scroll to About section
   console.log('📸 Capturing About section...');
@@ -77,7 +77,7 @@ async function reviewSections() {
   console.log('   - section-1-hero.png');
   console.log('   - section-2-music.png');
   console.log('   - section-3-tour.png');
-  console.log('   - section-4-photos.png');
+  console.log('   - section-4-media.png');
   console.log('   - section-5-about.png');
   console.log('   - section-6-footer.png');
 }

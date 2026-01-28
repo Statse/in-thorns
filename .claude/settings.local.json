@@ -16,7 +16,8 @@
       "Bash(npm outdated:*)",
       "Bash(npx npm-check-updates -u)",
       "Bash(npm info:*)",
-      "WebFetch(domain:open.spotify.com)"
+      "WebFetch(domain:open.spotify.com)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []
