@@ -17,9 +17,13 @@
       "Bash(npx npm-check-updates -u)",
       "Bash(npm info:*)",
       "WebFetch(domain:open.spotify.com)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(mkdir -p \"e:/github/in-thorns/.claude/skills/conventional-commit\")"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "e:\\github\\in-thorns\\.claude\\skills"
+    ]
   }
 }
