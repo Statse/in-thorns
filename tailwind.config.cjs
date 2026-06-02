@@ -47,6 +47,16 @@ module.exports = {
 		'group-hover:text-ew-orange',
 		'group-hover:text-ew-red',
 		'group-hover:text-ew-green',
+		// Wormhusk purple
+		'text-wh-purple',
+		'text-wh-purple-light',
+		'border-wh-purple',
+		'border-wh-purple/30',
+		'hover:border-wh-purple',
+		'bg-wh-purple/10',
+		'bg-wh-purple-dark/10',
+		'from-wh-purple-dark/10',
+		'to-wh-purple/10',
 	],
 	theme: {
 		extend: {
@@ -69,6 +79,12 @@ module.exports = {
 					forest: '#2C5F2D',
 				},
 				'ew-cream': '#F5F5DC',
+				// Wormhusk color palette (extracted from single artwork)
+				'wh-purple': {
+					DEFAULT: '#9D52C2',
+					light: '#C08ADE',
+					dark: '#6E2E96',
+				},
 			},
 			fontFamily: {
 				sans: ['Roboto', 'Inter var', 'Inter', 'system-ui', 'sans-serif'],
