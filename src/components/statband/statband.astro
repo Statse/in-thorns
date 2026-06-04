@@ -1,14 +1,16 @@
 ---
 import type { TourEvent } from '@/types/bandsintown'
+import { releases } from '@/data/releases'
 
 interface Props {
   events?: TourEvent[]
 }
 
 const { events = [] } = Astro.props
-const showCount = events.length > 0
-  ? String(events.length).padStart(2, '0')
-  : '04'
+const hasTour = events.length > 0
+const thirdStat = hasTour
+  ? { n: String(events.length).padStart(2, '0'), k: 'Upcoming dates', sub: 'Live · Bandsintown' }
+  : { n: String(releases.length).padStart(2, '0'), k: 'Releases', sub: 'Singles + album' }
 ---
 
 <div class="statband" aria-label="Band facts">
@@ -23,9 +25,9 @@ const showCount = events.length > 0
     <div class="stat__sub">Two-vocalist attack</div>
   </div>
   <div class="stat">
-    <div class="stat__n">{showCount}</div>
-    <div class="stat__k">Upcoming dates</div>
-    <div class="stat__sub">Live · Bandsintown</div>
+    <div class="stat__n">{thirdStat.n}</div>
+    <div class="stat__k">{thirdStat.k}</div>
+    <div class="stat__sub">{thirdStat.sub}</div>
   </div>
   <div class="stat">
     <div class="stat__n">NCY</div>
