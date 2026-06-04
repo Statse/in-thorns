@@ -20,7 +20,8 @@
       "Bash(npm run dev:*)",
       "Bash(mkdir -p \"e:/github/in-thorns/.claude/skills/conventional-commit\")",
       "Bash(curl -s http://localhost:4321/)",
-      "Bash(npx playwright *)"
+      "Bash(npx playwright *)",
+      "Bash(Get-ChildItem -Path \"e:\\\\github\\\\in-thorns\\\\handover\\\\design_handoff_gallery\\\\\" -File | Select-Object Name)"
     ],
     "deny": [],
     "ask": [],
