@@ -18,14 +18,6 @@ const { currentPath = '/' } = Astro.props
     <li><a href="/#bio">Bio</a></li>
     <li><a href="/press-kit">EPK</a></li>
     <li><a href="/#contact">Booking</a></li>
-    <li>
-      <a
-        class="nav__cta"
-        href="https://distrokid.com/hyperfollow/inthorns/wormhusk"
-        target="_blank"
-        rel="noopener"
-      >Pre-save →</a>
-    </li>
   </ul>
   <div class="nav__overlay" id="nav-overlay" aria-hidden="true"></div>
 </nav>
@@ -100,22 +92,6 @@ const { currentPath = '/' } = Astro.props
   .nav__links a:hover,
   .nav__links a.active { color: var(--it-orange); }
 
-  .nav__cta {
-    font-family: var(--it-font-mono) !important;
-    font-size: 11px !important;
-    background: var(--it-orange) !important;
-    color: var(--it-black) !important;
-    padding: 8px 14px;
-    border: none;
-    letter-spacing: var(--it-track-mono-sm) !important;
-    transition: background 200ms !important;
-  }
-
-  .nav__cta:hover {
-    background: var(--it-orange-light) !important;
-    color: var(--it-black) !important;
-  }
-
   .nav__burger {
     display: none;
     flex-direction: column;
@@ -179,13 +155,6 @@ const { currentPath = '/' } = Astro.props
       font-size: 12px;
     }
 
-    .nav__cta {
-      margin-top: 16px;
-      display: block;
-      text-align: center;
-      padding: 14px !important;
-    }
-
     .nav__overlay.open { display: block; }
 
     .nav__burger[aria-expanded="true"] span:nth-child(1) {
@@ -209,7 +178,7 @@ const { currentPath = '/' } = Astro.props
     const onScroll = () => {
       const y = window.scrollY;
       nav.classList.toggle('scrolled', y > 60);
-      const navAnchors = links.querySelectorAll<HTMLAnchorElement>('a:not(.nav__cta)');
+      const navAnchors = links.querySelectorAll<HTMLAnchorElement>('a');
       const sections = document.querySelectorAll<HTMLElement>('section[id], header[id]');
       let current = '';
       sections.forEach(s => { if (y >= s.offsetTop - 180) current = s.id; });

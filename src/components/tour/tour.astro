@@ -289,9 +289,8 @@ const formatWeekday = (datetime: string) => {
 
   .tour__empty-cta {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 12px;
-    align-items: stretch;
     flex-shrink: 0;
   }
 
@@ -316,14 +315,5 @@ const formatWeekday = (datetime: string) => {
       gap: 32px;
     }
 
-    .tour__empty-cta {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .tour__empty-cta .it-btn {
-      flex: 1;
-      min-width: 0;
-    }
   }
 </style>
