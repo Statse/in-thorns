@@ -1,8 +1,4 @@
 ---
-interface Props {
-  currentPath?: string
-}
-const { currentPath = '/' } = Astro.props
 ---
 
 <nav class="nav" id="nav" aria-label="Main">
@@ -169,6 +165,12 @@ const { currentPath = '/' } = Astro.props
 
 <script>
   function initNav() {
+    // Abort previous listeners so re-runs don't stack handlers
+    (window as any).__navAC?.abort();
+    const ac = new AbortController();
+    (window as any).__navAC = ac;
+    const { signal } = ac;
+
     const nav = document.getElementById('nav');
     const burger = document.getElementById('nav-burger');
     const links = document.getElementById('nav-links');
@@ -187,7 +189,7 @@ const { currentPath = '/' } = Astro.props
         a.classList.toggle('active', href === `#${current}` || href === `/#${current}`);
       });
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
     onScroll();
 
     const openDrawer = () => {
@@ -205,11 +207,10 @@ const { currentPath = '/' } = Astro.props
 
     burger.addEventListener('click', () => {
       links.classList.contains('open') ? closeDrawer() : openDrawer();
-    });
-    overlay.addEventListener('click', closeDrawer);
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    }, { signal });
+    overlay.addEventListener('click', closeDrawer, { signal });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer, { signal }));
   }
 
-  initNav();
   document.addEventListener('astro:page-load', initNav);
 </script>
