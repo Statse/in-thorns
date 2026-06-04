@@ -154,6 +154,7 @@ import { pressQuotes } from '@/data/press'
     .wrap { padding: 0 20px; }
     section { padding: 64px 0; }
     .press-grid { grid-template-columns: 1fr; }
-    .press-actions .it-btn { flex: 1; min-width: 0; }
+    .press-actions { flex-direction: column; }
+    .press-actions :global(.it-btn) { width: 100%; min-width: 0; }
   }
 </style>
