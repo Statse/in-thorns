@@ -167,23 +167,7 @@ const members = [
       <div class="epk-sec__label">A4 / Press<small>Pull quotes</small></div>
       <div>
         <h2>Press</h2>
-        <figure class="pullquote">
-          <div class="pullquote__mark" aria-hidden="true">"</div>
-          <blockquote>Live, they don't perform — <em>they invoke.</em></blockquote>
-          <figcaption class="pullquote__src">— Inferno Magazine</figcaption>
-        </figure>
-        <div class="press-grid">
-          <figure class="quote">
-            <div class="quote__mark">"</div>
-            <blockquote class="quote__text">A debut that arrived fully-formed — crushing, poetic, and fearless.</blockquote>
-            <figcaption class="quote__src">— KAAOSZINE · NCY 2024</figcaption>
-          </figure>
-          <figure class="quote">
-            <div class="quote__mark">"</div>
-            <blockquote class="quote__text">Equal parts devastating and beautiful. The quiet parts hit as hard as the loud ones.</blockquote>
-            <figcaption class="quote__src">— SOUNDI / PRINT</figcaption>
-          </figure>
-        </div>
+        <p class="epk-placeholder">Press quotes coming soon.</p>
       </div>
     </div>
   </section>
@@ -217,19 +201,14 @@ const members = [
       <div>
         <h2>Downloads</h2>
         <div class="epk-files">
-          <a class="epk-file" href="mailto:inthornsband@gmail.com?subject=EPK%20%E2%80%94%20Photo%20pack">
+          <a class="epk-file" href="/photos/exit_wounds/promo.zip" download>
             <span class="epk-file__ext">ZIP</span>
-            <span class="epk-file__m"><span class="epk-file__n">Photo pack</span><span class="epk-file__s">Hi-res promo + live · ~40 MB</span></span>
+            <span class="epk-file__m"><span class="epk-file__n">Photo pack</span><span class="epk-file__s">Hi-res promo photos</span></span>
             <span class="epk-file__arrow">↓</span>
           </a>
-          <a class="epk-file" href="mailto:inthornsband@gmail.com?subject=EPK%20%E2%80%94%20Logo%20pack">
+          <a class="epk-file" href="/logo.zip" download>
             <span class="epk-file__ext">SVG</span>
             <span class="epk-file__m"><span class="epk-file__n">Logo pack</span><span class="epk-file__s">Wordmark · mono + cream</span></span>
-            <span class="epk-file__arrow">↓</span>
-          </a>
-          <a class="epk-file" href="#" onclick="window.print();return false;">
-            <span class="epk-file__ext">PDF</span>
-            <span class="epk-file__m"><span class="epk-file__n">This EPK</span><span class="epk-file__s">Print / save as PDF</span></span>
             <span class="epk-file__arrow">↓</span>
           </a>
           <a class="epk-file" href="https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d" target="_blank" rel="noopener">
@@ -691,6 +670,15 @@ const members = [
 
   .epk-album-cover { max-width: 280px; }
 
+  .epk-placeholder {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: rgba(245, 245, 220, 0.35);
+    margin: 0;
+  }
+
   /* ---- Pull quote ---- */
   .pullquote {
     position: relative;
@@ -985,19 +973,4 @@ const members = [
     .epk-top__tag { display: none; }
   }
 
-  @media print {
-    .epk-top__actions { display: none; }
-    .epk-photo__dl { display: none; }
-    .epk-sec,
-    .epk-hero,
-    .epk-top { border-color: #999; }
-    body { background: #fff; color: #111; }
-    .stat__n,
-    .section__title,
-    .epk-hero h1,
-    .release__title,
-    .epk-sec h2,
-    .fact__v,
-    .member__name { color: #111 !important; }
-  }
 </style>
