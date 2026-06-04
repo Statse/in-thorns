@@ -26,7 +26,9 @@
 
   <div class="hero__lede">
     <p class="hero__desc">
-      Finnish metal collective from Jyväskylä. Crushing soundscapes, darkly poetic lyrics, and the kind of live show that pulls audiences into a surreal, horror-adjacent world.
+      Finnish metal collective from Jyväskylä. Crushing soundscapes, darkly
+      poetic lyrics, and the kind of live show that pulls audiences into a
+      surreal, horror-adjacent world.
     </p>
     <div class="hero__cta">
       <a
@@ -60,8 +62,13 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.85) 100%),
-      url('/hero/background.webp');
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.2) 40%,
+        rgba(0, 0, 0, 0.85) 100%
+      ),
+      url("/hero/background.webp");
     background-size: cover;
     background-position: center;
   }
@@ -69,11 +76,19 @@
   /* Wormhusk: add a violet tint overlay */
   .hero--wh .hero__bg {
     background-image:
-      radial-gradient(ellipse at 60% 40%, rgba(157, 82, 194, 0.18) 0%, transparent 60%),
-      linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.88) 100%),
-      url('/hero/background.webp');
+      radial-gradient(
+        ellipse at 60% 40%,
+        rgba(157, 82, 194, 0.18) 0%,
+        transparent 60%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.2) 40%,
+        rgba(0, 0, 0, 0.88) 100%
+      ),
+      url("/hero/background.webp");
   }
-
 
   /* Crop frame corners */
   .crop-frame {
@@ -91,10 +106,30 @@
     opacity: 0.8;
   }
 
-  .crop-frame .tl { top: 0; left: 0; border-top: 1px solid var(--it-orange); border-left: 1px solid var(--it-orange); }
-  .crop-frame .tr { top: 0; right: 0; border-top: 1px solid var(--it-orange); border-right: 1px solid var(--it-orange); }
-  .crop-frame .bl { bottom: 0; left: 0; border-bottom: 1px solid var(--it-orange); border-left: 1px solid var(--it-orange); }
-  .crop-frame .br { bottom: 0; right: 0; border-bottom: 1px solid var(--it-orange); border-right: 1px solid var(--it-orange); }
+  .crop-frame .tl {
+    top: 0;
+    left: 0;
+    border-top: 1px solid var(--it-orange);
+    border-left: 1px solid var(--it-orange);
+  }
+  .crop-frame .tr {
+    top: 0;
+    right: 0;
+    border-top: 1px solid var(--it-orange);
+    border-right: 1px solid var(--it-orange);
+  }
+  .crop-frame .bl {
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid var(--it-orange);
+    border-left: 1px solid var(--it-orange);
+  }
+  .crop-frame .br {
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid var(--it-orange);
+    border-right: 1px solid var(--it-orange);
+  }
 
   /* Meta strip */
   .hero__meta {
@@ -117,7 +152,9 @@
     flex-wrap: wrap;
   }
 
-  .hero__meta-num { margin-left: auto; }
+  .hero__meta-num {
+    margin-left: auto;
+  }
 
   /* Main title block */
   .hero__title {
@@ -140,10 +177,12 @@
     gap: 16px;
   }
 
-  .hero--wh .hero__eyebrow { color: var(--it-wh-violet-light); }
+  .hero--wh .hero__eyebrow {
+    color: var(--it-wh-violet-light);
+  }
 
   .hero__eyebrow::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 40px;
     height: 1px;
@@ -223,11 +262,17 @@
       font-size: 10px;
     }
 
-    .hero__meta-num { margin-left: 0; }
+    .hero__meta-num {
+      margin-left: 0;
+    }
   }
 
   @media (max-width: 480px) {
-    .hero__cta { flex-direction: column; }
-    .hero__cta .it-btn { min-width: auto; }
+    .hero__cta {
+      flex-direction: column;
+    }
+    .hero__cta .it-btn {
+      min-width: auto;
+    }
   }
 </style>
