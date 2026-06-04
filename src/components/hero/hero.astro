@@ -1,52 +1,250 @@
 ---
-// Hero section component
-import { Image } from 'astro:assets'
+// Hero section — Wormhusk era
 ---
 
-<section id='hero' class='relative min-h-screen flex items-center justify-center overflow-hidden pt-16'>
-	<!-- Background -->
-	<div class='absolute inset-0' aria-hidden='true'>
-		<Image
-			src='/hero/background.webp'
-			alt=''
-			width={1920}
-			height={1080}
-			class='w-full h-full object-cover'
-			loading='eager'
-			decoding='async'
-		/>
-		<div class='absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black'></div>
-		<!-- Film grain overlay -->
-		<div class='absolute inset-0 opacity-30 mix-blend-overlay' style='background-image: url(/itbg.gif); background-size: cover;'></div>
-	</div>
+<header class="hero hero--wh" id="top">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__grain" aria-hidden="true"></div>
 
-	<!-- Content -->
-	<div class='relative z-10 text-center px-4 max-w-4xl'>
-		<Image id='hero-logo' src='/it-logo-white.png' alt='In Thorns' width={800} height={200} class='w-full max-w-2xl mx-auto mb-8 transition-all duration-500' loading='eager' />
-		<h1 class='text-3xl md:text-5xl lg:text-6xl mb-6 tracking-wider text-ew-cream'>
-			what's left when the husk falls quiet.
-		</h1>
+  <div class="crop-frame" aria-hidden="true">
+    <i class="tl"></i>
+    <i class="tr"></i>
+    <i class="bl"></i>
+    <i class="br"></i>
+  </div>
 
-		<!-- Wormhusk Announcement -->
-		<div class='inline-block bg-ew-orange/20 border-2 border-ew-orange px-8 py-4 backdrop-blur-sm'>
-			<p class='text-ew-orange text-sm uppercase tracking-widest mb-2'>New Single</p>
-			<p class='text-2xl md:text-3xl font-bold text-white'>wormhusk</p>
-			<p class='text-ew-cream mt-2 mb-4'>Out now • 29.5.2026</p>
-			<a
-				href='#'
-				class='inline-block bg-ew-green hover:bg-ew-green-light text-white px-6 py-2 transition-colors text-sm uppercase tracking-wider'
-			>
-				Listen Now!
-			</a>
-		</div>
+  <div class="hero__meta">
+    <span>IN THORNS // FI</span>
+    <span>EST. 2022</span>
+    <span>JYVÄSKYLÄ</span>
+    <span>METAL COLLECTIVE</span>
+    <span class="hero__meta-num">NO. 01 / 2026</span>
+  </div>
 
-		<!-- Scroll indicator -->
-		<div class='mt-16'>
-			<a href='#music' aria-label='Scroll down to music section' class='inline-block text-ew-orange animate-bounce'>
-				<svg class='w-8 h-8' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
-					<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 14l-7 7m0 0l-7-7m7 7V3'></path>
-				</svg>
-			</a>
-		</div>
-	</div>
-</section>
+  <div class="hero__title">
+    <div class="hero__eyebrow">New single · Out now · May 29, 2026</div>
+    <h1 class="hero__h1">WORM<br /><em>HUSK</em></h1>
+  </div>
+
+  <div class="hero__lede">
+    <p class="hero__desc">
+      Finnish metal collective from Jyväskylä. Crushing soundscapes, darkly poetic lyrics, and the kind of live show that pulls audiences into a surreal, horror-adjacent world.
+    </p>
+    <div class="hero__cta">
+      <a
+        class="it-btn it-btn--primary"
+        href="https://distrokid.com/hyperfollow/inthorns/wormhusk"
+        target="_blank"
+        rel="noopener"
+      >
+        <span>Pre-save / Listen</span><span>→</span>
+      </a>
+      <a class="it-btn it-btn--ghost" href="#tour">
+        <span>Tour dates</span><span>↓</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: end;
+    padding: 0 48px 56px;
+    overflow: hidden;
+  }
+
+  /* Background image + gradient */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.85) 100%),
+      url('/hero/background.webp');
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Wormhusk: add a violet tint overlay */
+  .hero--wh .hero__bg {
+    background-image:
+      radial-gradient(ellipse at 60% 40%, rgba(157, 82, 194, 0.18) 0%, transparent 60%),
+      linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.88) 100%),
+      url('/hero/background.webp');
+  }
+
+  /* Film grain */
+  .hero__grain {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url('/itbg.gif');
+    background-size: 200px 200px;
+    opacity: 0.12;
+    animation: grain 8s steps(10) infinite;
+    pointer-events: none;
+  }
+
+  /* Crop frame corners */
+  .crop-frame {
+    position: absolute;
+    inset: 24px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .crop-frame i {
+    position: absolute;
+    display: block;
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+  }
+
+  .crop-frame .tl { top: 0; left: 0; border-top: 1px solid var(--it-orange); border-left: 1px solid var(--it-orange); }
+  .crop-frame .tr { top: 0; right: 0; border-top: 1px solid var(--it-orange); border-right: 1px solid var(--it-orange); }
+  .crop-frame .bl { bottom: 0; left: 0; border-bottom: 1px solid var(--it-orange); border-left: 1px solid var(--it-orange); }
+  .crop-frame .br { bottom: 0; right: 0; border-bottom: 1px solid var(--it-orange); border-right: 1px solid var(--it-orange); }
+
+  /* Meta strip */
+  .hero__meta {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-cream);
+    opacity: 0.6;
+    padding: 14px 0;
+    border-top: 1px solid var(--it-orange-30);
+    border-bottom: 1px solid var(--it-orange-30);
+    margin-top: 80px;
+    flex-wrap: wrap;
+  }
+
+  .hero__meta-num { margin-left: auto; }
+
+  /* Main title block */
+  .hero__title {
+    position: relative;
+    z-index: 3;
+    align-self: center;
+    padding: 40px 0;
+  }
+
+  .hero__eyebrow {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero--wh .hero__eyebrow { color: var(--it-wh-violet-light); }
+
+  .hero__eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .hero__h1 {
+    font-family: var(--it-font-display);
+    font-size: clamp(88px, 18vw, 280px);
+    line-height: 0.82;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .hero__h1 em {
+    font-style: normal;
+    background: var(--it-orange);
+    color: var(--it-black);
+    padding: 0 0.08em;
+  }
+
+  .hero--wh .hero__h1 em {
+    background: var(--it-wh-violet);
+    color: var(--it-cream);
+  }
+
+  /* Lede / CTA row */
+  .hero__lede {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+
+  .hero__desc {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 20px;
+    line-height: var(--it-lh-body);
+    color: var(--it-cream);
+    opacity: 0.85;
+    max-width: 48ch;
+    margin: 0;
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .hero {
+      padding: 0 20px 48px;
+    }
+
+    .hero__lede {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .hero__cta {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .hero__cta .it-btn {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .hero__meta {
+      gap: 12px;
+      font-size: 10px;
+    }
+
+    .hero__meta-num { margin-left: 0; }
+  }
+
+  @media (max-width: 480px) {
+    .hero__cta { flex-direction: column; }
+    .hero__cta .it-btn { min-width: auto; }
+  }
+</style>

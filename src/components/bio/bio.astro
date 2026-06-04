@@ -1,0 +1,208 @@
+---
+// Bio / The Collective section
+const members = [
+  { num: '01', name: 'Kristian Ruutala',    role: 'Harsh Vocals' },
+  { num: '02', name: 'Aleksi Statsevich',   role: 'Harsh Vocals' },
+  { num: '03', name: 'Aavee Tikkanen',      role: 'Vocals · Guitar' },
+  { num: '04', name: 'Aleksi Ruotsalainen', role: 'Guitar' },
+  { num: '05', name: 'Jimi Kinnunen',       role: 'Drums' },
+]
+
+const facts = [
+  { k: 'Origin',     v: 'Jyväskylä', sub: 'Central Finland · est. 2022' },
+  { k: 'Genre',      v: 'Metalcore',  sub: 'Post · alternative · surrealist' },
+  { k: 'Members',    v: '5',          sub: 'Two-vocalist attack' },
+  { k: 'Accolades',  v: "NCY '24",    sub: "Kaaoszine readers' poll" },
+]
+---
+
+<section id="bio">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <div class="section__num">06 / BIO</div>
+        <div class="section__sub">Who &amp; what</div>
+      </div>
+      <h2 class="section__title">The<br />Collective</h2>
+    </div>
+
+    <div class="bio">
+      <div class="bio__text">
+        <p>
+          Jyväskylä-based Finnish metal collective In Thorns releases new single <em>"wormhusk"</em> on May 29, 2026 — the second chapter of a new cycle following their acclaimed debut album <em>"the last bead on a cord of songs"</em> (2024). The debut earned them Newcomer of the Year recognition in Kaaoszine's readers' poll.
+        </p>
+        <p>
+          The collective creates metal driven by crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring melodies. Drawing inspiration from surrealist art and horror, In Thorns delivers an immersive sonic experience that balances devastating heaviness with haunting beauty. Live, the band delivers a tight, high-energy performance that pulls audiences into their dark, surreal world.
+        </p>
+
+        <div class="bio__facts">
+          {facts.map(f => (
+            <div class="fact">
+              <div class="fact__k">{f.k}</div>
+              <div class="fact__v">{f.v}</div>
+              <div class="fact__sub">{f.sub}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="members">
+        {members.map(m => (
+          <div class="member">
+            <div class="member__num">{m.num}</div>
+            <div class="member__name">{m.name}</div>
+            <div class="member__role">{m.role}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .bio {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+  }
+
+  /* Prose */
+  .bio__text p {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 19px;
+    line-height: var(--it-lh-body);
+    color: rgba(245, 245, 220, 0.85);
+    margin: 0 0 24px;
+    max-width: 64ch;
+  }
+
+  .bio__text p em {
+    font-style: italic;
+    color: var(--it-cream);
+  }
+
+  /* Drop cap */
+  .bio__text p:first-child::first-letter {
+    font-family: var(--it-font-display);
+    font-size: 72px;
+    line-height: 0.8;
+    color: var(--it-orange);
+    float: left;
+    margin-right: 8px;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  /* Facts grid */
+  .bio__facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--it-orange-30);
+    border: 1px solid var(--it-orange-30);
+    margin-top: 40px;
+  }
+
+  .fact {
+    background: var(--it-black);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .fact__k {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-orange);
+  }
+
+  .fact__v {
+    font-family: var(--it-font-display);
+    font-size: 26px;
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+  }
+
+  .fact__sub {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.35);
+  }
+
+  /* Members roster */
+  .members {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .member {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .member:first-child { border-top: 1px solid var(--it-orange-30); }
+
+  .member__num {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: var(--it-orange);
+  }
+
+  .member__name {
+    font-family: var(--it-font-display);
+    font-size: 22px;
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+  }
+
+  .member__role {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.4);
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .bio { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    section { padding: 64px 0; }
+    .member { grid-template-columns: 40px 1fr; }
+    .member__role { grid-column: 2; text-align: left; }
+  }
+</style>

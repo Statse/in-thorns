@@ -32,3 +32,5 @@ review-*.png
 test-results/
 playwright-report/
 playwright/.cache/
+
+/handover

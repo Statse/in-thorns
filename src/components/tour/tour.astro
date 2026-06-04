@@ -1,15 +1,331 @@
 ---
-import EventsList from './components/events-list.astro'
+import type { TourEvent } from '@/types/bandsintown'
+
+interface Props {
+  events: TourEvent[]
+}
+
+const { events } = Astro.props
+
+const formatDay = (datetime: string) => {
+  const d = new Date(datetime)
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).toUpperCase()
+}
+
+const formatTime = (datetime: string) => {
+  const d = new Date(datetime)
+  return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+}
+
+const formatWeekday = (datetime: string) => {
+  const d = new Date(datetime)
+  return d.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase()
+}
 ---
 
-<section id='tour' class='min-h-screen bg-gradient-to-b from-black to-ew-green-dark/20 py-20 px-4'>
-	<div class='container mx-auto max-w-6xl'>
-		<h2 class='text-4xl md:text-5xl font-bold text-ew-green-light mb-16 text-center'>
-			<span class='inline-block' style='text-shadow: 0 0 20px rgba(20, 255, 236, 0.5);'>Tour Dates</span>
-		</h2>
+<section id="tour">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <div class="section__num">02 / LIVE</div>
+        <div class="section__sub">Finland · 2026</div>
+      </div>
+      <h2 class="section__title">Tour<br />Dates</h2>
+    </div>
 
-		<div class='max-w-4xl mx-auto'>
-			<EventsList limit={10} />
-		</div>
-	</div>
+    {events.length > 0 ? (
+      <>
+        <div class="tour__list" role="list">
+          {events.map(event => (
+            <article class="date" role="listitem">
+              <div class="date__day">
+                {formatDay(event.datetime)}
+                <small>{formatWeekday(event.datetime)} · {formatTime(event.datetime)}</small>
+              </div>
+              <div>
+                <div class="date__venue">{event.venue}</div>
+                <div class="date__city">{event.city}{event.region ? `, ${event.region}` : ''}, {event.country}</div>
+              </div>
+              <div class="date__status date__status--live">On sale</div>
+              {event.ticketUrl ? (
+                <a class="date__tickets" href={event.ticketUrl} target="_blank" rel="noopener" aria-label={`Tickets for ${event.city} show`}>
+                  Tickets →
+                </a>
+              ) : (
+                <a class="date__tickets date__tickets--muted" href={event.eventUrl} target="_blank" rel="noopener" aria-label={`Info for ${event.city} show`}>
+                  Info →
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+        <div class="tour__footer">
+          <span>More dates announcing Q2 2026</span>
+          <a href="#contact">Booking &amp; promoter enquiries →</a>
+        </div>
+      </>
+    ) : (
+      <div class="tour__empty">
+        <div>
+          <div class="tour__empty-eyebrow">No dates announced</div>
+          <h3 class="tour__empty-title">Off the road —<br /><em>for now.</em></h3>
+          <p class="tour__empty-desc">No upcoming shows on the books. New dates are being routed for 2026 — get on the list or bring us to your city.</p>
+        </div>
+        <div class="tour__empty-cta">
+          <a
+            class="it-btn it-btn--primary"
+            href="https://www.bandsintown.com/a/inthorns?trigger=track"
+            target="_blank"
+            rel="noopener"
+          ><span>Get tour alerts</span><span>→</span></a>
+          <a class="it-btn" href="#contact"><span>Book the band</span><span>↗</span></a>
+        </div>
+      </div>
+    )}
+  </div>
 </section>
+
+<style>
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  /* Date rows */
+  .tour__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .date {
+    display: grid;
+    grid-template-columns: 180px 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+    cursor: default;
+    transition: padding-left 200ms, background 200ms;
+  }
+
+  .date:first-child { border-top: 1px solid var(--it-orange-30); }
+
+  .date:hover {
+    padding-left: 16px;
+    background: rgba(255, 107, 53, 0.04);
+  }
+
+  .date__day {
+    font-family: var(--it-font-display);
+    font-size: 40px;
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .date__day small {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.4);
+    text-transform: uppercase;
+  }
+
+  .date__venue {
+    font-family: var(--it-font-display);
+    font-size: 28px;
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+  }
+
+  .date__city {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.5);
+    margin-top: 4px;
+  }
+
+  /* Status badges */
+  .date__status {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    padding: 6px 10px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .date__status--live {
+    color: var(--it-green-light);
+    border-color: var(--it-green-light);
+  }
+
+  .date__status--hold {
+    color: var(--it-orange);
+    border-color: var(--it-orange);
+  }
+
+  .date__status--sold {
+    color: var(--it-red-light);
+    border-color: var(--it-red-light);
+  }
+
+  /* Ticket buttons */
+  .date__tickets {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    padding: 10px 16px;
+    border: 1px solid var(--it-orange);
+    color: var(--it-cream);
+    text-decoration: none;
+    transition: background 200ms, color 200ms;
+    white-space: nowrap;
+  }
+
+  .date__tickets:hover {
+    background: var(--it-orange);
+    color: var(--it-black);
+  }
+
+  .date__tickets--muted {
+    border-color: rgba(245, 245, 220, 0.25);
+    color: rgba(245, 245, 220, 0.5);
+  }
+
+  .date__tickets--muted:hover {
+    background: rgba(245, 245, 220, 0.1);
+    color: var(--it-cream);
+    border-color: var(--it-cream);
+  }
+
+  /* Footer */
+  .tour__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 24px;
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.4);
+    flex-wrap: wrap;
+  }
+
+  .tour__footer a {
+    color: var(--it-orange);
+    text-decoration: none;
+    transition: opacity 200ms;
+  }
+
+  .tour__footer a:hover { opacity: 0.7; }
+
+  /* Empty state */
+  .tour__empty {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+    padding: 64px 0;
+  }
+
+  .tour__empty-eyebrow {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: rgba(245, 245, 220, 0.4);
+    margin-bottom: 16px;
+  }
+
+  .tour__empty-title {
+    font-family: var(--it-font-display);
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+    margin: 0 0 24px;
+  }
+
+  .tour__empty-title em {
+    font-style: normal;
+    background: var(--it-orange);
+    color: var(--it-black);
+    padding: 0 0.06em;
+  }
+
+  .tour__empty-desc {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: var(--it-lh-body);
+    color: rgba(245, 245, 220, 0.7);
+    max-width: 48ch;
+    margin: 0;
+  }
+
+  .tour__empty-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 0 20px; }
+    section { padding: 64px 0; }
+
+    .date {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .date__day { grid-column: 1; grid-row: 1; font-size: 28px; }
+    .date:first-child + .date__venue,
+    .date > div:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .date__status { grid-column: 1; grid-row: 2; }
+    .date__tickets { grid-column: 2; grid-row: 2; text-align: center; }
+
+    .tour__empty {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .tour__empty-cta {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .tour__empty-cta .it-btn {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+</style>

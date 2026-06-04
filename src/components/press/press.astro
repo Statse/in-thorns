@@ -1,0 +1,160 @@
+---
+import type { PressQuote } from '@/data/press'
+import { pressQuotes } from '@/data/press'
+---
+
+<section id="press">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <div class="section__num">03 / PRESS</div>
+        <div class="section__sub">Media · EPK · Reviews</div>
+      </div>
+      <h2 class="section__title">What<br />They<br />Said</h2>
+    </div>
+
+    <figure class="pullquote">
+      <div class="pullquote__mark" aria-hidden="true">"</div>
+      <blockquote>Newcomer of the Year <em>2024.</em></blockquote>
+      <figcaption class="pullquote__src">— Kaaoszine readers' poll · 2024</figcaption>
+    </figure>
+
+    {pressQuotes.length > 0 && (
+      <div class="press-grid">
+        {pressQuotes.map(q => (
+          <figure class="quote">
+            <div class="quote__mark" aria-hidden="true">"</div>
+            <blockquote class="quote__text">{q.text}</blockquote>
+            <figcaption class="quote__src">— {q.source}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
+
+    <div class="press-actions">
+      <a class="it-btn" href="/press-kit"><span>Open full EPK</span><span>↗</span></a>
+      <a class="it-btn it-btn--ghost" href="/press-kit#photos"><span>Download press photos</span><span>↓</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  /* Pull quote */
+  .pullquote {
+    position: relative;
+    background: var(--it-ink);
+    border: 1px solid var(--it-orange-30);
+    padding: clamp(36px, 6vw, 72px);
+    margin: 0 0 48px;
+  }
+
+  .pullquote__mark {
+    position: absolute;
+    top: 16px;
+    left: clamp(24px, 4vw, 56px);
+    font-family: var(--it-font-display);
+    font-size: clamp(120px, 15vw, 200px);
+    line-height: 1;
+    color: var(--it-orange);
+    opacity: 0.3;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .pullquote blockquote {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: clamp(28px, 4.2vw, 60px);
+    line-height: 1.1;
+    color: var(--it-cream);
+    margin: 0 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pullquote blockquote em {
+    font-style: italic;
+    color: var(--it-orange);
+  }
+
+  .pullquote__src {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-orange);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Press grid */
+  .press-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .quote {
+    background: var(--it-ink);
+    border: 1px solid var(--it-orange-30);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .quote__mark {
+    font-family: var(--it-font-display);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--it-orange);
+    user-select: none;
+    margin-bottom: 8px;
+  }
+
+  .quote__text {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 22px;
+    line-height: var(--it-lh-body);
+    color: var(--it-cream);
+    flex-grow: 1;
+    margin: 0 0 24px;
+  }
+
+  .quote__src {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-orange);
+    margin-top: auto;
+  }
+
+  .press-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    section { padding: 64px 0; }
+    .press-grid { grid-template-columns: 1fr; }
+    .press-actions .it-btn { flex: 1; min-width: 0; }
+  }
+</style>

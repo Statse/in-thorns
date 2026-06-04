@@ -1,38 +1,246 @@
 ---
-// Navigation component
-import { Image } from 'astro:assets'
-
-// Check if we're on the homepage
-const isHomepage = Astro.url.pathname === '/'
-const linkPrefix = isHomepage ? '#' : '/#'
-
-// Check if we're on an album page
-const isAlbumPage = Astro.url.pathname.startsWith('/album/')
+interface Props {
+  currentPath?: string
+}
+const { currentPath = '/' } = Astro.props
 ---
 
-<nav id='main-nav' aria-label='Main navigation' class='fixed top-0 left-0 right-0 z-50 transition-all duration-500'>
-	<div class='container mx-auto px-4'>
-		<div class='flex items-center justify-between h-16'>
-			<!-- Logo -->
-			<a href={isHomepage ? '#hero' : '/'} aria-label={isHomepage ? 'Go to top of page' : 'Go to homepage'} class='transition-transform hover:scale-105'>
-				<Image id='nav-logo' src='/it-logo-white.png' alt='In Thorns logo' width={192} height={48} class={`h-12 transition-opacity duration-500 ${isAlbumPage ? 'opacity-100' : 'opacity-0'}`} loading='eager' />
-			</a>
-
-			{isAlbumPage ? (
-				<!-- Minimal nav for album pages -->
-				<a href='/#music' class='text-white hover:text-ew-orange transition-colors text-sm md:text-base'>
-					← Back to Music
-				</a>
-			) : (
-				<!-- Full nav links for homepage -->
-				<ul class='flex gap-6 text-sm md:text-base text-white'>
-					<li><a href={`${linkPrefix}music`} class='hover:text-ew-orange transition-colors'>Music</a></li>
-					<li><a href={`${linkPrefix}tour`} class='hover:text-ew-orange transition-colors'>Tour</a></li>
-					<li><a href={`${linkPrefix}media`} class='hover:text-ew-orange transition-colors'>Media</a></li>
-					<li><a href={`${linkPrefix}about`} class='hover:text-ew-orange transition-colors'>Bio</a></li>
-					<li><a href={`${linkPrefix}contact`} class='hover:text-ew-orange transition-colors'>Contact</a></li>
-				</ul>
-			)}
-		</div>
-	</div>
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="/" class="nav__logo">IN THORNS</a>
+  <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav__links" id="nav-links">
+    <li><a href="/#single">Single</a></li>
+    <li><a href="/#tour">Tour</a></li>
+    <li><a href="/#press">Press</a></li>
+    <li><a href="/#gallery">Images</a></li>
+    <li><a href="/#bio">Bio</a></li>
+    <li><a href="/press-kit">EPK</a></li>
+    <li><a href="/#contact">Booking</a></li>
+    <li>
+      <a
+        class="nav__cta"
+        href="https://distrokid.com/hyperfollow/inthorns/wormhusk"
+        target="_blank"
+        rel="noopener"
+      >Pre-save →</a>
+    </li>
+  </ul>
+  <div class="nav__overlay" id="nav-overlay" aria-hidden="true"></div>
 </nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 48px;
+    transition: background 300ms, border-color 300ms;
+  }
+
+  .nav.scrolled {
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .nav__logo {
+    font-family: var(--it-font-display);
+    font-size: 18px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--it-cream);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 200ms;
+    position: relative;
+    z-index: 52;
+  }
+
+  .nav__logo::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--it-orange);
+    flex-shrink: 0;
+  }
+
+  .nav__logo:hover { color: var(--it-orange); }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__links a {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    text-decoration: none;
+    color: rgba(245, 245, 220, 0.7);
+    transition: color 200ms;
+  }
+
+  .nav__links a:hover,
+  .nav__links a.active { color: var(--it-orange); }
+
+  .nav__cta {
+    font-family: var(--it-font-mono) !important;
+    font-size: 11px !important;
+    background: var(--it-orange) !important;
+    color: var(--it-black) !important;
+    padding: 8px 14px;
+    border: none;
+    letter-spacing: var(--it-track-mono-sm) !important;
+    transition: background 200ms !important;
+  }
+
+  .nav__cta:hover {
+    background: var(--it-orange-light) !important;
+    color: var(--it-black) !important;
+  }
+
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    position: relative;
+    z-index: 52;
+  }
+
+  .nav__burger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--it-cream);
+    transition: transform 300ms, opacity 300ms;
+  }
+
+  .nav__overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 49;
+  }
+
+  @media (max-width: 900px) {
+    .nav { padding: 16px 20px; }
+
+    .nav__burger { display: flex; }
+
+    .nav__links {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 280px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      background: var(--it-ink);
+      border-left: 1px solid var(--it-orange-30);
+      padding: 80px 32px 40px;
+      transform: translateX(100%);
+      transition: transform 320ms cubic-bezier(0.4, 0, 0.1, 1);
+      z-index: 51;
+    }
+
+    .nav__links.open { transform: translateX(0); }
+
+    .nav__links li {
+      width: 100%;
+      border-bottom: 1px solid rgba(245, 245, 220, 0.08);
+    }
+
+    .nav__links a {
+      display: block;
+      padding: 16px 0;
+      font-size: 12px;
+    }
+
+    .nav__cta {
+      margin-top: 16px;
+      display: block;
+      text-align: center;
+      padding: 14px !important;
+    }
+
+    .nav__overlay.open { display: block; }
+
+    .nav__burger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__burger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+  }
+</style>
+
+<script>
+  function initNav() {
+    const nav = document.getElementById('nav');
+    const burger = document.getElementById('nav-burger');
+    const links = document.getElementById('nav-links');
+    const overlay = document.getElementById('nav-overlay');
+    if (!nav || !burger || !links || !overlay) return;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      const navAnchors = links.querySelectorAll<HTMLAnchorElement>('a:not(.nav__cta)');
+      const sections = document.querySelectorAll<HTMLElement>('section[id], header[id]');
+      let current = '';
+      sections.forEach(s => { if (y >= s.offsetTop - 180) current = s.id; });
+      navAnchors.forEach(a => {
+        const href = a.getAttribute('href') || '';
+        a.classList.toggle('active', href === `#${current}` || href === `/#${current}`);
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const openDrawer = () => {
+      links.classList.add('open');
+      overlay.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeDrawer = () => {
+      links.classList.remove('open');
+      overlay.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    burger.addEventListener('click', () => {
+      links.classList.contains('open') ? closeDrawer() : openDrawer();
+    });
+    overlay.addEventListener('click', closeDrawer);
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+  }
+
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
+</script>

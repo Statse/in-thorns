@@ -1,51 +1,154 @@
 ---
-import SocialLinks from "./components/social-links.astro";
-import { Image } from "astro:assets";
+// Contact & booking section
+const contactRows = [
+  { k: 'Booking',    v: 'inthornsband@gmail.com',           href: 'mailto:inthornsband@gmail.com' },
+  { k: 'Press / EPK', v: 'View press kit →',                href: '/press-kit' },
+  { k: 'Labels',     v: 'Currently unsigned · open to conversations', href: null },
+  { k: 'Based',      v: 'Jyväskylä, Finland',               href: null },
+  { k: 'Spotify',    v: 'open.spotify.com/artist/InThorns', href: 'https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d' },
+  { k: 'Instagram',  v: '@inxthorns',                       href: 'https://www.instagram.com/inxthorns/' },
+]
 ---
 
-<footer id="contact" class="bg-black border-t-2 border-ew-orange/30 py-12 px-4">
-	<div class="container mx-auto max-w-6xl">
-		<div class="grid md:grid-cols-3 gap-8 mb-8">
-			<!-- Logo -->
-			<div class="flex items-center justify-center md:justify-start">
-				<Image
-					src="/it-logo-white.png"
-					alt="In Thorns"
-					width={256}
-					height={64}
-					class="h-16"
-				/>
-			</div>
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <div class="contact__left">
+        <h2 class="contact__h">Book<br /><em>the band.</em></h2>
+        <p class="contact__desc">
+          Booking, press, licensing, labels — one address. We reply in one to three working days, in English or Finnish.
+        </p>
+        <a class="it-btn it-btn--primary" href="mailto:inthornsband@gmail.com">
+          <span>inthornsband@gmail.com</span><span>→</span>
+        </a>
+      </div>
 
-			<!-- Social Links -->
-			<SocialLinks />
+      <div class="contact__list">
+        {contactRows.map(row => (
+          <div class="contact__row">
+            <div class="contact__k">{row.k}</div>
+            <div class="contact__v">
+              {row.href
+                ? <a href={row.href} target={row.href.startsWith('http') ? '_blank' : undefined} rel={row.href.startsWith('http') ? 'noopener' : undefined}>{row.v}</a>
+                : row.v
+              }
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
-			<!-- Contact -->
-			<div class="text-center md:text-right">
-				<h3 class="text-ew-orange text-lg mb-4">Contact and booking</h3>
-				<p class="text-ew-cream">
-					<a
-						href="mailto:inthornsband@gmail.com"
-						class="hover:text-ew-orange transition-colors"
-					>
-						inthornsband@gmail.com
-					</a>
-				</p>
-			</div>
-		</div>
+<style>
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
 
-		<div
-			class="border-t border-ew-orange/20 pt-8 text-center text-ew-cream/50 text-sm"
-		>
-			<p class="mb-2">&copy; 2025 In Thorns. All rights reserved.</p>
-			<p>
-				<a
-					href="/privacy"
-					class="hover:text-ew-orange transition-colors underline"
-				>
-					Privacy Policy
-				</a>
-			</p>
-		</div>
-	</div>
-</footer>
+  section {
+    padding: 96px 0;
+  }
+
+  .contact {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
+    background: var(--it-ink);
+    border: 1px solid var(--it-orange-30);
+    padding: 56px;
+  }
+
+  .contact__left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .contact__h {
+    font-family: var(--it-font-display);
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .contact__h em {
+    font-style: normal;
+    background: var(--it-orange);
+    color: var(--it-black);
+    padding: 0 0.06em;
+  }
+
+  .contact__desc {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: var(--it-lh-body);
+    color: rgba(245, 245, 220, 0.7);
+    margin: 0;
+    max-width: 44ch;
+  }
+
+  /* Contact rows (definition list style) */
+  .contact__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact__row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .contact__row:first-child { border-top: 1px solid var(--it-orange-30); }
+
+  .contact__k {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: var(--it-orange);
+  }
+
+  .contact__v {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: var(--it-lh-body);
+    color: rgba(245, 245, 220, 0.8);
+  }
+
+  .contact__v a {
+    color: var(--it-cream);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+
+  .contact__v a:hover { color: var(--it-orange); }
+
+  @media (max-width: 900px) {
+    .contact {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 40px 32px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    section { padding: 64px 0; }
+    .contact { padding: 32px 20px; }
+    .contact__row { grid-template-columns: 100px 1fr; }
+  }
+</style>

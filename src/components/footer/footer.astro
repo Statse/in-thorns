@@ -1,0 +1,88 @@
+---
+// Site footer
+---
+
+<footer class="footer">
+  <div class="wrap footer__row">
+    <div class="footer__copy">© 2026 IN THORNS · Jyväskylä, Finland</div>
+    <ul class="footer__links">
+      <li><a href="https://www.instagram.com/inxthorns/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d" target="_blank" rel="noopener">Spotify</a></li>
+      <li><a href="https://www.youtube.com/@inthornsband" target="_blank" rel="noopener">YouTube</a></li>
+      <li><a href="https://www.facebook.com/inthorns" target="_blank" rel="noopener">Facebook</a></li>
+    </ul>
+    <div class="footer__tagline">
+      The pain won't cease.
+      <a href="/privacy" class="footer__privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--it-orange-30);
+    padding: 24px 0;
+  }
+
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .footer__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer__copy,
+  .footer__tagline {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.35);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer__privacy {
+    color: rgba(245, 245, 220, 0.35);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+
+  .footer__privacy:hover { color: var(--it-orange); }
+
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer__links a {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.35);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+
+  .footer__links a:hover { color: var(--it-orange); }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    .footer__row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer__tagline { flex-direction: row; flex-wrap: wrap; }
+  }
+</style>

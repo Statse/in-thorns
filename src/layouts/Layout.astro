@@ -1,34 +1,30 @@
 ---
-import { ClientRouter, fade, slide } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import SpeedInsights from '@vercel/speed-insights/astro'
+import '@/styles/design-system.css'
+
 interface Props {
   title: string
+  description?: string
+  noindex?: boolean
 }
 
-const { title } = Astro.props
+const { title, description = "In Thorns — Metalcore from Jyväskylä, Finland.", noindex = false } = Astro.props
 ---
 
 <!doctype html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
-    <meta name='description' content="Let's sail into the unknown" />
-    <meta name='viewport' content='width=device-width' />
+    <meta name='description' content={description} />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='generator' content={Astro.generator} />
+    {noindex && <meta name='robots' content='noindex' />}
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body
-    class='bg-black min-h-screen w-screen flex flex-col font-koulen'
-    transition:animate='fade'
-  >
-    <style>
-      * {
-        font-family: simsun, times, serif;
-        font-weight: 800;
-      }
-    </style>
+  <body transition:animate='fade'>
     <slot />
     <SpeedInsights />
   </body>

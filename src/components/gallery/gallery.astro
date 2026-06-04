@@ -1,0 +1,129 @@
+---
+// Photo gallery section — masonry grid
+const photos = [
+  { src: '/photos/live/poppari_2025/_X2A6176.webp', alt: 'In Thorns live at Poppari 2025 — lead vocalist', caption: 'Live · Poppari 2025' },
+  { src: '/photos/exit_wounds/1.webp', alt: 'exit wounds promotional photo — In Thorns', caption: 'Promo · exit wounds' },
+  { src: '/photos/live/poppari_2025/_X2A5650.webp', alt: 'In Thorns live — wide stage shot', caption: 'Live · wide' },
+  { src: '/photos/tlbocos/2A2FE513-7654-45A3-9120-25FAD6AFF06C.webp', alt: 'the last bead on a cord of songs session', caption: 'Archive · tlboacos' },
+  { src: '/photos/live/poppari_2025/_X2A7434.webp', alt: 'In Thorns live — crowd perspective', caption: 'Live · crowd' },
+]
+---
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <div class="section__num">04 / MEDIA</div>
+        <div class="section__sub">Live · Promo · Archive</div>
+      </div>
+      <h2 class="section__title">Images</h2>
+    </div>
+
+    <div class="gallery">
+      {photos.map((photo, i) => (
+        <figure class={`gallery__item${i === 0 ? ' gallery__item--tall' : ''}`}>
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+          <figcaption class="gallery__caption">{photo.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <div class="gallery__footer">
+      <a class="it-btn" href="/gallery">View all photos →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 280px 280px;
+    gap: 12px;
+  }
+
+  .gallery__item {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .gallery__item--tall {
+    grid-row: span 2;
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.3) contrast(1.05);
+    transition: filter 700ms ease, transform 700ms ease;
+  }
+
+  .gallery__item:hover img {
+    filter: grayscale(0) contrast(1);
+    transform: scale(1.06);
+  }
+
+  .gallery__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.7);
+    transform: translateY(100%);
+    transition: transform 300ms ease;
+  }
+
+  .gallery__item:hover .gallery__caption {
+    transform: translateY(0);
+  }
+
+  .gallery__footer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    section { padding: 64px 0; }
+
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 200px 200px 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+    }
+
+    .gallery__item--tall { grid-row: span 1; }
+
+    .gallery__item {
+      height: 240px;
+    }
+  }
+</style>

@@ -1,0 +1,299 @@
+/* ==========================================================================
+   In Thorns — Design System
+   v2.0 · 2026
+   ========================================================================== */
+
+@import '@fontsource/anton';
+@import '@fontsource-variable/archivo';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+:root {
+  /* ---------- Color · Primary ---------- */
+  --it-orange:          #FF6B35;
+  --it-orange-light:    #FF8C42;
+  --it-orange-dark:     #FF4500;
+  --it-orange-20:       rgba(255, 107, 53, 0.20);
+  --it-orange-30:       rgba(255, 107, 53, 0.30);
+  --it-orange-50:       rgba(255, 107, 53, 0.50);
+
+  /* ---------- Color · Secondary ---------- */
+  --it-red:             #D32F2F;
+  --it-red-light:       #FF5252;
+  --it-red-dark:        #B71C1C;
+  --it-green:           #0D7377;
+  --it-green-light:     #14FFEC;
+  --it-green-dark:      #1A4D2E;
+
+  /* ---------- Color · Wormhusk ---------- */
+  --it-wh-violet:       #9D52C2;
+  --it-wh-violet-light: #C08ADE;
+  --it-wh-violet-dark:  #6E2E96;
+  --it-wh-violet-deep:  #2A0F3F;
+  --it-wh-bruise:       #3D1E5C;
+  --it-wh-violet-20:    rgba(157, 82, 194, 0.20);
+  --it-wh-violet-30:    rgba(157, 82, 194, 0.30);
+  --it-wh-violet-50:    rgba(157, 82, 194, 0.50);
+
+  /* ---------- Color · Neutrals ---------- */
+  --it-cream:           #F5F5DC;
+  --it-black:           #000000;
+  --it-ink:             #0A0A0A;
+  --it-black-50:        rgba(0, 0, 0, 0.50);
+  --it-black-80:        rgba(0, 0, 0, 0.80);
+
+  /* ---------- Typography ---------- */
+  --it-font-display:    'Anton', 'Impact', sans-serif;
+  --it-font-body:       'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --it-font-mono:       'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  --it-fs-hero:         340px;
+  --it-fs-title:        180px;
+  --it-fs-card:         56px;
+  --it-fs-body:         22px;
+  --it-fs-eyebrow:      13px;
+  --it-fs-mono:         12px;
+
+  --it-track-display:   -0.02em;
+  --it-track-mono-lg:   0.4em;
+  --it-track-mono-md:   0.3em;
+  --it-track-mono-sm:   0.2em;
+
+  --it-lh-display:      0.85;
+  --it-lh-body:         1.4;
+  --it-lh-mono:         1.8;
+
+  /* ---------- Borders / Shadows ---------- */
+  --it-border:          1px solid var(--it-orange-30);
+  --it-border-strong:   1px solid var(--it-orange);
+  --it-shadow-soft:     0 40px 80px rgba(0, 0, 0, 0.8);
+  --it-shadow-card:     0 0 0 1px var(--it-orange-30);
+}
+
+/* --------------------------------------------------------------------------
+   Base Reset
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--it-black);
+  color: var(--it-cream);
+  font-family: var(--it-font-body);
+  font-weight: 800;
+  line-height: var(--it-lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   Typography Utilities
+   -------------------------------------------------------------------------- */
+.it-display {
+  font-family: var(--it-font-display);
+  line-height: var(--it-lh-display);
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-display);
+}
+
+.it-body {
+  font-family: var(--it-font-body);
+  font-weight: 800;
+  line-height: var(--it-lh-body);
+}
+
+.it-mono {
+  font-family: var(--it-font-mono);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-mono-md);
+}
+
+.it-accent       { color: var(--it-orange); }
+.it-accent-green { color: var(--it-green-light); }
+.it-accent-red   { color: var(--it-red-light); }
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.it-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--it-font-mono);
+  font-size: var(--it-fs-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-mono-md);
+  padding: 18px 24px;
+  border: 1px solid var(--it-orange);
+  background: transparent;
+  color: var(--it-cream);
+  cursor: pointer;
+  transition: background 200ms, color 200ms, border-color 200ms;
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 220px;
+  justify-content: center;
+}
+
+.it-btn:hover {
+  background: var(--it-orange);
+  color: var(--it-black);
+}
+
+.it-btn--primary {
+  background: var(--it-orange);
+  color: var(--it-black);
+}
+
+.it-btn--primary:hover {
+  background: transparent;
+  color: var(--it-cream);
+}
+
+.it-btn--ghost {
+  border-color: rgba(245, 245, 220, 0.25);
+  color: var(--it-cream);
+}
+
+.it-btn--ghost:hover {
+  border-color: var(--it-orange);
+  color: var(--it-orange);
+  background: transparent;
+}
+
+.it-btn--sm {
+  padding: 10px 16px;
+  font-size: 10px;
+  min-width: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Chips
+   -------------------------------------------------------------------------- */
+.it-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--it-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-mono-sm);
+  padding: 8px 14px;
+  border: 1px solid rgba(245, 245, 220, 0.25);
+  color: var(--it-cream);
+  text-decoration: none;
+  transition: border-color 150ms, color 150ms;
+}
+
+.it-chip:hover {
+  border-color: var(--it-orange);
+  color: var(--it-orange);
+}
+
+/* --------------------------------------------------------------------------
+   Section Head
+   -------------------------------------------------------------------------- */
+.section__head {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: start;
+  gap: 16px;
+  padding-bottom: 48px;
+}
+
+.section__num {
+  font-family: var(--it-font-mono);
+  font-size: var(--it-fs-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-mono-md);
+  color: var(--it-orange);
+  padding-top: 0.6em;
+}
+
+.section__sub {
+  font-family: var(--it-font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-mono-lg);
+  color: rgba(245, 245, 220, 0.4);
+  padding-top: 0.4em;
+}
+
+.section__title {
+  font-family: var(--it-font-display);
+  font-size: clamp(56px, 10vw, 140px);
+  line-height: var(--it-lh-display);
+  text-transform: uppercase;
+  letter-spacing: var(--it-track-display);
+  color: var(--it-cream);
+  grid-column: 2;
+}
+
+@media (max-width: 720px) {
+  .section__head {
+    grid-template-columns: 1fr;
+    padding-bottom: 32px;
+  }
+  .section__title {
+    grid-column: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Barcode divider
+   -------------------------------------------------------------------------- */
+.barcode {
+  width: 100%;
+  height: 32px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--it-orange) 0px,
+    var(--it-orange) 1px,
+    transparent 1px,
+    transparent 4px,
+    var(--it-orange) 4px,
+    var(--it-orange) 5px,
+    transparent 5px,
+    transparent 10px,
+    var(--it-orange) 10px,
+    var(--it-orange) 11px,
+    transparent 11px,
+    transparent 16px,
+    var(--it-orange) 16px,
+    var(--it-orange) 18px,
+    transparent 18px,
+    transparent 24px
+  );
+  opacity: 0.35;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  30%       { transform: translate(1%, 2%); }
+  50%       { transform: translate(-1%, 1%); }
+  70%       { transform: translate(2%, -1%); }
+  90%       { transform: translate(-2%, 2%); }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none !important; }
+  .grain         { animation: none !important; }
+  * { transition-duration: 0.01ms !important; }
+}
