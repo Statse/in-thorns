@@ -4,8 +4,6 @@
 
 <header class="hero hero--wh" id="top">
   <div class="hero__bg" aria-hidden="true"></div>
-  <div class="hero__grain" aria-hidden="true"></div>
-
   <div class="crop-frame" aria-hidden="true">
     <i class="tl"></i>
     <i class="tr"></i>
@@ -76,18 +74,6 @@
       url('/hero/background.webp');
   }
 
-  /* Film grain */
-  .hero__grain {
-    position: absolute;
-    inset: -50%;
-    width: 200%;
-    height: 200%;
-    background-image: url('/itbg.gif');
-    background-size: 200px 200px;
-    opacity: 0.12;
-    animation: grain 8s steps(10) infinite;
-    pointer-events: none;
-  }
 
   /* Crop frame corners */
   .crop-frame {
@@ -176,14 +162,11 @@
 
   .hero__h1 em {
     font-style: normal;
-    background: var(--it-orange);
-    color: var(--it-black);
-    padding: 0 0.08em;
+    color: var(--it-orange);
   }
 
   .hero--wh .hero__h1 em {
-    background: var(--it-wh-violet);
-    color: var(--it-cream);
+    color: var(--it-wh-violet-light);
   }
 
   /* Lede / CTA row */
