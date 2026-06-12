@@ -1,19 +1,25 @@
 ---
+
 ---
 
 <nav class="nav" id="nav" aria-label="Main">
   <a href="/" class="nav__logo">IN THORNS</a>
-  <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+  <button
+    class="nav__burger"
+    id="nav-burger"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="nav-links"
+  >
     <span></span><span></span><span></span>
   </button>
   <ul class="nav__links" id="nav-links">
     <li><a href="/#single">Single</a></li>
     <li><a href="/#tour">Tour</a></li>
-    <li><a href="/#press">Press</a></li>
     <li><a href="/#gallery">Images</a></li>
     <li><a href="/#bio">Bio</a></li>
-    <li><a href="/press-kit">EPK</a></li>
     <li><a href="/#contact">Booking</a></li>
+    <li><a href="/press-kit" class="nav__cta">Press kit</a></li>
   </ul>
   <div class="nav__overlay" id="nav-overlay" aria-hidden="true"></div>
 </nav>
@@ -29,7 +35,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 48px;
-    transition: background 300ms, border-color 300ms;
+    transition:
+      background 300ms,
+      border-color 300ms;
   }
 
   .nav.scrolled {
@@ -55,7 +63,7 @@
   }
 
   .nav__logo::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 8px;
     height: 8px;
@@ -63,7 +71,9 @@
     flex-shrink: 0;
   }
 
-  .nav__logo:hover { color: var(--it-orange); }
+  .nav__logo:hover {
+    color: var(--it-orange);
+  }
 
   .nav__links {
     display: flex;
@@ -86,7 +96,21 @@
   }
 
   .nav__links a:hover,
-  .nav__links a.active { color: var(--it-orange); }
+  .nav__links a.active {
+    color: var(--it-orange);
+  }
+
+  .nav__links a.nav__cta {
+    border: 1px solid var(--it-orange-30);
+    padding: 7px 14px;
+    color: var(--it-cream);
+    transition: border-color 180ms, color 180ms;
+  }
+
+  .nav__links a.nav__cta:hover {
+    border-color: var(--it-orange);
+    color: var(--it-orange);
+  }
 
   .nav__burger {
     display: none;
@@ -105,7 +129,9 @@
     width: 22px;
     height: 1px;
     background: var(--it-cream);
-    transition: transform 300ms, opacity 300ms;
+    transition:
+      transform 300ms,
+      opacity 300ms;
   }
 
   .nav__overlay {
@@ -117,9 +143,13 @@
   }
 
   @media (max-width: 900px) {
-    .nav { padding: 16px 20px; }
+    .nav {
+      padding: 16px 20px;
+    }
 
-    .nav__burger { display: flex; }
+    .nav__burger {
+      display: flex;
+    }
 
     .nav__links {
       position: fixed;
@@ -138,7 +168,9 @@
       z-index: 51;
     }
 
-    .nav__links.open { transform: translateX(0); }
+    .nav__links.open {
+      transform: translateX(0);
+    }
 
     .nav__links li {
       width: 100%;
@@ -151,12 +183,16 @@
       font-size: 12px;
     }
 
-    .nav__overlay.open { display: block; }
+    .nav__overlay.open {
+      display: block;
+    }
 
     .nav__burger[aria-expanded="true"] span:nth-child(1) {
       transform: translateY(6px) rotate(45deg);
     }
-    .nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__burger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
     .nav__burger[aria-expanded="true"] span:nth-child(3) {
       transform: translateY(-6px) rotate(-45deg);
     }
@@ -171,46 +207,59 @@
     (window as any).__navAC = ac;
     const { signal } = ac;
 
-    const nav = document.getElementById('nav');
-    const burger = document.getElementById('nav-burger');
-    const links = document.getElementById('nav-links');
-    const overlay = document.getElementById('nav-overlay');
+    const nav = document.getElementById("nav");
+    const burger = document.getElementById("nav-burger");
+    const links = document.getElementById("nav-links");
+    const overlay = document.getElementById("nav-overlay");
     if (!nav || !burger || !links || !overlay) return;
 
     const onScroll = () => {
       const y = window.scrollY;
-      nav.classList.toggle('scrolled', y > 60);
-      const navAnchors = links.querySelectorAll<HTMLAnchorElement>('a');
-      const sections = document.querySelectorAll<HTMLElement>('section[id], header[id]');
-      let current = '';
-      sections.forEach(s => { if (y >= s.offsetTop - 180) current = s.id; });
-      navAnchors.forEach(a => {
-        const href = a.getAttribute('href') || '';
-        a.classList.toggle('active', href === `#${current}` || href === `/#${current}`);
+      nav.classList.toggle("scrolled", y > 60);
+      const navAnchors = links.querySelectorAll<HTMLAnchorElement>("a");
+      const sections = document.querySelectorAll<HTMLElement>(
+        "section[id], header[id]",
+      );
+      let current = "";
+      sections.forEach((s) => {
+        if (y >= s.offsetTop - 180) current = s.id;
+      });
+      navAnchors.forEach((a) => {
+        const href = a.getAttribute("href") || "";
+        a.classList.toggle(
+          "active",
+          href === `#${current}` || href === `/#${current}`,
+        );
       });
     };
-    window.addEventListener('scroll', onScroll, { passive: true, signal });
+    window.addEventListener("scroll", onScroll, { passive: true, signal });
     onScroll();
 
     const openDrawer = () => {
-      links.classList.add('open');
-      overlay.classList.add('open');
-      burger.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      links.classList.add("open");
+      overlay.classList.add("open");
+      burger.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
     };
     const closeDrawer = () => {
-      links.classList.remove('open');
-      overlay.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      links.classList.remove("open");
+      overlay.classList.remove("open");
+      burger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
     };
 
-    burger.addEventListener('click', () => {
-      links.classList.contains('open') ? closeDrawer() : openDrawer();
-    }, { signal });
-    overlay.addEventListener('click', closeDrawer, { signal });
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer, { signal }));
+    burger.addEventListener(
+      "click",
+      () => {
+        links.classList.contains("open") ? closeDrawer() : openDrawer();
+      },
+      { signal },
+    );
+    overlay.addEventListener("click", closeDrawer, { signal });
+    links
+      .querySelectorAll("a")
+      .forEach((a) => a.addEventListener("click", closeDrawer, { signal }));
   }
 
-  document.addEventListener('astro:page-load', initNav);
+  document.addEventListener("astro:page-load", initNav);
 </script>
