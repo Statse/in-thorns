@@ -21,7 +21,11 @@
       "Bash(mkdir -p \"e:/github/in-thorns/.claude/skills/conventional-commit\")",
       "Bash(curl -s http://localhost:4321/)",
       "Bash(npx playwright *)",
-      "Bash(Get-ChildItem -Path \"e:\\\\github\\\\in-thorns\\\\handover\\\\design_handoff_gallery\\\\\" -File | Select-Object Name)"
+      "Bash(Get-ChildItem -Path \"e:\\\\github\\\\in-thorns\\\\handover\\\\design_handoff_gallery\\\\\" -File | Select-Object Name)",
+      "Bash(Get-ChildItem -Path . -Name)",
+      "Bash(Get-ChildItem -Recurse \"E:\\\\github\\\\in-thorns\\\\public\\\\photos\" -File)",
+      "Bash(Measure-Object)",
+      "Bash(Select-Object -ExpandProperty Count)"
     ],
     "deny": [],
     "ask": [],

@@ -49,7 +49,7 @@ export const releases: Release[] = [
     tag: 'Album',
     cover: '/music/tlboacos-album.webp',
     meta: 'Debut LP · 2024 · 8 tracks',
-    desc: 'Nihilistic soundscapes and soaring melodies. Newcomer of the Year 2024 — Kaaoszine readers\' poll.',
+    desc: 'Nihilistic soundscapes and soaring melodies. Top 10 newcomer of the year 2024 — Kaaoszine readers\' poll.',
     links: [
       { label: 'Spotify', url: 'https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy' },
       { label: 'Apple Music', url: 'https://music.apple.com/tr/album/the-last-bead-on-a-cord-of-songs/1723544456' },

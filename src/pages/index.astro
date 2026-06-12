@@ -3,12 +3,9 @@ import Layout from '@/layouts/Layout.astro'
 import Navigation from '@/components/navigation/navigation.astro'
 import Hero from '@/components/hero/hero.astro'
 import Ticker from '@/components/ticker/ticker.astro'
-import Feature from '@/components/feature/feature.astro'
-import StatBand from '@/components/statband/statband.astro'
 import Tour from '@/components/tour/tour.astro'
-import Press from '@/components/press/press.astro'
-import Gallery from '@/components/gallery/gallery.astro'
 import Discography from '@/components/discography/discography.astro'
+import PhotoStrip from '@/components/photostrip/photostrip.astro'
 import Bio from '@/components/bio/bio.astro'
 import Contact from '@/components/contact/contact.astro'
 import Footer from '@/components/footer/footer.astro'
@@ -35,12 +32,9 @@ try {
   <main id="main">
     <Hero />
     <Ticker events={events} />
-    <Feature />
-    <StatBand events={events} />
     <Tour events={events} />
-    <Press />
-    <Gallery />
     <Discography />
+    <PhotoStrip />
     <Bio />
     <Contact />
   </main>

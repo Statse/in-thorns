@@ -12,7 +12,7 @@ const facts = [
   { k: 'Origin',     v: 'Jyväskylä', sub: 'Central Finland · est. 2022' },
   { k: 'Genre',      v: 'Metalcore',  sub: 'Post · alternative · surrealist' },
   { k: 'Members',    v: '5',          sub: 'Two-vocalist attack' },
-  { k: 'Accolades',  v: "NCY '24",    sub: "Kaaoszine readers' poll" },
+  { k: 'Accolades',  v: "#8 '24",     sub: 'Vuoden tulokas · Kaaoszine' },
 ]
 ---
 
@@ -20,19 +20,27 @@ const facts = [
   <div class="wrap">
     <div class="section__head">
       <div>
-        <div class="section__num">06 / BIO</div>
-        <div class="section__sub">Who &amp; what</div>
+        <div class="section__num">03 / BIO</div>
+        <div class="section__sub">Who &amp; what · Press</div>
       </div>
       <h2 class="section__title">The<br />Collective</h2>
+    </div>
+
+    <div class="pressline">
+      <div>
+        <div class="pressline__quote">Top 10 newcomer of the year, <em>2024.</em></div>
+        <div class="pressline__src">— Kaaoszine readers' poll · 5,000+ voters</div>
+      </div>
+      <div class="pressline__cta">
+        <a class="it-btn" href="/press-kit"><span>Open full EPK</span><span>↗</span></a>
+        <a class="it-btn it-btn--ghost" href="/press-kit#photos"><span>Press photos</span><span>↓</span></a>
+      </div>
     </div>
 
     <div class="bio">
       <div class="bio__text">
         <p>
-          Jyväskylä-based Finnish metal collective In Thorns releases new single <em>"wormhusk"</em> on May 29, 2026 — the second chapter of a new cycle following their acclaimed debut album <em>"the last bead on a cord of songs"</em> (2024). The debut earned them Newcomer of the Year recognition in Kaaoszine's readers' poll.
-        </p>
-        <p>
-          The collective creates metal driven by crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring melodies. Drawing inspiration from surrealist art and horror, In Thorns delivers an immersive sonic experience that balances devastating heaviness with haunting beauty. Live, the band delivers a tight, high-energy performance that pulls audiences into their dark, surreal world.
+          Jyväskylä-based metal collective In Thorns creates music driven by crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring melodies. Their acclaimed 2024 debut <em>"the last bead on a cord of songs"</em> placed top 10 in Kaaoszine's newcomer of the year readers' poll; the new single cycle — <em>"exit wounds"</em> and <em>"wormhusk"</em> — pushes heavier and leaner. Drawing from surrealist art and horror, the live show pulls audiences into their dark, surreal world.
         </p>
 
         <div class="bio__facts">
@@ -67,8 +75,50 @@ const facts = [
   }
 
   section {
-    padding: 96px 0;
+    padding: 88px 0;
     border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  /* Pressline strip */
+  .pressline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    border: 1px solid var(--it-orange-30);
+    background: var(--it-ink);
+    padding: 28px 36px;
+    margin-bottom: 56px;
+  }
+
+  .pressline__quote {
+    font-family: var(--it-font-display);
+    font-size: clamp(24px, 3vw, 40px);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--it-cream);
+  }
+
+  .pressline__quote em {
+    font-style: normal;
+    color: var(--it-orange);
+  }
+
+  .pressline__src {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    opacity: 0.55;
+    margin-top: 10px;
+  }
+
+  .pressline__cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .bio {
@@ -91,18 +141,6 @@ const facts = [
   .bio__text p em {
     font-style: italic;
     color: var(--it-cream);
-  }
-
-  /* Drop cap */
-  .bio__text p:first-child::first-letter {
-    font-family: var(--it-font-display);
-    font-size: 72px;
-    line-height: 0.8;
-    color: var(--it-orange);
-    float: left;
-    margin-right: 8px;
-    margin-top: 8px;
-    text-transform: uppercase;
   }
 
   /* Facts grid */
@@ -202,6 +240,7 @@ const facts = [
   @media (max-width: 720px) {
     .wrap { padding: 0 20px; }
     section { padding: 64px 0; }
+    .pressline { padding: 24px 20px; }
     .member { grid-template-columns: 40px 1fr; }
     .member__role { grid-column: 2; text-align: left; }
   }
