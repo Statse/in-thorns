@@ -1,101 +1,645 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Navigation from "@/components/navigation/navigation.astro";
-import { Image } from "astro:assets";
+import Layout from '@/layouts/Layout.astro'
+import Navigation from '@/components/navigation/navigation.astro'
+import Footer from '@/components/footer/footer.astro'
 
-// Get preview images for each gallery category
-const galleries = [
-	{
-		slug: "exit-wounds",
-		title: "exit wounds",
-		description: "Exit wounds promo",
-		previewImage: "/photos/exit_wounds/1.webp",
-		colorClass: "ew-orange",
-		count: 11,
-	},
-	{
-		slug: "tlboacos",
-		title: "the last bead on a cord of songs",
-		description: "Album promo",
-		previewImage:
-			"/photos/tlbocos/2A2FE513-7654-45A3-9120-25FAD6AFF06C.webp",
-		colorClass: "ew-red",
-		count: 7,
-	},
-	{
-		slug: "live",
-		title: "live",
-		description: "Live performance photos",
-		previewImage: "/photos/live/poppari_2025/_X2A5650.webp",
-		colorClass: "ew-green",
-		count: 15,
-	},
-];
+const liveFiles = [
+  '_X2A5650','_X2A5772','_X2A5851','_X2A6009','_X2A6051',
+  '_X2A6176','_X2A6265','_X2A6585','_X2A7000','_X2A7067',
+  '_X2A7387','_X2A7434','_X2A7729','_X2A7760','_X2A7803',
+]
+
+const archiveFiles = [
+  '2A2FE513-7654-45A3-9120-25FAD6AFF06C',
+  '393EEFFE-B1F9-4361-9339-48ECC64AF230',
+  '3E182CA6-A88C-4615-9E90-6314E8967DE4',
+  '4C4C479B-6670-4746-A1B2-BD45E55374AD',
+  '5D9C895E-9851-4EC9-A3F1-A9B3C4D6F7AA',
+  '5DCD3CD8-46F7-4D25-BD98-69228191E431',
+  '6AE80828-5A69-4912-B297-33BB6A156B84',
+]
+
+type Photo = { src: string; collection: string; caption: string }
+
+const photos: Photo[] = [
+  ...liveFiles.map((f, i) => ({
+    src: `/photos/live/poppari_2025/${f}.webp`,
+    collection: 'Live',
+    caption: `Live · Poppari 2025 — ${String(i + 1).padStart(2, '0')}`,
+  })),
+  ...Array.from({ length: 11 }, (_, i) => ({
+    src: `/photos/exit_wounds/${i + 1}.webp`,
+    collection: 'Promo',
+    caption: `Promo · exit wounds — ${String(i + 1).padStart(2, '0')}`,
+  })),
+  ...archiveFiles.map((f, i) => ({
+    src: `/photos/tlbocos/${f}.webp`,
+    collection: 'Archive',
+    caption: `Archive · tlbocos — ${String(i + 1).padStart(2, '0')}`,
+  })),
+]
+
+const total = photos.length
 ---
 
-<Layout title="Gallery - In Thorns">
-	<Navigation />
+<Layout
+  title="In Thorns — Gallery · Live, Promo & Archive"
+  description="Photo gallery for In Thorns — live shots, promotional sessions and archive frames from the collective."
+>
+  <Navigation />
 
-	<main class="min-h-screen bg-black pt-24 pb-20 px-4">
-		<div class="container mx-auto max-w-6xl">
-			<h1
-				class="text-4xl md:text-6xl font-bold text-ew-orange mb-4 text-center"
-			>
-				<span
-					class="inline-block"
-					style="text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);"
-					>Gallery</span
-				>
-			</h1>
-			<p class="text-ew-cream/70 text-center mb-16 max-w-2xl mx-auto">
-				Browse through our collection of promo photos, album artwork,
-				and live performances
-			</p>
+  <main id="main">
 
-			<div class="grid md:grid-cols-3 gap-8">
-				{
-					galleries.map((gallery) => (
-						<a
-							href={`/gallery/${gallery.slug}`}
-							class={`group relative overflow-hidden bg-gradient-to-br from-${gallery.colorClass}/10 to-black border-2 border-${gallery.colorClass}/30 hover:border-${gallery.colorClass} transition-all duration-300`}
-						>
-							<div class="aspect-square relative overflow-hidden">
-								<Image
-									src={gallery.previewImage}
-									alt={gallery.title}
-									width={600}
-									height={600}
-									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-								/>
-								<div
-									class={`absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent`}
-								/>
+    <!-- PAGE HEADER -->
+    <header class="gpage-hero">
+      <div class="gpage-hero__grain" aria-hidden="true"></div>
+      <div class="gpage-hero__meta">
+        <span>IN THORNS // FI</span>
+        <span>PHOTO ARCHIVE</span>
+        <span>LIVE · PROMO · ARCHIVE</span>
+        <span class="gpage-hero__meta-num">NO. 05 / 2026</span>
+      </div>
+      <div class="gpage-hero__eyebrow">Media — Images</div>
+      <h1 class="gpage-hero__h1">Gall<em>ery</em></h1>
+      <p class="gpage-hero__desc">
+        Stage, studio and street. Live shots, promotional sessions and archive frames from the collective. Tap any frame to open it full-size — use ← / → to move through the set.
+      </p>
+    </header>
 
-								{/* Hover overlay */}
-								<div
-									class={`absolute inset-0 bg-${gallery.colorClass}/0 group-hover:bg-${gallery.colorClass}/20 transition-colors`}
-								/>
-							</div>
+    <!-- FILTER BAR -->
+    <div class="gfilter" role="toolbar" aria-label="Filter gallery by collection">
+      <span class="gfilter__label">Collection</span>
+      <button class="gfilter__btn" data-filter="all" aria-pressed="true">All</button>
+      <button class="gfilter__btn" data-filter="Live" aria-pressed="false">Live</button>
+      <button class="gfilter__btn" data-filter="Promo" aria-pressed="false">Promo</button>
+      <button class="gfilter__btn" data-filter="Archive" aria-pressed="false">Archive</button>
+      <span class="gfilter__count" id="gcount" aria-live="polite">{total} frames</span>
+    </div>
 
-							<div class="p-6">
-								<h2
-									class={`text-2xl font-bold text-white mb-2 group-hover:text-${gallery.colorClass} transition-colors`}
-								>
-									{gallery.title}
-								</h2>
-								<p class="text-ew-cream/70 text-sm mb-3">
-									{gallery.description}
-								</p>
-								<p
-									class={`text-${gallery.colorClass} text-sm uppercase tracking-wider`}
-								>
-									{gallery.count} photos →
-								</p>
-							</div>
-						</a>
-					))
-				}
-			</div>
-		</div>
-	</main>
+    <!-- MASONRY GRID -->
+    <div class="masonry-wrap">
+      <div class="masonry" id="masonry">
+        {photos.map((photo, i) => (
+          <button
+            class="gcard"
+            type="button"
+            data-index={i}
+            data-collection={photo.collection}
+            aria-label={`Open: ${photo.caption}`}
+          >
+            <img src={photo.src} alt={photo.caption} loading="lazy" />
+            <span class="gcard__crop" aria-hidden="true">
+              <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+            </span>
+            <span class="gcard__index">{String(i + 1).padStart(2, '0')}</span>
+            <span class="gcard__cap">
+              <span>{photo.caption}</span>
+              <span class="gcard__view">↗ Expand</span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <div class="lightbox__chrome">
+      <div>
+        <span class="lightbox__counter" id="lbCounter">01 / {total}</span>
+        <span class="lightbox__collection" id="lbCollection">Live</span>
+      </div>
+      <button class="lightbox__close" id="lbClose" aria-label="Close viewer (Esc)">
+        <span>Close</span><span aria-hidden="true">✕</span>
+      </button>
+    </div>
+    <div class="lightbox__stage">
+      <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous image">←</button>
+      <img class="lightbox__img" id="lbImg" alt="" />
+      <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next image">→</button>
+    </div>
+    <div class="lightbox__cap">
+      <span class="lightbox__cap-title" id="lbCaption">—</span>
+      <span class="lightbox__cap-hint">← / → navigate · Esc close</span>
+    </div>
+  </div>
+
+  <Footer />
+
 </Layout>
+
+<style>
+  /* ---------- Page header ---------- */
+  .gpage-hero {
+    position: relative;
+    padding: 160px 48px 56px;
+    border-bottom: 1px solid var(--it-orange-30);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .gpage-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(circle at 18% 20%, rgba(255,107,53,0.10) 0, transparent 42%),
+      radial-gradient(circle at 82% 90%, rgba(157,82,194,0.07) 0, transparent 45%);
+    pointer-events: none;
+  }
+
+  .gpage-hero__meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    opacity: 0.6;
+    border-top: 1px solid rgba(245,245,220,0.15);
+    border-bottom: 1px solid rgba(245,245,220,0.15);
+    padding: 10px 0;
+    margin-bottom: 40px;
+  }
+
+  .gpage-hero__eyebrow {
+    font-family: var(--it-font-mono);
+    font-size: 12px;
+    letter-spacing: var(--it-track-mono-lg);
+    color: var(--it-orange);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .gpage-hero__eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--it-orange);
+  }
+
+  .gpage-hero__h1 {
+    font-family: var(--it-font-display);
+    font-size: clamp(72px, 15vw, 220px);
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .gpage-hero__h1 em {
+    font-style: normal;
+    color: var(--it-orange);
+  }
+
+  .gpage-hero__desc {
+    font-family: var(--it-font-body);
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--it-cream);
+    opacity: 0.85;
+    max-width: 52ch;
+    margin-top: 28px;
+  }
+
+  /* ---------- Filter bar ---------- */
+  .gfilter {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 16px 48px;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .gfilter__label {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    opacity: 0.5;
+    margin-right: 8px;
+  }
+
+  .gfilter__btn {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    background: transparent;
+    border: 1px solid rgba(245, 245, 220, 0.22);
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: border-color 160ms, color 160ms, background 160ms;
+  }
+
+  .gfilter__btn:hover {
+    border-color: var(--it-orange);
+    color: var(--it-orange);
+  }
+
+  .gfilter__btn[aria-pressed="true"] {
+    background: var(--it-orange);
+    border-color: var(--it-orange);
+    color: var(--it-black);
+  }
+
+  .gfilter__count {
+    margin-left: auto;
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    color: var(--it-orange);
+  }
+
+  /* ---------- Masonry grid ---------- */
+  .masonry-wrap {
+    padding: 48px;
+  }
+
+  .masonry {
+    columns: 3;
+    column-gap: 12px;
+  }
+
+  /* ---------- Photo card ---------- */
+  .gcard {
+    position: relative;
+    display: block;
+    width: 100%;
+    break-inside: avoid;
+    margin: 0 0 12px;
+    background: var(--it-ink);
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .gcard img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(0.35) contrast(1.04);
+    transition: transform 700ms ease, filter 500ms ease;
+  }
+
+  .gcard:hover img,
+  .gcard:focus-visible img {
+    transform: scale(1.045);
+    filter: none;
+  }
+
+  .gcard:focus-visible {
+    outline: 2px solid var(--it-orange);
+    outline-offset: 2px;
+  }
+
+  /* Crop-mark corners */
+  .gcard__crop {
+    position: absolute;
+    inset: 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 220ms;
+  }
+
+  .gcard:hover .gcard__crop,
+  .gcard:focus-visible .gcard__crop {
+    opacity: 0.9;
+  }
+
+  .gcard__crop i {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: var(--it-orange);
+  }
+
+  .gcard__crop i.tl { top: 0; left: 0; border-top: 1px solid; border-left: 1px solid; }
+  .gcard__crop i.tr { top: 0; right: 0; border-top: 1px solid; border-right: 1px solid; }
+  .gcard__crop i.bl { bottom: 0; left: 0; border-bottom: 1px solid; border-left: 1px solid; }
+  .gcard__crop i.br { bottom: 0; right: 0; border-bottom: 1px solid; border-right: 1px solid; }
+
+  .gcard__index {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-sm);
+    color: var(--it-cream);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    backdrop-filter: blur(4px);
+  }
+
+  .gcard__cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 28px 12px 12px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.78));
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    color: var(--it-cream);
+  }
+
+  .gcard__view {
+    color: var(--it-orange);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 220ms, transform 220ms;
+    white-space: nowrap;
+  }
+
+  .gcard:hover .gcard__view,
+  .gcard:focus-visible .gcard__view {
+    opacity: 1;
+    transform: none;
+  }
+
+  .gcard.is-hidden { display: none; }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 240ms, visibility 240ms;
+  }
+
+  .lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox__chrome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--it-orange-30);
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    flex-shrink: 0;
+  }
+
+  .lightbox__counter { color: var(--lb-accent, var(--it-orange)); }
+  .lightbox__collection { opacity: 0.6; margin-left: 10px; }
+
+  .lightbox__close {
+    background: transparent;
+    border: 1px solid rgba(245, 245, 220, 0.25);
+    color: var(--it-cream);
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: border-color 160ms, color 160ms;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lightbox__close:hover {
+    border-color: var(--lb-accent, var(--it-orange));
+    color: var(--lb-accent, var(--it-orange));
+  }
+
+  .lightbox__stage {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 88px;
+  }
+
+  .lightbox__img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: var(--it-shadow-soft);
+    border: 1px solid var(--it-orange-30);
+  }
+
+  .lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(245, 245, 220, 0.25);
+    color: var(--it-cream);
+    font-family: var(--it-font-mono);
+    font-size: 22px;
+    cursor: pointer;
+    transition: background 160ms, border-color 160ms, color 160ms;
+  }
+
+  .lightbox__nav:hover {
+    background: var(--lb-accent, var(--it-orange));
+    border-color: var(--lb-accent, var(--it-orange));
+    color: var(--it-black);
+  }
+
+  .lightbox__nav--prev { left: 18px; }
+  .lightbox__nav--next { right: 18px; }
+
+  .lightbox__cap {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 16px 24px 22px;
+    border-top: 1px solid var(--it-orange-30);
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    flex-shrink: 0;
+  }
+
+  .lightbox__cap-title { opacity: 0.9; }
+  .lightbox__cap-hint { opacity: 0.45; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .masonry { columns: 2; }
+  }
+
+  @media (max-width: 720px) {
+    .gpage-hero { padding: 130px 20px 40px; }
+    .gfilter { padding: 12px 20px; }
+    .gfilter__count { width: 100%; margin-left: 0; order: 99; }
+    .masonry-wrap { padding: 24px 20px; }
+    .lightbox__stage { padding: 16px 12px; }
+    .lightbox__nav { width: 44px; height: 44px; font-size: 18px; }
+    .lightbox__nav--prev { left: 8px; }
+    .lightbox__nav--next { right: 8px; }
+    .lightbox__cap-hint { display: none; }
+  }
+
+  @media (max-width: 560px) {
+    .masonry { columns: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gcard img,
+    .gcard__crop,
+    .gcard__view,
+    .lightbox { transition-duration: 0.01ms !important; }
+  }
+</style>
+
+<script>
+  function initGallery() {
+    const masonry   = document.getElementById('masonry')
+    const countEl   = document.getElementById('gcount')
+    const lightbox  = document.getElementById('lightbox')
+    const lbImg     = document.getElementById('lbImg') as HTMLImageElement
+    const lbCounter = document.getElementById('lbCounter')
+    const lbColl    = document.getElementById('lbCollection')
+    const lbCaption = document.getElementById('lbCaption')
+    if (!masonry || !countEl || !lightbox || !lbImg || !lbCounter || !lbColl || !lbCaption) return
+
+    const cards = Array.from(masonry.querySelectorAll<HTMLButtonElement>('.gcard'))
+
+    // Build photo data from DOM
+    const photos = cards.map(card => ({
+      src:        (card.querySelector('img') as HTMLImageElement).src,
+      alt:        (card.querySelector('img') as HTMLImageElement).alt,
+      collection: card.dataset.collection ?? '',
+      caption:    card.querySelector('.gcard__cap span')?.textContent ?? '',
+    }))
+
+    let visible: number[] = []
+    let current = 0
+    let lastFocus: Element | null = null
+
+    function applyFilter(filter: string) {
+      visible = []
+      cards.forEach((card, i) => {
+        const show = filter === 'all' || photos[i].collection === filter
+        card.classList.toggle('is-hidden', !show)
+        if (show) visible.push(i)
+      })
+      const n = visible.length
+      countEl!.textContent = `${n} frame${n === 1 ? '' : 's'}`
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.gfilter__btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gfilter__btn').forEach(b => b.setAttribute('aria-pressed', 'false'))
+        btn.setAttribute('aria-pressed', 'true')
+        applyFilter(btn.dataset.filter ?? 'all')
+      })
+    })
+
+    function render() {
+      const photo = photos[visible[current]]
+      if (!photo) return
+      lbImg!.src = photo.src
+      lbImg!.alt = photo.alt
+      lbCaption!.textContent = photo.caption
+      lbColl!.textContent = photo.collection
+      lbCounter!.textContent = `${String(current + 1).padStart(2, '0')} / ${String(visible.length).padStart(2, '0')}`
+      lightbox!.style.setProperty('--lb-accent',
+        photo.collection === 'Wormhusk' ? 'var(--it-wh-violet)' : 'var(--it-orange)')
+    }
+
+    function openAt(photoIndex: number) {
+      current = visible.indexOf(photoIndex)
+      if (current === -1) return
+      lastFocus = document.activeElement
+      lightbox!.hidden = false
+      requestAnimationFrame(() => lightbox!.classList.add('is-open'))
+      document.body.style.overflow = 'hidden'
+      render()
+      document.getElementById('lbClose')?.focus()
+    }
+
+    function close() {
+      lightbox!.classList.remove('is-open')
+      document.body.style.overflow = ''
+      setTimeout(() => { lightbox!.hidden = true }, 260)
+      if (lastFocus instanceof HTMLElement) lastFocus.focus()
+    }
+
+    function step(dir: number) {
+      if (!visible.length) return
+      current = (current + dir + visible.length) % visible.length
+      render()
+    }
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => openAt(i))
+    })
+
+    document.getElementById('lbClose')?.addEventListener('click', close)
+    document.getElementById('lbPrev')?.addEventListener('click', () => step(-1))
+    document.getElementById('lbNext')?.addEventListener('click', () => step(1))
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) close() })
+
+    document.addEventListener('keydown', e => {
+      if (lightbox!.hidden) return
+      if (e.key === 'Escape') close()
+      else if (e.key === 'ArrowLeft') step(-1)
+      else if (e.key === 'ArrowRight') step(1)
+    })
+
+    applyFilter('all')
+  }
+
+  initGallery()
+  document.addEventListener('astro:page-load', initGallery)
+</script>

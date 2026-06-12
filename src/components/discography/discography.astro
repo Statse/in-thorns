@@ -1,0 +1,161 @@
+---
+import { releases } from '@/data/releases'
+---
+
+<section id="discography">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <div class="section__num">05 / DISCOGRAPHY</div>
+        <div class="section__sub">The catalog</div>
+      </div>
+      <h2 class="section__title">Records</h2>
+    </div>
+
+    <div class="releases releases--three">
+      {releases.map(r => (
+        <article class={`release release--${r.theme}`}>
+          <span class="release__tag">{r.tag}</span>
+          <div class="release__cover">
+            <img src={r.cover} alt={`${r.title} — In Thorns ${r.type} artwork`} width="600" height="600" loading="lazy" />
+          </div>
+          <div class="release__meta">{r.meta}</div>
+          <h3 class="release__title">{r.title}</h3>
+          <p class="release__desc">{r.desc}</p>
+          <div class="release__links">
+            {r.links.map(link => (
+              <a class="it-chip" href={link.url} target="_blank" rel="noopener">{link.label}</a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 88px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .releases--three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  /* Release card */
+  .release {
+    position: relative;
+    border: 1px solid var(--it-orange-30);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .release--wh {
+    border-color: var(--it-wh-violet-30);
+  }
+
+  .release--secondary {
+    border-color: rgba(211, 47, 47, 0.3);
+  }
+
+  .release__tag {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    background: var(--it-orange);
+    color: var(--it-black);
+    padding: 5px 9px;
+    z-index: 1;
+  }
+
+  .release--wh .release__tag {
+    background: var(--it-wh-violet);
+    color: var(--it-cream);
+  }
+
+  .release--secondary .release__tag {
+    background: var(--it-red);
+    color: var(--it-cream);
+  }
+
+  .release__cover {
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .release__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms ease;
+  }
+
+  .release:hover .release__cover img {
+    transform: scale(1.04);
+  }
+
+  .release__meta {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.4);
+  }
+
+  .release__title {
+    font-family: var(--it-font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .release--wh .release__title { color: var(--it-wh-violet-light); }
+  .release--secondary .release__title { color: var(--it-red-light); }
+
+  .release__desc {
+    font-family: var(--it-font-body);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: var(--it-lh-body);
+    color: rgba(245, 245, 220, 0.7);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .release__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  @media (max-width: 900px) {
+    .releases--three { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    section { padding: 64px 0; }
+  }
+</style>

@@ -1,0 +1,107 @@
+---
+// Slim full-bleed photo strip between Records and Bio.
+// Photo count reflects gallery/index.astro: 15 live + 11 promo + 7 archive = 33
+const GALLERY_COUNT = 33
+---
+
+<div class="photostrip" id="gallery" aria-label="Photo gallery preview">
+  <a href="/gallery" aria-label="Open gallery — live at Poppari 2025">
+    <img src="/photos/live/poppari_2025/_X2A6176.webp" alt="In Thorns live at Poppari 2025 — lead vocalist" loading="lazy" />
+    <span class="photostrip__caption">Live · Poppari 2025</span>
+  </a>
+  <a href="/gallery" aria-label="Open gallery — exit wounds promo">
+    <img src="/photos/exit_wounds/1.webp" alt="exit wounds promotional photo — In Thorns" loading="lazy" />
+    <span class="photostrip__caption">Promo · exit wounds</span>
+  </a>
+  <a href="/gallery" aria-label="Open gallery — crowd perspective">
+    <img src="/photos/live/poppari_2025/_X2A7434.webp" alt="In Thorns live — crowd perspective" loading="lazy" />
+    <span class="photostrip__caption">Live · crowd</span>
+  </a>
+  <a class="photostrip__more" href="/gallery" aria-label={`Open full gallery — ${GALLERY_COUNT} frames`}>
+    <span class="n">{GALLERY_COUNT}</span>
+    <span>frames · live, promo &amp; archive</span>
+    <span class="photostrip__more-cta">Open full gallery →</span>
+  </a>
+</div>
+
+<style>
+  .photostrip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    border-top: 1px solid var(--it-orange-30);
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .photostrip a {
+    position: relative;
+    overflow: hidden;
+    background: var(--it-ink);
+    aspect-ratio: 4 / 3;
+    display: block;
+    text-decoration: none;
+  }
+
+  .photostrip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms ease;
+    filter: grayscale(0.1) contrast(1.05);
+  }
+
+  .photostrip a:hover img {
+    transform: scale(1.06);
+    filter: none;
+  }
+
+  .photostrip__caption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 4px 8px;
+  }
+
+  .photostrip__more {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(0, 0, 0, 0)) var(--it-ink);
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-cream);
+    transition: color 200ms;
+  }
+
+  .photostrip__more:hover {
+    color: var(--it-orange);
+  }
+
+  .photostrip__more .n {
+    font-family: var(--it-font-display);
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.9;
+    color: var(--it-orange);
+  }
+
+  .photostrip__more-cta {
+    color: var(--it-orange);
+  }
+
+  @media (max-width: 720px) {
+    .photostrip {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
