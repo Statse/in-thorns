@@ -25,7 +25,8 @@
       "Bash(Get-ChildItem -Path . -Name)",
       "Bash(Get-ChildItem -Recurse \"E:\\\\github\\\\in-thorns\\\\public\\\\photos\" -File)",
       "Bash(Measure-Object)",
-      "Bash(Select-Object -ExpandProperty Count)"
+      "Bash(Select-Object -ExpandProperty Count)",
+      "Bash(npm uninstall *)"
     ],
     "deny": [],
     "ask": [],
