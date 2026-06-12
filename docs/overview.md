@@ -284,12 +284,12 @@ Set in `.env` locally, and in Vercel project settings for production/preview.
 
 ## Copy accuracy — Kaaoszine accolade
 
-The band placed **#8** (top 10) in Kaaoszine's "Vuoden tulokas 2024" readers' poll. They did **not** win it (Crownshift won). The correct claim everywhere is "top 10 newcomer of the year 2024". Grep for `Newcomer` or `NCY` if you suspect stale copy.
+The band placed **#8** (top 10) in Kaaoszine's "Newcommer of the year 2024" readers' poll. They did **not** win it (Crownshift won). The correct claim everywhere is "top 10 newcomer of the year 2024". Grep for `Newcomer` or `NCY` if you suspect stale copy.
 
 Correct forms by location:
 - Ticker: `TOP 10 NEWCOMER OF THE YEAR 2024 — KAAOSZINE`
 - Pressline: `Top 10 newcomer of the year, 2024.` / `— Kaaoszine readers' poll · 5,000+ voters`
-- Bio facts grid: `#8 '24` / `Vuoden tulokas · Kaaoszine`
+- Bio facts grid: `#8 '24` / `Newcommer of the year · Kaaoszine`
 - Release desc (debut LP): `Top 10 newcomer of the year 2024 — Kaaoszine readers' poll.`
 
 ---
