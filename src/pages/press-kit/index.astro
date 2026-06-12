@@ -1,23 +1,35 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import { releases } from '@/data/releases'
+import Layout from "@/layouts/Layout.astro";
+import { releases } from "@/data/releases";
 
 const epkPhotos = [
-  { src: '/photos/exit_wounds/1.webp', caption: 'Promo · primary', ext: 'WEBP' },
-  { src: '/photos/exit_wounds/2.webp', caption: 'Promo · alley', ext: 'WEBP' },
-  { src: '/photos/exit_wounds/3.webp', caption: 'Promo · church', ext: 'WEBP' },
-  { src: '/photos/live/poppari_2025/_X2A6176.webp', caption: 'Live · Poppari', ext: 'WEBP' },
-  { src: '/photos/live/poppari_2025/_X2A7434.webp', caption: 'Live · crowd', ext: 'WEBP' },
-  { src: '/photos/exit_wounds/4.webp', caption: 'Promo · color', ext: 'WEBP' },
-]
+  {
+    src: "/photos/exit_wounds/1.webp",
+    caption: "Promo · primary",
+    ext: "WEBP",
+  },
+  { src: "/photos/exit_wounds/2.webp", caption: "Promo · alley", ext: "WEBP" },
+  { src: "/photos/exit_wounds/3.webp", caption: "Promo · church", ext: "WEBP" },
+  {
+    src: "/photos/live/poppari_2025/_X2A6176.webp",
+    caption: "Live · Poppari",
+    ext: "WEBP",
+  },
+  {
+    src: "/photos/live/poppari_2025/_X2A7434.webp",
+    caption: "Live · crowd",
+    ext: "WEBP",
+  },
+  { src: "/photos/exit_wounds/4.webp", caption: "Promo · color", ext: "WEBP" },
+];
 
 const members = [
-  { num: '01', name: 'Kristian Ruutala',    role: 'Harsh Vocals' },
-  { num: '02', name: 'Aleksi Statsevich',   role: 'Harsh Vocals' },
-  { num: '03', name: 'Aavee Tikkanen',      role: 'Vocals · Guitar' },
-  { num: '04', name: 'Aleksi Ruotsalainen', role: 'Guitar' },
-  { num: '05', name: 'Jimi Kinnunen',       role: 'Drums' },
-]
+  { num: "01", name: "Kristian Ruutala", role: "Harsh Vocals" },
+  { num: "02", name: "Aleksi Statsevich", role: "Harsh Vocals" },
+  { num: "03", name: "Aavee Tikkanen", role: "Vocals · Guitar" },
+  { num: "04", name: "Aleksi Ruotsalainen", role: "Guitar" },
+  { num: "05", name: "Jimi Kinnunen", role: "Drums" },
+];
 ---
 
 <Layout
@@ -25,237 +37,407 @@ const members = [
   description="Official EPK for In Thorns — Finnish metalcore collective, Jyväskylä. Bio, facts, press, photos, releases, booking."
   noindex={true}
 >
-
-<header class="epk-top">
-  <a href="/" class="epk-top__logo">IN THORNS</a>
-  <div class="epk-top__tag">Electronic Press Kit · 2026</div>
-  <div class="epk-top__actions">
-    <a class="it-chip" href="mailto:inthornsband@gmail.com?subject=EPK%20%E2%80%94%20Press%20enquiry">Contact</a>
-    <a class="it-chip" href="/">Website →</a>
-  </div>
-</header>
-
-<main class="epk-wrap">
-
-  <!-- HERO -->
-  <section class="epk-hero">
-    <div>
-      <div class="epk-hero__eyebrow">Electronic Press Kit</div>
-      <h1>In<br /><em>Thorns.</em></h1>
+  <header class="epk-top">
+    <a href="/" class="epk-top__logo">IN THORNS</a>
+    <div class="epk-top__tag">Electronic Press Kit · 2026</div>
+    <div class="epk-top__actions">
+      <a
+        class="it-chip"
+        href="mailto:inthornsband@gmail.com?subject=EPK%20%E2%80%94%20Press%20enquiry"
+        >Contact</a
+      >
+      <a class="it-chip" href="/">Website →</a>
     </div>
-    <p class="epk-hero__sub">
-      <strong>Finnish metalcore collective from Jyväskylä.</strong> New single <em>"wormhusk"</em> out now (May 29, 2026). Crushing soundscapes, darkly poetic lyrics, surrealist horror staging.
-    </p>
-  </section>
+  </header>
 
-  <!-- A0 QUICK FACTS -->
-  <section class="epk-sec" id="facts">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A0 / At a glance<small>Copy-paste facts</small></div>
+  <main class="epk-wrap">
+    <!-- HERO -->
+    <section class="epk-hero">
       <div>
-        <h2>Quick facts</h2>
-        <div class="bio__facts">
-          <div class="fact"><div class="fact__k">Origin</div><div class="fact__v">Jyväskylä</div><div class="fact__sub">Central Finland · est. 2022</div></div>
-          <div class="fact"><div class="fact__k">Genre</div><div class="fact__v">Metalcore</div><div class="fact__sub">Post · alternative · surrealist</div></div>
-          <div class="fact"><div class="fact__k">Members</div><div class="fact__v">5</div><div class="fact__sub">Two-vocalist attack</div></div>
-          <div class="fact"><div class="fact__k">Accolades</div><div class="fact__v">#8 '24</div><div class="fact__sub">Vuoden tulokas · Kaaoszine</div></div>
-        </div>
-        <div class="epk-statband">
-          <div class="stat"><div class="stat__n">02</div><div class="stat__k">Singles · 2026</div><div class="stat__sub">exit wounds · wormhusk</div></div>
-          <div class="stat"><div class="stat__n">01</div><div class="stat__k">Album</div><div class="stat__sub">tlbocs · 2024</div></div>
-          <div class="stat"><div class="stat__n">06</div><div class="stat__k">Tour dates</div><div class="stat__sub">Spring 2026 · FI</div></div>
-          <div class="stat"><div class="stat__n">FI</div><div class="stat__k">Territory</div><div class="stat__sub">EN / FI press</div></div>
-        </div>
+        <div class="epk-hero__eyebrow">Electronic Press Kit</div>
+        <h1>In<br /><em>Thorns.</em></h1>
       </div>
-    </div>
-  </section>
+      <p class="epk-hero__sub">
+        <strong>Finnish metalcore collective from Jyväskylä.</strong> New single <em
+          >"wormhusk"</em
+        > out now (May 29, 2026). Crushing soundscapes, darkly poetic lyrics, surrealist
+        horror staging.
+      </p>
+    </section>
 
-  <!-- A1 BIO -->
-  <section class="epk-sec" id="bio">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A1 / Biography<small>Long · short · one-liner</small></div>
-      <div class="epk-bio">
-        <h2>Biography</h2>
-        <p>
-          Jyväskylä-based Finnish metalcore collective <strong>In Thorns</strong> releases new single <em>"wormhusk"</em> on May 29, 2026 — the second chapter of a new cycle following <em>"exit wounds"</em> (January 2026) and their acclaimed debut album <em>"the last bead on a cord of songs"</em> (2024), which placed top 10 in Kaaoszine's newcomer of the year readers' poll.
-        </p>
-        <p>
-          The collective creates metalcore driven by crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring melodies. Drawing on surrealist art and horror, In Thorns delivers an immersive experience that balances devastating heaviness with haunting beauty. Live, the band's tight, high-energy performance pulls audiences into a dark, surreal world.
-        </p>
-        <div class="epk-bio__variants">
-          <div class="epk-bio__variant">
-            <div class="vk"><span>Short bio</span><span>~50 words</span></div>
-            <p>In Thorns is a five-piece metalcore collective from Jyväskylä, Finland. Following top 10 newcomer of the year recognition for their 2024 debut, the band's 2026 cycle — singles "exit wounds" and "wormhusk" — pairs crushing weight with surrealist, horror-tinged staging and darkly poetic lyrics.</p>
-          </div>
-          <div class="epk-bio__variant">
-            <div class="vk"><span>One-liner</span><span>For listings</span></div>
-            <p>Finnish metalcore collective from Jyväskylä — crushing, poetic, surreal. New single "wormhusk" out now.</p>
-          </div>
+    <!-- A0 QUICK FACTS -->
+    <section class="epk-sec" id="facts">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A0 / At a glance<small>Copy-paste facts</small>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- A2 MEMBERS -->
-  <section class="epk-sec" id="members">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A2 / Line-up<small>Five members</small></div>
-      <div>
-        <h2>Line-up</h2>
-        <div class="members">
-          {members.map(m => (
-            <div class="member">
-              <div class="member__num">{m.num}</div>
-              <div class="member__name">{m.name}</div>
-              <div class="member__role">{m.role}</div>
+        <div>
+          <h2>Quick facts</h2>
+          <div class="bio__facts">
+            <div class="fact">
+              <div class="fact__k">Origin</div><div class="fact__v">
+                Jyväskylä
+              </div><div class="fact__sub">Central Finland · est. 2022</div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- A3 RELEASES -->
-  <section class="epk-sec" id="releases">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A3 / Releases<small>2024 → 2026</small></div>
-      <div>
-        <h2>Releases</h2>
-        <div class="releases releases--even">
-          {releases.filter(r => r.type === 'single').map(r => (
-            <article class={`release release--${r.theme}`}>
-              <span class="release__tag">{r.tag}</span>
-              <div class="release__cover">
-                <img src={r.cover} alt={`${r.title} artwork`} width="600" height="600" loading="lazy" />
+            <div class="fact">
+              <div class="fact__k">Genre</div><div class="fact__v">
+                Metalcore
+              </div><div class="fact__sub">Post · alternative · surrealist</div>
+            </div>
+            <div class="fact">
+              <div class="fact__k">Members</div><div class="fact__v">5</div><div
+                class="fact__sub"
+              >
+                Three-vocalist attack
               </div>
-              <div class="release__meta">{r.meta}</div>
-              <h3 class="release__title">{r.title}</h3>
-              <p class="release__desc">{r.desc}</p>
-              <div class="release__links">
-                {r.links.slice(0, 2).map(link => (
-                  <a class="it-chip" href={link.url} target="_blank" rel="noopener">{link.label}</a>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-        {releases.filter(r => r.type === 'album').map(r => (
-          <div class="epk-album-row">
-            <article class={`release release--${r.theme}`}>
-              <span class="release__tag">{r.tag}</span>
-              <div class="release__cover epk-album-cover">
-                <img src={r.cover} alt={`${r.title} artwork`} width="600" height="600" loading="lazy" />
-              </div>
-              <div class="release__meta">{r.meta}</div>
-              <h3 class="release__title">{r.title}</h3>
-              <p class="release__desc">{r.desc}</p>
-              <div class="release__links">
-                {r.links.map(link => (
-                  <a class="it-chip" href={link.url} target="_blank" rel="noopener">{link.label}</a>
-                ))}
-              </div>
-            </article>
+            </div>
+            <div class="fact">
+              <div class="fact__k">Accolades</div><div class="fact__v">
+                #8 '24
+              </div><div class="fact__sub">Vuoden tulokas · Kaaoszine</div>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- A4 PRESS -->
-  <section class="epk-sec" id="press">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A4 / Press<small>Pull quotes</small></div>
-      <div>
-        <h2>Press</h2>
-        <p class="epk-placeholder">Press quotes coming soon.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- A5 PHOTOS -->
-  <section class="epk-sec" id="photos">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A5 / Photos<small>Hi-res · credit required</small></div>
-      <div>
-        <h2>Press photos</h2>
-        <div class="epk-photos">
-          {epkPhotos.map(photo => (
-            <figure class="epk-photo">
-              <img src={photo.src} alt={`In Thorns press photo — ${photo.caption}`} loading="lazy" />
-              <figcaption class="epk-photo__dl">
-                <span>{photo.caption}</span>
-                <b>{photo.ext} ↓</b>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p class="epk-photo-credit">Photo credit: on file · request originals via booking email</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- A6 DOWNLOADS -->
-  <section class="epk-sec" id="downloads">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A6 / Assets<small>Download bundle</small></div>
-      <div>
-        <h2>Downloads</h2>
-        <div class="epk-files">
-          <a class="epk-file" href="/photos/exit_wounds/promo.zip" download>
-            <span class="epk-file__ext">ZIP</span>
-            <span class="epk-file__m"><span class="epk-file__n">Photo pack</span><span class="epk-file__s">Hi-res promo photos</span></span>
-            <span class="epk-file__arrow">↓</span>
-          </a>
-          <a class="epk-file" href="/logo.zip" download>
-            <span class="epk-file__ext">SVG</span>
-            <span class="epk-file__m"><span class="epk-file__n">Logo pack</span><span class="epk-file__s">Wordmark · mono + cream</span></span>
-            <span class="epk-file__arrow">↓</span>
-          </a>
-          <a class="epk-file" href="https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d" target="_blank" rel="noopener">
-            <span class="epk-file__ext">DSP</span>
-            <span class="epk-file__m"><span class="epk-file__n">Streaming links</span><span class="epk-file__s">Spotify · Apple · YT · Deezer</span></span>
-            <span class="epk-file__arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- A7 CONTACT -->
-  <section class="epk-sec epk-sec--last" id="contact">
-    <div class="epk-sec__grid">
-      <div class="epk-sec__label">A7 / Contact<small>Booking · press</small></div>
-      <div>
-        <h2>Contact</h2>
-        <div class="epk-spec">
-          <div class="contact__list">
-            <div class="contact__row"><div class="contact__k">Booking</div><div class="contact__v"><a href="mailto:inthornsband@gmail.com">inthornsband@gmail.com</a></div></div>
-            <div class="contact__row"><div class="contact__k">Based</div><div class="contact__v">Jyväskylä, Finland</div></div>
-          </div>
-          <div class="contact__list">
-            <div class="contact__row"><div class="contact__k">Spotify</div><div class="contact__v"><a href="https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d" target="_blank" rel="noopener">@InThorns</a></div></div>
-            <div class="contact__row"><div class="contact__k">Instagram</div><div class="contact__v"><a href="https://www.instagram.com/inxthorns/" target="_blank" rel="noopener">@inxthorns</a></div></div>
-            <div class="contact__row"><div class="contact__k">YouTube</div><div class="contact__v"><a href="https://www.youtube.com/@inthornsband" target="_blank" rel="noopener">@inthornsband</a></div></div>
+          <div class="epk-statband">
+            <div class="stat">
+              <div class="stat__n">02</div><div class="stat__k">
+                Singles · 2026
+              </div><div class="stat__sub">exit wounds · wormhusk</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">01</div><div class="stat__k">Album</div><div
+                class="stat__sub"
+              >
+                tlbocs · 2024
+              </div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">06</div><div class="stat__k">
+                Tour dates
+              </div><div class="stat__sub">Spring 2026 · FI</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">FI</div><div class="stat__k">
+                Territory
+              </div><div class="stat__sub">EN / FI press</div>
+            </div>
           </div>
         </div>
-        <div class="epk-contact-cta">
-          <a class="it-btn it-btn--primary" href="mailto:inthornsband@gmail.com">
-            <span>inthornsband@gmail.com</span><span>→</span>
-          </a>
+      </div>
+    </section>
+
+    <!-- A1 BIO -->
+    <section class="epk-sec" id="bio">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A1 / Biography<small>Long · short · one-liner</small>
+        </div>
+        <div class="epk-bio">
+          <h2>Biography</h2>
+          <p>
+            Jyväskylä-based Finnish metalcore collective <strong
+              >In Thorns</strong
+            > releases new single <em>"wormhusk"</em> on May 29, 2026 — the second
+            chapter of a new cycle following <em>"exit wounds"</em> (January 2026)
+            and their acclaimed debut album <em
+              >"the last bead on a cord of songs"</em
+            > (2024), which placed top 10 in Kaaoszine's newcomer of the year readers'
+            poll.
+          </p>
+          <p>
+            The collective creates metalcore driven by crushing soundscapes,
+            nihilistic and darkly poetic lyrics, and soaring melodies. Drawing
+            on surrealist art and horror, In Thorns delivers an immersive
+            experience that balances devastating heaviness with haunting beauty.
+            Live, the band's tight, high-energy performance pulls audiences into
+            a dark, surreal world.
+          </p>
+          <div class="epk-bio__variants">
+            <div class="epk-bio__variant">
+              <div class="vk"><span>Short bio</span><span>~50 words</span></div>
+              <p>
+                In Thorns is a five-piece metalcore collective from Jyväskylä,
+                Finland. Following top 10 newcomer of the year recognition for
+                their 2024 debut, the band's 2026 cycle — singles "exit wounds"
+                and "wormhusk" — pairs crushing weight with surrealist,
+                horror-tinged staging and darkly poetic lyrics.
+              </p>
+            </div>
+            <div class="epk-bio__variant">
+              <div class="vk">
+                <span>One-liner</span><span>For listings</span>
+              </div>
+              <p>
+                Finnish metalcore collective from Jyväskylä — crushing, poetic,
+                surreal. New single "wormhusk" out now.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- A2 MEMBERS -->
+    <section class="epk-sec" id="members">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A2 / Line-up<small>Five members</small>
+        </div>
+        <div>
+          <h2>Line-up</h2>
+          <div class="members">
+            {
+              members.map((m) => (
+                <div class="member">
+                  <div class="member__num">{m.num}</div>
+                  <div class="member__name">{m.name}</div>
+                  <div class="member__role">{m.role}</div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A3 RELEASES -->
+    <section class="epk-sec" id="releases">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A3 / Releases<small>2024 → 2026</small>
+        </div>
+        <div>
+          <h2>Releases</h2>
+          <div class="releases releases--even">
+            {
+              releases
+                .filter((r) => r.type === "single")
+                .map((r) => (
+                  <article class={`release release--${r.theme}`}>
+                    <span class="release__tag">{r.tag}</span>
+                    <div class="release__cover">
+                      <img
+                        src={r.cover}
+                        alt={`${r.title} artwork`}
+                        width="600"
+                        height="600"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="release__meta">{r.meta}</div>
+                    <h3 class="release__title">{r.title}</h3>
+                    <p class="release__desc">{r.desc}</p>
+                    <div class="release__links">
+                      {r.links.slice(0, 2).map((link) => (
+                        <a
+                          class="it-chip"
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  </article>
+                ))
+            }
+          </div>
+          {
+            releases
+              .filter((r) => r.type === "album")
+              .map((r) => (
+                <div class="epk-album-row">
+                  <article class={`release release--${r.theme}`}>
+                    <span class="release__tag">{r.tag}</span>
+                    <div class="release__cover epk-album-cover">
+                      <img
+                        src={r.cover}
+                        alt={`${r.title} artwork`}
+                        width="600"
+                        height="600"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="release__meta">{r.meta}</div>
+                    <h3 class="release__title">{r.title}</h3>
+                    <p class="release__desc">{r.desc}</p>
+                    <div class="release__links">
+                      {r.links.map((link) => (
+                        <a
+                          class="it-chip"
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  </article>
+                </div>
+              ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- A4 PRESS -->
+    <section class="epk-sec" id="press">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">A4 / Press<small>Pull quotes</small></div>
+        <div>
+          <h2>Press</h2>
+          <p class="epk-placeholder">Press quotes coming soon.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A5 PHOTOS -->
+    <section class="epk-sec" id="photos">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A5 / Photos<small>Hi-res · credit required</small>
+        </div>
+        <div>
+          <h2>Press photos</h2>
+          <div class="epk-photos">
+            {
+              epkPhotos.map((photo) => (
+                <figure class="epk-photo">
+                  <img
+                    src={photo.src}
+                    alt={`In Thorns press photo — ${photo.caption}`}
+                    loading="lazy"
+                  />
+                  <figcaption class="epk-photo__dl">
+                    <span>{photo.caption}</span>
+                    <b>{photo.ext} ↓</b>
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+          <p class="epk-photo-credit">
+            Photo credit: on file · request originals via booking email
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A6 DOWNLOADS -->
+    <section class="epk-sec" id="downloads">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A6 / Assets<small>Download bundle</small>
+        </div>
+        <div>
+          <h2>Downloads</h2>
+          <div class="epk-files">
+            <a class="epk-file" href="/photos/exit_wounds/promo.zip" download>
+              <span class="epk-file__ext">ZIP</span>
+              <span class="epk-file__m"
+                ><span class="epk-file__n">Photo pack</span><span
+                  class="epk-file__s">Hi-res promo photos</span
+                ></span
+              >
+              <span class="epk-file__arrow">↓</span>
+            </a>
+            <a class="epk-file" href="/logo.zip" download>
+              <span class="epk-file__ext">SVG</span>
+              <span class="epk-file__m"
+                ><span class="epk-file__n">Logo pack</span><span
+                  class="epk-file__s">Wordmark · mono + cream</span
+                ></span
+              >
+              <span class="epk-file__arrow">↓</span>
+            </a>
+            <a
+              class="epk-file"
+              href="https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="epk-file__ext">DSP</span>
+              <span class="epk-file__m"
+                ><span class="epk-file__n">Streaming links</span><span
+                  class="epk-file__s">Spotify · Apple · YT · Deezer</span
+                ></span
+              >
+              <span class="epk-file__arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A7 CONTACT -->
+    <section class="epk-sec epk-sec--last" id="contact">
+      <div class="epk-sec__grid">
+        <div class="epk-sec__label">
+          A7 / Contact<small>Booking · press</small>
+        </div>
+        <div>
+          <h2>Contact</h2>
+          <div class="epk-spec">
+            <div class="contact__list">
+              <div class="contact__row">
+                <div class="contact__k">Booking</div><div class="contact__v">
+                  <a href="mailto:inthornsband@gmail.com"
+                    >inthornsband@gmail.com</a>
+                </div>
+              </div>
+              <div class="contact__row">
+                <div class="contact__k">Based</div><div class="contact__v">
+                  Jyväskylä, Finland
+                </div>
+              </div>
+            </div>
+            <div class="contact__list">
+              <div class="contact__row">
+                <div class="contact__k">Spotify</div><div class="contact__v">
+                  <a
+                    href="https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d"
+                    target="_blank"
+                    rel="noopener">@InThorns</a>
+                </div>
+              </div>
+              <div class="contact__row">
+                <div class="contact__k">Instagram</div><div class="contact__v">
+                  <a
+                    href="https://www.instagram.com/inxthorns/"
+                    target="_blank"
+                    rel="noopener">@inxthorns</a>
+                </div>
+              </div>
+              <div class="contact__row">
+                <div class="contact__k">YouTube</div><div class="contact__v">
+                  <a
+                    href="https://www.youtube.com/@inthornsband"
+                    target="_blank"
+                    rel="noopener">@inthornsband</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="epk-contact-cta">
+            <a
+              class="it-btn it-btn--primary"
+              href="mailto:inthornsband@gmail.com"
+            >
+              <span>inthornsband@gmail.com</span><span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="epk-footer">
+    <div class="epk-wrap epk-footer__row">
+      <div>© 2026 IN THORNS · Jyväskylä, FI</div>
+      <div>EPK · The pain won't cease.</div>
     </div>
-  </section>
-
-</main>
-
-<footer class="epk-footer">
-  <div class="epk-wrap epk-footer__row">
-    <div>© 2026 IN THORNS · Jyväskylä, FI</div>
-    <div>EPK · The pain won't cease.</div>
-  </div>
-</footer>
-
+  </footer>
 </Layout>
 
 <style>
@@ -294,7 +476,7 @@ const members = [
   }
 
   .epk-top__logo::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -337,7 +519,7 @@ const members = [
   }
 
   .epk-hero__eyebrow::before {
-    content: '';
+    content: "";
     width: 40px;
     height: 1px;
     background: var(--it-orange);
@@ -368,8 +550,13 @@ const members = [
     margin: 0;
   }
 
-  .epk-hero__sub strong { color: var(--it-cream); }
-  .epk-hero__sub em { font-style: italic; color: var(--it-orange); }
+  .epk-hero__sub strong {
+    color: var(--it-cream);
+  }
+  .epk-hero__sub em {
+    font-style: italic;
+    color: var(--it-orange);
+  }
 
   /* ---- Sections ---- */
   .epk-sec {
@@ -378,7 +565,9 @@ const members = [
     scroll-margin-top: 90px;
   }
 
-  .epk-sec--last { border-bottom: none; }
+  .epk-sec--last {
+    border-bottom: none;
+  }
 
   .epk-sec__grid {
     display: grid;
@@ -429,8 +618,14 @@ const members = [
     color: var(--it-cream);
   }
 
-  .epk-bio p em { font-style: italic; color: var(--it-orange); }
-  .epk-bio p strong { color: var(--it-cream); font-weight: 800; }
+  .epk-bio p em {
+    font-style: italic;
+    color: var(--it-orange);
+  }
+  .epk-bio p strong {
+    color: var(--it-cream);
+    font-weight: 800;
+  }
 
   .epk-bio__variants {
     margin-top: 32px;
@@ -481,7 +676,9 @@ const members = [
     gap: 4px;
   }
 
-  .epk-statband .stat:last-child { border-right: none; }
+  .epk-statband .stat:last-child {
+    border-right: none;
+  }
 
   .epk-statband .stat__n {
     font-family: var(--it-font-display);
@@ -553,7 +750,10 @@ const members = [
   }
 
   /* ---- Members ---- */
-  .members { display: flex; flex-direction: column; }
+  .members {
+    display: flex;
+    flex-direction: column;
+  }
 
   .member {
     display: grid;
@@ -564,7 +764,9 @@ const members = [
     border-bottom: 1px solid var(--it-orange-30);
   }
 
-  .member:first-child { border-top: 1px solid var(--it-orange-30); }
+  .member:first-child {
+    border-top: 1px solid var(--it-orange-30);
+  }
 
   .member__num {
     font-family: var(--it-font-mono);
@@ -611,8 +813,12 @@ const members = [
     gap: 12px;
   }
 
-  .release--wh { border-color: var(--it-wh-violet-30); }
-  .release--secondary { border-color: rgba(211, 47, 47, 0.3); }
+  .release--wh {
+    border-color: var(--it-wh-violet-30);
+  }
+  .release--secondary {
+    border-color: rgba(211, 47, 47, 0.3);
+  }
 
   .release__tag {
     position: absolute;
@@ -629,11 +835,25 @@ const members = [
     z-index: 1;
   }
 
-  .release--wh .release__tag { background: var(--it-wh-violet); color: var(--it-cream); }
-  .release--secondary .release__tag { background: var(--it-red); color: var(--it-cream); }
+  .release--wh .release__tag {
+    background: var(--it-wh-violet);
+    color: var(--it-cream);
+  }
+  .release--secondary .release__tag {
+    background: var(--it-red);
+    color: var(--it-cream);
+  }
 
-  .release__cover { aspect-ratio: 1; overflow: hidden; }
-  .release__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .release__cover {
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .release__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
   .release__meta {
     font-family: var(--it-font-mono);
@@ -653,8 +873,12 @@ const members = [
     margin: 0;
   }
 
-  .release--wh .release__title { color: var(--it-wh-violet-light); }
-  .release--secondary .release__title { color: var(--it-red-light); }
+  .release--wh .release__title {
+    color: var(--it-wh-violet-light);
+  }
+  .release--secondary .release__title {
+    color: var(--it-red-light);
+  }
 
   .release__desc {
     font-family: var(--it-font-body);
@@ -664,11 +888,19 @@ const members = [
     margin: 0;
   }
 
-  .release__links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .release__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
-  .epk-album-row { margin-top: 0; }
+  .epk-album-row {
+    margin-top: 0;
+  }
 
-  .epk-album-cover { max-width: 280px; }
+  .epk-album-cover {
+    max-width: 280px;
+  }
 
   .epk-placeholder {
     font-family: var(--it-font-mono);
@@ -711,7 +943,10 @@ const members = [
     z-index: 1;
   }
 
-  .pullquote blockquote em { font-style: italic; color: var(--it-orange); }
+  .pullquote blockquote em {
+    font-style: italic;
+    color: var(--it-orange);
+  }
 
   .pullquote__src {
     font-family: var(--it-font-mono);
@@ -786,7 +1021,9 @@ const members = [
     height: 100%;
     object-fit: cover;
     filter: grayscale(0.3) contrast(1.05);
-    transition: filter 400ms, transform 600ms;
+    transition:
+      filter 400ms,
+      transform 600ms;
     display: block;
   }
 
@@ -840,7 +1077,9 @@ const members = [
     padding: 18px 20px;
     text-decoration: none;
     color: var(--it-cream);
-    transition: border-color 180ms, background 180ms;
+    transition:
+      border-color 180ms,
+      background 180ms;
   }
 
   .epk-file:hover {
@@ -894,7 +1133,10 @@ const members = [
     gap: 0 40px;
   }
 
-  .contact__list { display: flex; flex-direction: column; }
+  .contact__list {
+    display: flex;
+    flex-direction: column;
+  }
 
   .contact__row {
     display: grid;
@@ -905,7 +1147,9 @@ const members = [
     border-bottom: 1px solid var(--it-orange-30);
   }
 
-  .contact__row:first-child { border-top: 1px solid var(--it-orange-30); }
+  .contact__row:first-child {
+    border-top: 1px solid var(--it-orange-30);
+  }
 
   .contact__k {
     font-family: var(--it-font-mono);
@@ -927,9 +1171,13 @@ const members = [
     transition: color 200ms;
   }
 
-  .contact__v a:hover { color: var(--it-orange); }
+  .contact__v a:hover {
+    color: var(--it-orange);
+  }
 
-  .epk-contact-cta { margin-top: 32px; }
+  .epk-contact-cta {
+    margin-top: 32px;
+  }
 
   /* ---- Footer ---- */
   .epk-footer {
@@ -951,26 +1199,57 @@ const members = [
 
   /* ---- Responsive ---- */
   @media (max-width: 900px) {
-    .epk-top { padding: 20px; }
-    .epk-hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
-    .epk-sec__grid { grid-template-columns: 1fr; gap: 20px; }
-    .epk-sec__label { position: static; }
-    .epk-statband { grid-template-columns: repeat(2, 1fr); }
-    .epk-statband .stat:nth-child(2) { border-right: none; }
+    .epk-top {
+      padding: 20px;
+    }
+    .epk-hero {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 48px 0;
+    }
+    .epk-sec__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .epk-sec__label {
+      position: static;
+    }
+    .epk-statband {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .epk-statband .stat:nth-child(2) {
+      border-right: none;
+    }
   }
 
   @media (max-width: 720px) {
-    .epk-wrap { padding: 0 20px; }
-    .epk-photos { grid-template-columns: 1fr 1fr; }
-    .epk-files { grid-template-columns: 1fr; }
-    .epk-spec { grid-template-columns: 1fr; }
-    .press-grid { grid-template-columns: 1fr; }
-    .releases--even { grid-template-columns: 1fr; }
-    .epk-footer__row { flex-direction: column; align-items: flex-start; }
+    .epk-wrap {
+      padding: 0 20px;
+    }
+    .epk-photos {
+      grid-template-columns: 1fr 1fr;
+    }
+    .epk-files {
+      grid-template-columns: 1fr;
+    }
+    .epk-spec {
+      grid-template-columns: 1fr;
+    }
+    .press-grid {
+      grid-template-columns: 1fr;
+    }
+    .releases--even {
+      grid-template-columns: 1fr;
+    }
+    .epk-footer__row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   @media (max-width: 640px) {
-    .epk-top__tag { display: none; }
+    .epk-top__tag {
+      display: none;
+    }
   }
-
 </style>

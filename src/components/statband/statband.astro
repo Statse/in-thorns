@@ -1,16 +1,24 @@
 ---
-import type { TourEvent } from '@/types/bandsintown'
-import { releases } from '@/data/releases'
+import type { TourEvent } from "@/types/bandsintown";
+import { releases } from "@/data/releases";
 
 interface Props {
-  events?: TourEvent[]
+  events?: TourEvent[];
 }
 
-const { events = [] } = Astro.props
-const hasTour = events.length > 0
+const { events = [] } = Astro.props;
+const hasTour = events.length > 0;
 const thirdStat = hasTour
-  ? { n: String(events.length).padStart(2, '0'), k: 'Upcoming dates', sub: 'Live · Bandsintown' }
-  : { n: String(releases.length).padStart(2, '0'), k: 'Releases', sub: 'Singles + album' }
+  ? {
+      n: String(events.length).padStart(2, "0"),
+      k: "Upcoming dates",
+      sub: "Live · Bandsintown",
+    }
+  : {
+      n: String(releases.length).padStart(2, "0"),
+      k: "Releases",
+      sub: "Singles + album",
+    };
 ---
 
 <div class="statband" aria-label="Band facts">
@@ -22,7 +30,7 @@ const thirdStat = hasTour
   <div class="stat">
     <div class="stat__n">05</div>
     <div class="stat__k">Members</div>
-    <div class="stat__sub">Two-vocalist attack</div>
+    <div class="stat__sub">Three-vocalist attack</div>
   </div>
   <div class="stat">
     <div class="stat__n">{thirdStat.n}</div>
@@ -52,7 +60,9 @@ const thirdStat = hasTour
     gap: 6px;
   }
 
-  .stat:last-child { border-right: none; }
+  .stat:last-child {
+    border-right: none;
+  }
 
   .stat__n {
     font-family: var(--it-font-display);
@@ -81,16 +91,31 @@ const thirdStat = hasTour
   }
 
   @media (max-width: 900px) {
-    .statband { grid-template-columns: repeat(2, 1fr); }
-    .stat:nth-child(2) { border-right: none; }
+    .statband {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .stat:nth-child(2) {
+      border-right: none;
+    }
     .stat:nth-child(1),
-    .stat:nth-child(2) { border-bottom: 1px solid var(--it-orange-30); }
-    .stat { padding: 32px 24px; }
+    .stat:nth-child(2) {
+      border-bottom: 1px solid var(--it-orange-30);
+    }
+    .stat {
+      padding: 32px 24px;
+    }
   }
 
   @media (max-width: 480px) {
-    .statband { grid-template-columns: 1fr; }
-    .stat { border-right: none !important; border-bottom: 1px solid var(--it-orange-30); }
-    .stat:last-child { border-bottom: none; }
+    .statband {
+      grid-template-columns: 1fr;
+    }
+    .stat {
+      border-right: none !important;
+      border-bottom: 1px solid var(--it-orange-30);
+    }
+    .stat:last-child {
+      border-bottom: none;
+    }
   }
 </style>

@@ -1,19 +1,19 @@
 ---
 // Bio / The Collective section
 const members = [
-  { num: '01', name: 'Kristian Ruutala',    role: 'Harsh Vocals' },
-  { num: '02', name: 'Aleksi Statsevich',   role: 'Harsh Vocals' },
-  { num: '03', name: 'Aavee Tikkanen',      role: 'Vocals · Guitar' },
-  { num: '04', name: 'Aleksi Ruotsalainen', role: 'Guitar' },
-  { num: '05', name: 'Jimi Kinnunen',       role: 'Drums' },
-]
+  { num: "01", name: "Kristian Ruutala", role: "Harsh Vocals" },
+  { num: "02", name: "Aleksi Statsevich", role: "Harsh Vocals" },
+  { num: "03", name: "Aavee Tikkanen", role: "Vocals · Guitar" },
+  { num: "04", name: "Aleksi Ruotsalainen", role: "Guitar" },
+  { num: "05", name: "Jimi Kinnunen", role: "Drums" },
+];
 
 const facts = [
-  { k: 'Origin',     v: 'Jyväskylä', sub: 'Central Finland · est. 2022' },
-  { k: 'Genre',      v: 'Metalcore',  sub: 'Post · alternative · surrealist' },
-  { k: 'Members',    v: '5',          sub: 'Two-vocalist attack' },
-  { k: 'Accolades',  v: "#8 '24",     sub: 'Vuoden tulokas · Kaaoszine' },
-]
+  { k: "Origin", v: "Jyväskylä", sub: "Central Finland · est. 2022" },
+  { k: "Genre", v: "Metalcore", sub: "Post · alternative · surrealist" },
+  { k: "Members", v: "5", sub: "Three-vocalist attack" },
+  { k: "Accolades", v: "#8 '24", sub: "Vuoden tulokas · Kaaoszine" },
+];
 ---
 
 <section id="bio">
@@ -28,40 +28,59 @@ const facts = [
 
     <div class="pressline">
       <div>
-        <div class="pressline__quote">Top 10 newcomer of the year, <em>2024.</em></div>
-        <div class="pressline__src">— Kaaoszine readers' poll · 5,000+ voters</div>
+        <div class="pressline__quote">
+          Top 10 newcomer of the year, <em>2024.</em>
+        </div>
+        <div class="pressline__src">
+          — Kaaoszine readers' poll · 5,000+ voters
+        </div>
       </div>
       <div class="pressline__cta">
-        <a class="it-btn" href="/press-kit"><span>Open full EPK</span><span>↗</span></a>
-        <a class="it-btn it-btn--ghost" href="/press-kit#photos"><span>Press photos</span><span>↓</span></a>
+        <a class="it-btn" href="/press-kit"
+          ><span>Open full EPK</span><span>↗</span></a
+        >
+        <a class="it-btn it-btn--ghost" href="/press-kit#photos"
+          ><span>Press photos</span><span>↓</span></a
+        >
       </div>
     </div>
 
     <div class="bio">
       <div class="bio__text">
         <p>
-          Jyväskylä-based metal collective In Thorns creates music driven by crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring melodies. Their acclaimed 2024 debut <em>"the last bead on a cord of songs"</em> placed top 10 in Kaaoszine's newcomer of the year readers' poll; the new single cycle — <em>"exit wounds"</em> and <em>"wormhusk"</em> — pushes heavier and leaner. Drawing from surrealist art and horror, the live show pulls audiences into their dark, surreal world.
+          Jyväskylä-based metal collective In Thorns creates music driven by
+          crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring
+          melodies. Their acclaimed 2024 debut <em
+            >"the last bead on a cord of songs"</em
+          > placed top 10 in Kaaoszine's newcomer of the year readers' poll; the new
+          single cycle — <em>"exit wounds"</em> and <em>"wormhusk"</em> — pushes heavier
+          and leaner. Drawing from surrealist art and horror, the live show pulls
+          audiences into their dark, surreal world.
         </p>
 
         <div class="bio__facts">
-          {facts.map(f => (
-            <div class="fact">
-              <div class="fact__k">{f.k}</div>
-              <div class="fact__v">{f.v}</div>
-              <div class="fact__sub">{f.sub}</div>
-            </div>
-          ))}
+          {
+            facts.map((f) => (
+              <div class="fact">
+                <div class="fact__k">{f.k}</div>
+                <div class="fact__v">{f.v}</div>
+                <div class="fact__sub">{f.sub}</div>
+              </div>
+            ))
+          }
         </div>
       </div>
 
       <div class="members">
-        {members.map(m => (
-          <div class="member">
-            <div class="member__num">{m.num}</div>
-            <div class="member__name">{m.name}</div>
-            <div class="member__role">{m.role}</div>
-          </div>
-        ))}
+        {
+          members.map((m) => (
+            <div class="member">
+              <div class="member__num">{m.num}</div>
+              <div class="member__name">{m.name}</div>
+              <div class="member__role">{m.role}</div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -203,7 +222,9 @@ const facts = [
     border-bottom: 1px solid var(--it-orange-30);
   }
 
-  .member:first-child { border-top: 1px solid var(--it-orange-30); }
+  .member:first-child {
+    border-top: 1px solid var(--it-orange-30);
+  }
 
   .member__num {
     font-family: var(--it-font-mono);
@@ -234,14 +255,28 @@ const facts = [
   }
 
   @media (max-width: 900px) {
-    .bio { grid-template-columns: 1fr; gap: 48px; }
+    .bio {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
   }
 
   @media (max-width: 720px) {
-    .wrap { padding: 0 20px; }
-    section { padding: 64px 0; }
-    .pressline { padding: 24px 20px; }
-    .member { grid-template-columns: 40px 1fr; }
-    .member__role { grid-column: 2; text-align: left; }
+    .wrap {
+      padding: 0 20px;
+    }
+    section {
+      padding: 64px 0;
+    }
+    .pressline {
+      padding: 24px 20px;
+    }
+    .member {
+      grid-template-columns: 40px 1fr;
+    }
+    .member__role {
+      grid-column: 2;
+      text-align: left;
+    }
   }
 </style>
