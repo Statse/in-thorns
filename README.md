@@ -1,7 +1,9 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="public/it-logo-white.png">
-  <img src="public/it-logo.png" alt="In Thorns" width="360">
-</picture>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/it-logo-white.png">
+    <img src="public/it-logo.png" alt="In Thorns" width="360">
+  </picture>
+</div>
 
 # in-thorns.com
 
