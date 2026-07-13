@@ -31,6 +31,13 @@ export interface EpkRelease {
   links: { label: string; url: string }[]
 }
 
+export interface EpkStat {
+  n: string
+  k: string
+  sub: string
+  isTourCount?: boolean
+}
+
 export interface EpkContent {
   pageTitle: string
   header: {
@@ -43,14 +50,14 @@ export interface EpkContent {
     subHtml: string
   }
   facts: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     grid: { k: string; v: string; sub: string }[]
-    stats: { n: string; k: string; sub: string }[]
+    stats: EpkStat[]
   }
   bio: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     paragraphsHtml: string[]
@@ -58,38 +65,39 @@ export interface EpkContent {
     oneliner: { label: string; sublabel: string; html: string }
   }
   lineup: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     members: EpkMember[]
   }
   releases: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     items: EpkRelease[]
   }
   press: {
-    sectionLabel: string
+    hidden?: boolean
+    sectionTitle: string
     sectionSub: string
     heading: string
     placeholder: string
   }
   photos: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     items: EpkPhoto[]
     credit: string
   }
   downloads: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     files: EpkFile[]
   }
   contact: {
-    sectionLabel: string
+    sectionTitle: string
     sectionSub: string
     heading: string
     leftRows: { k: string; v: string; href?: string }[]

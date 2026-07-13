@@ -13,7 +13,7 @@ export const enContent: EpkContent = {
       '<strong>Finnish metalcore collective from Jyväskylä.</strong> New single <em>"wormhusk"</em> out now (May 29, 2026). Crushing soundscapes, darkly poetic lyrics, surrealist horror staging.',
   },
   facts: {
-    sectionLabel: 'A0 / At a glance',
+    sectionTitle: 'At a glance',
     sectionSub: 'Copy-paste facts',
     heading: 'Quick facts',
     grid: [
@@ -25,12 +25,12 @@ export const enContent: EpkContent = {
     stats: [
       { n: '02', k: 'Singles · 2026', sub: 'exit wounds · wormhusk' },
       { n: '01', k: 'Album', sub: 'tlbocs · 2024' },
-      { n: '06', k: 'Tour dates', sub: 'Spring 2026 · FI' },
+      { n: '00', k: 'Tour dates', sub: 'Spring 2026 · FI', isTourCount: true },
       { n: 'FI', k: 'Territory', sub: 'EN / FI press' },
     ],
   },
   bio: {
-    sectionLabel: 'A1 / Biography',
+    sectionTitle: 'Biography',
     sectionSub: 'Long · short · one-liner',
     heading: 'Biography',
     paragraphsHtml: [
@@ -49,7 +49,7 @@ export const enContent: EpkContent = {
     },
   },
   lineup: {
-    sectionLabel: 'A2 / Line-up',
+    sectionTitle: 'Line-up',
     sectionSub: 'Four members',
     heading: 'Line-up',
     members: [
@@ -60,7 +60,7 @@ export const enContent: EpkContent = {
     ],
   },
   releases: {
-    sectionLabel: 'A3 / Releases',
+    sectionTitle: 'Releases',
     sectionSub: '2024 → 2026',
     heading: 'Releases',
     items: [
@@ -111,13 +111,14 @@ export const enContent: EpkContent = {
     ],
   },
   press: {
-    sectionLabel: 'A4 / Press',
+    hidden: true,
+    sectionTitle: 'Press',
     sectionSub: 'Pull quotes',
     heading: 'Press',
     placeholder: 'Press quotes coming soon.',
   },
   photos: {
-    sectionLabel: 'A5 / Photos',
+    sectionTitle: 'Photos',
     sectionSub: 'Hi-res · credit required',
     heading: 'Press photos',
     items: [
@@ -131,7 +132,7 @@ export const enContent: EpkContent = {
     credit: 'Photo credit: on file · request originals via booking email',
   },
   downloads: {
-    sectionLabel: 'A6 / Assets',
+    sectionTitle: 'Assets',
     sectionSub: 'Download bundle',
     heading: 'Downloads',
     files: [
@@ -141,7 +142,7 @@ export const enContent: EpkContent = {
     ],
   },
   contact: {
-    sectionLabel: 'A7 / Contact',
+    sectionTitle: 'Contact',
     sectionSub: 'Booking · press',
     heading: 'Contact',
     leftRows: [

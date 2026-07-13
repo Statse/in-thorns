@@ -9,6 +9,35 @@ interface Props {
 const { content: c } = Astro.props
 const singles = c.releases.items.filter((r) => r.type === 'single')
 const albums = c.releases.items.filter((r) => r.type === 'album')
+
+// Fetch live tour count
+let tourCount = 0
+try {
+  const eventsUrl = new URL('/api/events', Astro.url)
+  const res = await fetch(eventsUrl.toString())
+  if (res.ok) {
+    const json = await res.json()
+    if (json.success) tourCount = (json.data ?? []).length
+  }
+} catch {}
+
+// Build visible stats (hide tour stat if no dates, update count if there are)
+const visibleStats = c.facts.stats
+  .filter((s) => !s.isTourCount || tourCount > 0)
+  .map((s) =>
+    s.isTourCount
+      ? { ...s, n: String(tourCount).padStart(2, '0') }
+      : s
+  )
+
+// Auto-number sections in display order, skipping hidden ones
+const sectionOrder = ['facts', 'bio', 'lineup', 'releases', 'press', 'photos', 'downloads', 'contact'] as const
+const hiddenSections = new Set(c.press.hidden ? ['press'] : [])
+const visibleOrder = sectionOrder.filter((id) => !hiddenSections.has(id))
+const label = (id: string) => {
+  const idx = visibleOrder.indexOf(id as typeof sectionOrder[number])
+  return idx >= 0 ? `A${idx} / ` : ''
+}
 ---
 
 <Layout title={c.pageTitle}>
@@ -31,11 +60,11 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       <p class='epk-hero__sub' set:html={c.hero.subHtml} />
     </section>
 
-    <!-- A0 FACTS -->
+    <!-- FACTS -->
     <section class='epk-sec' id='facts'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.facts.sectionLabel}<small>{c.facts.sectionSub}</small>
+          {label('facts')}{c.facts.sectionTitle}<small>{c.facts.sectionSub}</small>
         </div>
         <div>
           <h2>{c.facts.heading}</h2>
@@ -48,8 +77,8 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
               </div>
             ))}
           </div>
-          <div class='epk-statband'>
-            {c.facts.stats.map((s) => (
+          <div class={`epk-statband epk-statband--${visibleStats.length}`}>
+            {visibleStats.map((s) => (
               <div class='stat'>
                 <div class='stat__n'>{s.n}</div>
                 <div class='stat__k'>{s.k}</div>
@@ -61,11 +90,11 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       </div>
     </section>
 
-    <!-- A1 BIO -->
+    <!-- BIO -->
     <section class='epk-sec' id='bio'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.bio.sectionLabel}<small>{c.bio.sectionSub}</small>
+          {label('bio')}{c.bio.sectionTitle}<small>{c.bio.sectionSub}</small>
         </div>
         <div class='epk-bio'>
           <h2>{c.bio.heading}</h2>
@@ -86,11 +115,11 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       </div>
     </section>
 
-    <!-- A2 LINE-UP -->
+    <!-- LINE-UP -->
     <section class='epk-sec' id='members'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.lineup.sectionLabel}<small>{c.lineup.sectionSub}</small>
+          {label('lineup')}{c.lineup.sectionTitle}<small>{c.lineup.sectionSub}</small>
         </div>
         <div>
           <h2>{c.lineup.heading}</h2>
@@ -107,11 +136,11 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       </div>
     </section>
 
-    <!-- A3 RELEASES -->
+    <!-- RELEASES -->
     <section class='epk-sec' id='releases'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.releases.sectionLabel}<small>{c.releases.sectionSub}</small>
+          {label('releases')}{c.releases.sectionTitle}<small>{c.releases.sectionSub}</small>
         </div>
         <div>
           <h2>{c.releases.heading}</h2>
@@ -155,22 +184,24 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       </div>
     </section>
 
-    <!-- A4 PRESS -->
-    <section class='epk-sec' id='press'>
-      <div class='epk-sec__grid'>
-        <div class='epk-sec__label'>{c.press.sectionLabel}<small>{c.press.sectionSub}</small></div>
-        <div>
-          <h2>{c.press.heading}</h2>
-          <p class='epk-placeholder'>{c.press.placeholder}</p>
+    <!-- PRESS (hidden when no quotes) -->
+    {!c.press.hidden && (
+      <section class='epk-sec' id='press'>
+        <div class='epk-sec__grid'>
+          <div class='epk-sec__label'>{label('press')}{c.press.sectionTitle}<small>{c.press.sectionSub}</small></div>
+          <div>
+            <h2>{c.press.heading}</h2>
+            <p class='epk-placeholder'>{c.press.placeholder}</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
 
-    <!-- A5 PHOTOS -->
+    <!-- PHOTOS -->
     <section class='epk-sec' id='photos'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.photos.sectionLabel}<small>{c.photos.sectionSub}</small>
+          {label('photos')}{c.photos.sectionTitle}<small>{c.photos.sectionSub}</small>
         </div>
         <div>
           <h2>{c.photos.heading}</h2>
@@ -190,11 +221,11 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       </div>
     </section>
 
-    <!-- A6 DOWNLOADS -->
+    <!-- DOWNLOADS -->
     <section class='epk-sec' id='downloads'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.downloads.sectionLabel}<small>{c.downloads.sectionSub}</small>
+          {label('downloads')}{c.downloads.sectionTitle}<small>{c.downloads.sectionSub}</small>
         </div>
         <div>
           <h2>{c.downloads.heading}</h2>
@@ -214,11 +245,11 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
       </div>
     </section>
 
-    <!-- A7 CONTACT -->
+    <!-- CONTACT -->
     <section class='epk-sec epk-sec--last' id='contact'>
       <div class='epk-sec__grid'>
         <div class='epk-sec__label'>
-          {c.contact.sectionLabel}<small>{c.contact.sectionSub}</small>
+          {label('contact')}{c.contact.sectionTitle}<small>{c.contact.sectionSub}</small>
         </div>
         <div>
           <h2>{c.contact.heading}</h2>
@@ -469,6 +500,10 @@ const albums = c.releases.items.filter((r) => r.type === 'album')
   .epk-statband {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .epk-statband--3 {
+    grid-template-columns: repeat(3, 1fr);
     border: 1px solid var(--it-orange-30);
     margin-top: 24px;
   }

@@ -10,10 +10,10 @@ export const fiContent: EpkContent = {
   hero: {
     eyebrow: 'Lehdistöpaketti',
     subHtml:
-      '<strong>Jyväskyläläinen metallikollektiivi.</strong> Uusi single <em>"wormhusk"</em> nyt kuunneltavissa (29.5.2026). Murskaavat äänimaisematjot, runollinen sanoitus, surrealistinen kauhushow.',
+      '<strong>Jyväskyläläinen metallikollektiivi.</strong> Uusi single <em>"wormhusk"</em> nyt kuunneltavissa (29.5.2026). Tarttuva äänimaailma, synkät sanat, teatraalinen liveshow – kokemus, josta puhutaan vielä keikan jälkeenkin.',
   },
   facts: {
-    sectionLabel: 'A0 / Lyhyesti',
+    sectionTitle: 'Lyhyesti',
     sectionSub: 'Pikafaktat',
     heading: 'Pikafaktat',
     grid: [
@@ -25,12 +25,12 @@ export const fiContent: EpkContent = {
     stats: [
       { n: '02', k: 'Singlet · 2026', sub: 'exit wounds · wormhusk' },
       { n: '01', k: 'Albumi', sub: 'tlbocs · 2024' },
-      { n: '06', k: 'Keikkapäivät', sub: 'Kevät 2026 · FI' },
+      { n: '00', k: 'Keikkapäivät', sub: 'Kevät 2026 · FI', isTourCount: true },
       { n: 'FI', k: 'Alue', sub: 'FI / EN lehdistö' },
     ],
   },
   bio: {
-    sectionLabel: 'A1 / Biografia',
+    sectionTitle: 'Biografia',
     sectionSub: 'Pitkä · lyhyt · iskulause',
     heading: 'Biografia',
     paragraphsHtml: [
@@ -47,11 +47,11 @@ export const fiContent: EpkContent = {
     oneliner: {
       label: 'Iskulause',
       sublabel: 'Listauksiin',
-      html: 'Jyväskyläläinen metallikollektiivi — murskaava, runollinen, armoton. Uusi single <em>"wormhusk"</em> nyt kuunneltavissa.',
+      html: 'Jyväskyläläinen metallikollektiivi – tarttuva, synkkä, armoton. Uusi single <em>"wormhusk"</em> nyt kuunneltavissa.',
     },
   },
   lineup: {
-    sectionLabel: 'A2 / Kokoonpano',
+    sectionTitle: 'Kokoonpano',
     sectionSub: 'Neljä jäsentä',
     heading: 'Kokoonpano',
     members: [
@@ -62,7 +62,7 @@ export const fiContent: EpkContent = {
     ],
   },
   releases: {
-    sectionLabel: 'A3 / Julkaisut',
+    sectionTitle: 'Julkaisut',
     sectionSub: '2024 → 2026',
     heading: 'Julkaisut',
     items: [
@@ -102,7 +102,7 @@ export const fiContent: EpkContent = {
         tag: 'Albumi',
         cover: '/music/tlboacos-album.webp',
         meta: 'Debyytti-LP · 2024 · 8 kappaletta',
-        desc: 'Nihilistiset äänimaisematjot ja kohoavat melodiat. Top 10 vuoden tulokas 2024 — Kaaoszinen lukijaäänestys.',
+        desc: 'Nihilistiset äänimaisemoja ja kohoavat melodiat. Top 10 vuoden tulokas 2024 — Kaaoszinen lukijaäänestys.',
         links: [
           { label: 'Spotify', url: 'https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy' },
           { label: 'Apple Music', url: 'https://music.apple.com/tr/album/the-last-bead-on-a-cord-of-songs/1723544456' },
@@ -113,13 +113,14 @@ export const fiContent: EpkContent = {
     ],
   },
   press: {
-    sectionLabel: 'A4 / Lehdistö',
+    hidden: true,
+    sectionTitle: 'Lehdistö',
     sectionSub: 'Lainaukset',
     heading: 'Lehdistö',
     placeholder: 'Lehdistölainaukset tulossa.',
   },
   photos: {
-    sectionLabel: 'A5 / Kuvat',
+    sectionTitle: 'Kuvat',
     sectionSub: 'Korkearesoluutio · lähde mainittava',
     heading: 'Promokuvat',
     items: [
@@ -133,7 +134,7 @@ export const fiContent: EpkContent = {
     credit: 'Valokuvaaja: tiedostossa · pyydä originaalit bookkaaussähköpostilla',
   },
   downloads: {
-    sectionLabel: 'A6 / Materiaalit',
+    sectionTitle: 'Materiaalit',
     sectionSub: 'Lataa paketti',
     heading: 'Lataukset',
     files: [
@@ -143,7 +144,7 @@ export const fiContent: EpkContent = {
     ],
   },
   contact: {
-    sectionLabel: 'A7 / Yhteystiedot',
+    sectionTitle: 'Yhteystiedot',
     sectionSub: 'Bookkaus · lehdistö',
     heading: 'Yhteystiedot',
     leftRows: [
