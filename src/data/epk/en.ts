@@ -33,14 +33,15 @@ export const enContent: EpkContent = {
     sectionTitle: 'Biography',
     sectionSub: 'Long · short · one-liner',
     heading: 'Biography',
+    longLabel: 'Long bio',
+    wordsLabel: 'words',
     paragraphsHtml: [
-      'Jyväskylä-based Finnish metalcore collective <strong>In Thorns</strong> releases new single <em>"wormhusk"</em> on May 29, 2026 — the second chapter of a new cycle following <em>"exit wounds"</em> (January 2026) and their acclaimed debut album <em>"the last bead on a cord of songs"</em> (2024), which placed top 10 in Kaaoszine\'s newcomer of the year readers\' poll.',
+      'Jyväskylä-based Finnish metalcore collective <strong>In Thorns</strong> released new single <em>"wormhusk"</em> on May 29, 2026, following <em>"exit wounds"</em> (January 2026) and their acclaimed debut album <em>"the last bead on a cord of songs"</em> (2024), which placed #8 in Kaaoszine\'s newcomer of the year readers\' poll.',
       'The collective creates metalcore driven by crushing soundscapes, nihilistic and darkly poetic lyrics, and soaring melodies. Drawing on surrealist art and horror, In Thorns delivers an immersive experience that balances devastating heaviness with haunting beauty. Live, the band\'s tight, high-energy performance pulls audiences into a dark, surreal world.',
     ],
     shortBio: {
       label: 'Short bio',
-      count: '~50 words',
-      html: 'In Thorns is a four-piece metalcore collective from Jyväskylä, Finland. Following top 10 newcomer of the year recognition for their 2024 debut, the band\'s 2026 cycle — singles <em>"exit wounds"</em> and <em>"wormhusk"</em> — pairs crushing weight with surrealist, horror-tinged staging and darkly poetic lyrics.',
+      html: 'In Thorns is a four-piece metalcore collective from Jyväskylä, Finland, whose 2024 debut placed #8 in Kaaoszine\'s newcomer of the year readers\' poll. The band\'s 2026 singles <em>"exit wounds"</em> and <em>"wormhusk"</em> pair crushing weight with surrealist, horror-tinged staging and darkly poetic lyrics.',
     },
     oneliner: {
       label: 'One-liner',
@@ -72,7 +73,7 @@ export const enContent: EpkContent = {
         tag: 'New — May 29',
         cover: '/music/WH SINGLE ART.png',
         meta: 'Single · 2026 · Self-released',
-        desc: 'The second single of the cycle — claustrophobic, oppressive, a slow violet dread.',
+        desc: 'A musically heavy, oppressive single about domestic violence. "I\'m too afraid to turn the lights off."',
         links: [
           { label: 'Listen', url: 'https://distrokid.com/hyperfollow/inthorns/wormhusk' },
           { label: 'Spotify', url: 'https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d' },
@@ -86,7 +87,7 @@ export const enContent: EpkContent = {
         tag: 'Single — Jan 23',
         cover: '/music/exit-wounds-cover.webp',
         meta: 'Single · 2026 · Self-released',
-        desc: 'The first artefact of the cycle — heavier, leaner, cinematic. "The pain won\'t cease."',
+        desc: 'Released in January — the single that opened the band\'s heavier, more determined era. "The pain won\'t cease."',
         links: [
           { label: 'Listen', url: 'https://distrokid.com/hyperfollow/inthorns/exit-wounds' },
           { label: 'Spotify', url: 'https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d' },

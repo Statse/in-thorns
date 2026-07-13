@@ -60,8 +60,10 @@ export interface EpkContent {
     sectionTitle: string
     sectionSub: string
     heading: string
+    longLabel: string
+    wordsLabel: string
     paragraphsHtml: string[]
-    shortBio: { label: string; count: string; html: string }
+    shortBio: { label: string; html: string }
     oneliner: { label: string; sublabel: string; html: string }
   }
   lineup: {

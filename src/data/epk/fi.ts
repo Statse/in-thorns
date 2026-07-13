@@ -13,14 +13,14 @@ export const fiContent: EpkContent = {
       '<strong>Jyväskyläläinen metallikollektiivi.</strong> Uusi single <em>"wormhusk"</em> nyt kuunneltavissa (29.5.2026). Tarttuva äänimaailma, synkät sanat, teatraalinen liveshow – kokemus, josta puhutaan vielä keikan jälkeenkin.',
   },
   facts: {
-    sectionTitle: 'Lyhyesti',
-    sectionSub: 'Pikafaktat',
-    heading: 'Pikafaktat',
+    sectionTitle: 'Tietoja',
+    sectionSub: 'Faktat lyhyesti',
+    heading: 'Tietoja',
     grid: [
       { k: 'Kotipaikka', v: 'Jyväskylä', sub: 'Keski-Suomi · perust. 2022' },
       { k: 'Genre', v: 'Metalcore', sub: 'Post · alternative · surrealistinen' },
       { k: 'Jäsenet', v: '4', sub: 'Kolme laulajaa' },
-      { k: 'Tunnustukset', v: '#8 \'24', sub: 'Vuoden tulokas · Kaaoszine' },
+      { k: 'Ansiot', v: '#8 \'24', sub: 'Vuoden tulokas · Kaaoszine' },
     ],
     stats: [
       { n: '02', k: 'Singlet · 2026', sub: 'exit wounds · wormhusk' },
@@ -30,9 +30,11 @@ export const fiContent: EpkContent = {
     ],
   },
   bio: {
-    sectionTitle: 'Biografia',
+    sectionTitle: 'Kuvaus',
     sectionSub: 'Pitkä · lyhyt · iskulause',
-    heading: 'Biografia',
+    heading: 'Kuvaus',
+    longLabel: 'Pitkä kuvaus',
+    wordsLabel: 'sanaa',
     paragraphsHtml: [
       'Jyväskyläläinen metallikollektiivi <strong>In Thorns</strong> ammentaa soundiinsa 2000-luvun nu-metallin groove-pohjaista poljentaa, mutta myös modernin metallin murskaavaa intensiteettiä, luoden äänimaailman, joka on tarttuva, synkkä ja armoton.',
       'Kollektiivin liveperformanssi luo yleisölle alusta loppuun otteessaan pitävän, katseita kahlitsevan, teatraalisen ja ennen kaikkea energisen kokemuksen, josta puhutaan vielä keikan jälkeenkin.',
@@ -40,14 +42,13 @@ export const fiContent: EpkContent = {
       'Vuonna 2026 bändi julkaisi uudet singlet <em>"exit wounds"</em> ja <em>"wormhusk"</em> jotka maalaavat yhtyeen uuden, entistä anteeksipyytelemättömämmän tyylisuunnan.',
     ],
     shortBio: {
-      label: 'Lyhyt bio',
-      count: '~50 sanaa',
-      html: 'In Thorns on neljähenkinen metallikollektiivi Jyväskylästä. Debyyttialbuminsa myötä Kaaoszinen "Vuoden tulokas 2024" -tunnustuksen saanut bändi jatkoi 2026 julkaisemalla singlet <em>"exit wounds"</em> ja <em>"wormhusk"</em> – murskaavaa, surrealistista metallia, josta puhutaan vielä keikan jälkeenkin.',
+      label: 'Lyhyt kuvaus',
+      html: 'In Thorns on neljähenkinen metallikollektiivi Jyväskylästä. Debyyttialbumillaan yhtye nousi Kaaoszinen "Vuoden tulokas 2024" -listalle (sija 8). Vuonna 2026 julkaistut singlet <em>"exit wounds"</em> ja <em>"wormhusk"</em> jatkavat bändin entistä raskaampaa ja määrätietoisempaa aikakautta – murskaavaa, surrealistista metallia, josta puhutaan vielä keikan jälkeenkin.',
     },
     oneliner: {
       label: 'Iskulause',
       sublabel: 'Listauksiin',
-      html: 'Jyväskyläläinen metallikollektiivi – tarttuva, synkkä, armoton. Uusi single <em>"wormhusk"</em> nyt kuunneltavissa.',
+      html: 'Jyväskyläläinen metallikollektiivi – murskaava, runollinen, armoton. Uusi raadollinen single <em>"wormhusk"</em> nyt kuunneltavissa.',
     },
   },
   lineup: {
@@ -74,7 +75,7 @@ export const fiContent: EpkContent = {
         tag: 'Uusi — 29.5.',
         cover: '/music/WH SINGLE ART.png',
         meta: 'Single · 2026 · Omatuotanto',
-        desc: 'Syklin toinen single — klaustrofobinen, painostava, hidas violetti ahdistus.',
+        desc: 'Lähisuhdeväkivaltaa käsittelevä, musiikillisesti raskas ja ahdistava single. "I\'m too afraid to turn the lights off."',
         links: [
           { label: 'Kuuntele', url: 'https://distrokid.com/hyperfollow/inthorns/wormhusk' },
           { label: 'Spotify', url: 'https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d' },
@@ -88,7 +89,7 @@ export const fiContent: EpkContent = {
         tag: 'Single — 23.1.',
         cover: '/music/exit-wounds-cover.webp',
         meta: 'Single · 2026 · Omatuotanto',
-        desc: 'Syklin ensimmäinen artefakti — raskaampi, leankempi, elokuvallinen. "The pain won\'t cease."',
+        desc: 'Tammikuussa julkaistu single, joka avasi yhtyeen entistä raskaamman ja määrätietoisemman aikakauden. "The pain won\'t cease."',
         links: [
           { label: 'Kuuntele', url: 'https://distrokid.com/hyperfollow/inthorns/exit-wounds' },
           { label: 'Spotify', url: 'https://open.spotify.com/artist/4b0Yziy8xm1VtefVI9ri2d' },
@@ -102,7 +103,7 @@ export const fiContent: EpkContent = {
         tag: 'Albumi',
         cover: '/music/tlboacos-album.webp',
         meta: 'Debyytti-LP · 2024 · 8 kappaletta',
-        desc: 'Nihilistiset äänimaisemoja ja kohoavat melodiat. Top 10 vuoden tulokas 2024 — Kaaoszinen lukijaäänestys.',
+        desc: 'Debyyttialbumi, joka sai kiitosta sekä faneilta että kriitikoilta. Kaaoszinen lukijaäänestyksessä sija 8 kategoriassa "Vuoden tulokas 2024".',
         links: [
           { label: 'Spotify', url: 'https://open.spotify.com/album/4wUaeA2NL4yZq0OOzw8xUy' },
           { label: 'Apple Music', url: 'https://music.apple.com/tr/album/the-last-bead-on-a-cord-of-songs/1723544456' },
@@ -131,7 +132,7 @@ export const fiContent: EpkContent = {
       { src: '/photos/live/poppari_2025/_X2A7434.webp', caption: 'Live · crowd', ext: 'WEBP' },
       { src: '/photos/exit_wounds/4.webp', caption: 'Promo · color', ext: 'WEBP' },
     ],
-    credit: 'Valokuvaaja: tiedostossa · pyydä originaalit bookkaaussähköpostilla',
+    credit: 'Valokuvaajan tiedot pyynnöstä · originaalit sähköpostitse',
   },
   downloads: {
     sectionTitle: 'Materiaalit',
@@ -145,10 +146,10 @@ export const fiContent: EpkContent = {
   },
   contact: {
     sectionTitle: 'Yhteystiedot',
-    sectionSub: 'Bookkaus · lehdistö',
+    sectionSub: 'Keikat · lehdistö',
     heading: 'Yhteystiedot',
     leftRows: [
-      { k: 'Bookkaus', v: 'inthornsband@gmail.com', href: 'mailto:inthornsband@gmail.com' },
+      { k: 'Sähköposti', v: 'inthornsband@gmail.com', href: 'mailto:inthornsband@gmail.com' },
       { k: 'Kotipaikka', v: 'Jyväskylä, Suomi' },
     ],
     rightRows: [

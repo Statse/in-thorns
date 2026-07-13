@@ -30,6 +30,12 @@ const visibleStats = c.facts.stats
       : s
   )
 
+// Word counts, computed so they stay accurate when copy changes
+const countWords = (html: string) =>
+  html.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length
+const longBioWords = countWords(c.bio.paragraphsHtml.join(' '))
+const shortBioWords = countWords(c.bio.shortBio.html)
+
 // Auto-number sections in display order, skipping hidden ones
 const sectionOrder = ['facts', 'bio', 'lineup', 'releases', 'press', 'photos', 'downloads', 'contact'] as const
 const hiddenSections = new Set(c.press.hidden ? ['press'] : [])
@@ -98,12 +104,13 @@ const label = (id: string) => {
         </div>
         <div class='epk-bio'>
           <h2>{c.bio.heading}</h2>
+          <div class='vk'><span>{c.bio.longLabel}</span><span>~{longBioWords} {c.bio.wordsLabel}</span></div>
           {c.bio.paragraphsHtml.map((p) => (
             <p set:html={p} />
           ))}
           <div class='epk-bio__variants'>
             <div class='epk-bio__variant'>
-              <div class='vk'><span>{c.bio.shortBio.label}</span><span>{c.bio.shortBio.count}</span></div>
+              <div class='vk'><span>{c.bio.shortBio.label}</span><span>~{shortBioWords} {c.bio.wordsLabel}</span></div>
               <p set:html={c.bio.shortBio.html} />
             </div>
             <div class='epk-bio__variant'>
