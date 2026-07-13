@@ -1,0 +1,851 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import type { EpkContent } from '@/data/epk/types'
+
+interface Props {
+  content: EpkContent
+}
+
+const { content: c } = Astro.props
+const singles = c.releases.items.filter((r) => r.type === 'single')
+const albums = c.releases.items.filter((r) => r.type === 'album')
+---
+
+<Layout title={c.pageTitle}>
+  <header class='epk-top'>
+    <a href='/' class='epk-top__logo'>IN THORNS</a>
+    <div class='epk-top__tag'>{c.header.tag}</div>
+    <div class='epk-top__actions'>
+      <a class='it-chip' href={`mailto:inthornsband@gmail.com?subject=EPK%20%E2%80%94%20Press%20enquiry`}>{c.header.contactLabel}</a>
+      <a class='it-chip' href={c.header.langLink.href}>{c.header.langLink.label}</a>
+    </div>
+  </header>
+
+  <main class='epk-wrap'>
+    <!-- HERO -->
+    <section class='epk-hero'>
+      <div>
+        <div class='epk-hero__eyebrow'>{c.hero.eyebrow}</div>
+        <h1>In<br /><em>Thorns.</em></h1>
+      </div>
+      <p class='epk-hero__sub' set:html={c.hero.subHtml} />
+    </section>
+
+    <!-- A0 FACTS -->
+    <section class='epk-sec' id='facts'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.facts.sectionLabel}<small>{c.facts.sectionSub}</small>
+        </div>
+        <div>
+          <h2>{c.facts.heading}</h2>
+          <div class='bio__facts'>
+            {c.facts.grid.map((f) => (
+              <div class='fact'>
+                <div class='fact__k'>{f.k}</div>
+                <div class='fact__v'>{f.v}</div>
+                <div class='fact__sub'>{f.sub}</div>
+              </div>
+            ))}
+          </div>
+          <div class='epk-statband'>
+            {c.facts.stats.map((s) => (
+              <div class='stat'>
+                <div class='stat__n'>{s.n}</div>
+                <div class='stat__k'>{s.k}</div>
+                <div class='stat__sub'>{s.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A1 BIO -->
+    <section class='epk-sec' id='bio'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.bio.sectionLabel}<small>{c.bio.sectionSub}</small>
+        </div>
+        <div class='epk-bio'>
+          <h2>{c.bio.heading}</h2>
+          {c.bio.paragraphsHtml.map((p) => (
+            <p set:html={p} />
+          ))}
+          <div class='epk-bio__variants'>
+            <div class='epk-bio__variant'>
+              <div class='vk'><span>{c.bio.shortBio.label}</span><span>{c.bio.shortBio.count}</span></div>
+              <p set:html={c.bio.shortBio.html} />
+            </div>
+            <div class='epk-bio__variant'>
+              <div class='vk'><span>{c.bio.oneliner.label}</span><span>{c.bio.oneliner.sublabel}</span></div>
+              <p set:html={c.bio.oneliner.html} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A2 LINE-UP -->
+    <section class='epk-sec' id='members'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.lineup.sectionLabel}<small>{c.lineup.sectionSub}</small>
+        </div>
+        <div>
+          <h2>{c.lineup.heading}</h2>
+          <div class='members'>
+            {c.lineup.members.map((m) => (
+              <div class='member'>
+                <div class='member__num'>{m.num}</div>
+                <div class='member__name'>{m.name}</div>
+                <div class='member__role'>{m.role}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A3 RELEASES -->
+    <section class='epk-sec' id='releases'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.releases.sectionLabel}<small>{c.releases.sectionSub}</small>
+        </div>
+        <div>
+          <h2>{c.releases.heading}</h2>
+          <div class='releases releases--even'>
+            {singles.map((r) => (
+              <article class={`release release--${r.theme}`}>
+                <span class='release__tag'>{r.tag}</span>
+                <div class='release__cover'>
+                  <img src={r.cover} alt={`${r.title} artwork`} width='600' height='600' loading='lazy' />
+                </div>
+                <div class='release__meta'>{r.meta}</div>
+                <h3 class='release__title'>{r.title}</h3>
+                <p class='release__desc'>{r.desc}</p>
+                <div class='release__links'>
+                  {r.links.slice(0, 2).map((link) => (
+                    <a class='it-chip' href={link.url} target='_blank' rel='noopener'>{link.label}</a>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+          {albums.map((r) => (
+            <div class='epk-album-row'>
+              <article class={`release release--${r.theme}`}>
+                <span class='release__tag'>{r.tag}</span>
+                <div class='release__cover epk-album-cover'>
+                  <img src={r.cover} alt={`${r.title} artwork`} width='600' height='600' loading='lazy' />
+                </div>
+                <div class='release__meta'>{r.meta}</div>
+                <h3 class='release__title'>{r.title}</h3>
+                <p class='release__desc'>{r.desc}</p>
+                <div class='release__links'>
+                  {r.links.map((link) => (
+                    <a class='it-chip' href={link.url} target='_blank' rel='noopener'>{link.label}</a>
+                  ))}
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- A4 PRESS -->
+    <section class='epk-sec' id='press'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>{c.press.sectionLabel}<small>{c.press.sectionSub}</small></div>
+        <div>
+          <h2>{c.press.heading}</h2>
+          <p class='epk-placeholder'>{c.press.placeholder}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A5 PHOTOS -->
+    <section class='epk-sec' id='photos'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.photos.sectionLabel}<small>{c.photos.sectionSub}</small>
+        </div>
+        <div>
+          <h2>{c.photos.heading}</h2>
+          <div class='epk-photos'>
+            {c.photos.items.map((photo) => (
+              <figure class='epk-photo'>
+                <img src={photo.src} alt={`In Thorns press photo — ${photo.caption}`} loading='lazy' />
+                <figcaption class='epk-photo__dl'>
+                  <span>{photo.caption}</span>
+                  <b>{photo.ext} ↓</b>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p class='epk-photo-credit'>{c.photos.credit}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A6 DOWNLOADS -->
+    <section class='epk-sec' id='downloads'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.downloads.sectionLabel}<small>{c.downloads.sectionSub}</small>
+        </div>
+        <div>
+          <h2>{c.downloads.heading}</h2>
+          <div class='epk-files'>
+            {c.downloads.files.map((f) => (
+              <a class='epk-file' href={f.href} target={f.isDownload ? undefined : '_blank'} rel={f.isDownload ? undefined : 'noopener'} download={f.isDownload || undefined}>
+                <span class='epk-file__ext'>{f.ext}</span>
+                <span class='epk-file__m'>
+                  <span class='epk-file__n'>{f.name}</span>
+                  <span class='epk-file__s'>{f.sub}</span>
+                </span>
+                <span class='epk-file__arrow'>{f.arrow}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A7 CONTACT -->
+    <section class='epk-sec epk-sec--last' id='contact'>
+      <div class='epk-sec__grid'>
+        <div class='epk-sec__label'>
+          {c.contact.sectionLabel}<small>{c.contact.sectionSub}</small>
+        </div>
+        <div>
+          <h2>{c.contact.heading}</h2>
+          <div class='epk-spec'>
+            <div class='contact__list'>
+              {c.contact.leftRows.map((row) => (
+                <div class='contact__row'>
+                  <div class='contact__k'>{row.k}</div>
+                  <div class='contact__v'>
+                    {row.href ? <a href={row.href}>{row.v}</a> : row.v}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class='contact__list'>
+              {c.contact.rightRows.map((row) => (
+                <div class='contact__row'>
+                  <div class='contact__k'>{row.k}</div>
+                  <div class='contact__v'>
+                    <a href={row.href} target='_blank' rel='noopener'>{row.v}</a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class='epk-contact-cta'>
+            <a class='it-btn it-btn--primary' href='mailto:inthornsband@gmail.com'>
+              <span>{c.contact.ctaLabel}</span><span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class='epk-footer'>
+    <div class='epk-wrap epk-footer__row'>
+      <div>{c.footer.left}</div>
+      <div>{c.footer.right}</div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .epk-wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .epk-top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--it-orange-30);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .epk-top__logo {
+    font-family: var(--it-font-display);
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--it-cream);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .epk-top__logo::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: var(--it-orange);
+  }
+
+  .epk-top__tag {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: rgba(245, 245, 220, 0.6);
+  }
+
+  .epk-top__actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .epk-hero {
+    padding: 80px 0 64px;
+    border-bottom: 1px solid var(--it-orange-30);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 56px;
+    align-items: end;
+  }
+
+  .epk-hero__eyebrow {
+    font-family: var(--it-font-mono);
+    font-size: 12px;
+    letter-spacing: var(--it-track-mono-lg);
+    color: var(--it-orange);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .epk-hero__eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--it-orange);
+  }
+
+  .epk-hero h1 {
+    font-family: var(--it-font-display);
+    font-size: clamp(72px, 13vw, 180px);
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .epk-hero h1 em {
+    font-style: normal;
+    color: var(--it-orange);
+    display: block;
+  }
+
+  .epk-hero__sub {
+    font-family: var(--it-font-body);
+    font-size: 18px;
+    line-height: 1.5;
+    opacity: 0.82;
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .epk-hero__sub strong { color: var(--it-cream); }
+  .epk-hero__sub em { font-style: italic; color: var(--it-orange); }
+
+  .epk-sec {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+    scroll-margin-top: 90px;
+  }
+
+  .epk-sec--last { border-bottom: none; }
+
+  .epk-sec__grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .epk-sec__label {
+    font-family: var(--it-font-mono);
+    font-size: 12px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-orange);
+    position: sticky;
+    top: 100px;
+  }
+
+  .epk-sec__label small {
+    display: block;
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    color: rgba(245, 245, 220, 0.45);
+    letter-spacing: var(--it-track-mono-sm);
+    margin-top: 8px;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  .epk-sec h2 {
+    font-family: var(--it-font-display);
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--it-cream);
+    margin: 0 0 28px;
+  }
+
+  .epk-bio p {
+    font-family: var(--it-font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    max-width: 64ch;
+    color: var(--it-cream);
+  }
+
+  .epk-bio p em { font-style: italic; color: var(--it-orange); }
+  .epk-bio p strong { color: var(--it-cream); font-weight: 800; }
+
+  .epk-bio__variants {
+    margin-top: 32px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .epk-bio__variant {
+    border: 1px solid rgba(245, 245, 220, 0.14);
+    background: var(--it-ink);
+    padding: 20px 22px;
+  }
+
+  .vk {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-md);
+    text-transform: uppercase;
+    color: var(--it-orange);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .epk-bio__variant p {
+    font-family: var(--it-font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.82;
+    color: var(--it-cream);
+    max-width: none;
+  }
+
+  .epk-bio__variant p em { font-style: italic; color: var(--it-orange); }
+
+  .epk-statband {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--it-orange-30);
+    margin-top: 24px;
+  }
+
+  .epk-statband .stat {
+    padding: 24px 20px;
+    border-right: 1px solid var(--it-orange-30);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .epk-statband .stat:last-child { border-right: none; }
+
+  .epk-statband .stat__n {
+    font-family: var(--it-font-display);
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-orange);
+  }
+
+  .epk-statband .stat__k {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-cream);
+  }
+
+  .epk-statband .stat__sub {
+    font-family: var(--it-font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.35);
+  }
+
+  .bio__facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--it-orange-30);
+    border: 1px solid var(--it-orange-30);
+  }
+
+  .fact {
+    background: var(--it-black);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .fact__k {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: var(--it-orange);
+  }
+
+  .fact__v {
+    font-family: var(--it-font-display);
+    font-size: 26px;
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+  }
+
+  .fact__sub {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.35);
+  }
+
+  .members { display: flex; flex-direction: column; }
+
+  .member {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .member:first-child { border-top: 1px solid var(--it-orange-30); }
+
+  .member__num {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: var(--it-orange);
+  }
+
+  .member__name {
+    font-family: var(--it-font-display);
+    font-size: 22px;
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+  }
+
+  .member__role {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.4);
+    text-align: right;
+  }
+
+  .releases--even {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+
+  .release {
+    position: relative;
+    border: 1px solid var(--it-orange-30);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .release--wh { border-color: var(--it-wh-violet-30); }
+  .release--secondary { border-color: rgba(211, 47, 47, 0.3); }
+
+  .release__tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    background: var(--it-orange);
+    color: var(--it-black);
+    padding: 5px 9px;
+    z-index: 1;
+  }
+
+  .release--wh .release__tag { background: var(--it-wh-violet); color: var(--it-cream); }
+  .release--secondary .release__tag { background: var(--it-red); color: var(--it-cream); }
+
+  .release__cover { aspect-ratio: 1; overflow: hidden; }
+  .release__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .release__meta {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.4);
+  }
+
+  .release__title {
+    font-family: var(--it-font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: var(--it-lh-display);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-display);
+    color: var(--it-cream);
+    margin: 0;
+  }
+
+  .release--wh .release__title { color: var(--it-wh-violet-light); }
+  .release--secondary .release__title { color: var(--it-red-light); }
+
+  .release__desc {
+    font-family: var(--it-font-body);
+    font-size: 15px;
+    line-height: var(--it-lh-body);
+    color: rgba(245, 245, 220, 0.7);
+    margin: 0;
+  }
+
+  .release__links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .epk-album-row { margin-top: 0; }
+  .epk-album-cover { max-width: 280px; }
+
+  .epk-placeholder {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-md);
+    color: rgba(245, 245, 220, 0.35);
+    margin: 0;
+  }
+
+  .epk-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .epk-photo {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--it-ink);
+    border: 1px solid rgba(245, 245, 220, 0.1);
+    margin: 0;
+  }
+
+  .epk-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.05);
+    transition: filter 400ms, transform 600ms;
+    display: block;
+  }
+
+  .epk-photo:hover img { filter: none; transform: scale(1.05); }
+
+  .epk-photo__dl {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.85), transparent);
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    color: var(--it-cream);
+  }
+
+  .epk-photo__dl b { color: var(--it-orange); font-weight: 400; }
+
+  .epk-photo-credit {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-top: 16px;
+    color: var(--it-cream);
+  }
+
+  .epk-files {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .epk-file {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(245, 245, 220, 0.16);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--it-cream);
+    transition: border-color 180ms, background 180ms;
+  }
+
+  .epk-file:hover { border-color: var(--it-orange); background: rgba(255, 107, 53, 0.05); }
+
+  .epk-file__ext {
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--it-orange);
+    border: 1px solid var(--it-orange-30);
+    padding: 8px 10px;
+    flex-shrink: 0;
+  }
+
+  .epk-file__m { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+  .epk-file__n {
+    font-family: var(--it-font-display);
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .epk-file__s {
+    font-family: var(--it-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--it-track-mono-sm);
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .epk-file__arrow { font-family: var(--it-font-mono); color: var(--it-orange); flex-shrink: 0; }
+
+  .epk-spec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+  }
+
+  .contact__list { display: flex; flex-direction: column; }
+
+  .contact__row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--it-orange-30);
+  }
+
+  .contact__row:first-child { border-top: 1px solid var(--it-orange-30); }
+
+  .contact__k {
+    font-family: var(--it-font-mono);
+    font-size: var(--it-fs-mono);
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: var(--it-orange);
+  }
+
+  .contact__v { font-family: var(--it-font-body); font-size: 15px; color: rgba(245, 245, 220, 0.8); }
+  .contact__v a { color: var(--it-cream); text-decoration: none; transition: color 200ms; }
+  .contact__v a:hover { color: var(--it-orange); }
+
+  .epk-contact-cta { margin-top: 32px; }
+
+  .epk-footer {
+    border-top: 1px solid var(--it-orange-30);
+    padding: 32px 0;
+  }
+
+  .epk-footer__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--it-font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: var(--it-track-mono-sm);
+    color: rgba(245, 245, 220, 0.35);
+  }
+
+  @media (max-width: 900px) {
+    .epk-top { padding: 20px; }
+    .epk-hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
+    .epk-sec__grid { grid-template-columns: 1fr; gap: 20px; }
+    .epk-sec__label { position: static; }
+    .epk-statband { grid-template-columns: repeat(2, 1fr); }
+    .epk-statband .stat:nth-child(2) { border-right: none; }
+  }
+
+  @media (max-width: 720px) {
+    .epk-wrap { padding: 0 20px; }
+    .epk-photos { grid-template-columns: 1fr 1fr; }
+    .epk-files { grid-template-columns: 1fr; }
+    .epk-spec { grid-template-columns: 1fr; }
+    .releases--even { grid-template-columns: 1fr; }
+    .epk-footer__row { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 640px) {
+    .epk-top__tag { display: none; }
+  }
+</style>
