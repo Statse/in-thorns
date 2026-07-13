@@ -5,7 +5,7 @@ export const enContent: EpkContent = {
   header: {
     tag: 'Press Kit · 2026',
     contactLabel: 'Contact',
-    langLink: { label: 'Suomeksi →', href: '/epk-fi' },
+    langLink: { label: 'Suomeksi →', href: '/press-kit-fi' },
   },
   hero: {
     eyebrow: 'Press Kit',
